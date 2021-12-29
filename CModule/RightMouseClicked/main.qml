@@ -40,6 +40,7 @@ Window {
 
             //菜单内容
             contentItem: Text{
+                font{ pixelSize: 20 }
                 color: menuItem.highlighted ? "red" : "white"
                 text: menuItem.text
                 horizontalAlignment: Text.AlignHCenter

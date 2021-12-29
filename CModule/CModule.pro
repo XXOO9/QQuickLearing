@@ -1,10 +1,10 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-#    CHttpModule \
+#    CHttpModule
 #    unitTest     \
 #    CHttpModule2 \
 #    EnumWithQuick \
-#    QQuickTableView
-    RightMouseClicked
+    QQuickTableView \
+#    RightMouseClicked
 

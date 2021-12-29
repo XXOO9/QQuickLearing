@@ -7,4 +7,14 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("Hello World")
+
+    Button{
+        onClicked: {
+            tableModel.test_append()
+        }
+    }
+
+    MyTableView{
+        anchors.centerIn: parent
+    }
 }
