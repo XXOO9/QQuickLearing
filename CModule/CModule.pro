@@ -5,6 +5,6 @@ SUBDIRS += \
 #    unitTest     \
 #    CHttpModule2 \
 #    EnumWithQuick \
-    QQuickTableView \
-#    RightMouseClicked
+ \#    RightMouseClicked
+    MyTableView
 

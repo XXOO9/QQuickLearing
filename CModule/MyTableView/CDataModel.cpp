@@ -1,0 +1,168 @@
+﻿#include "CDataModel.h"
+
+CDataModel::CDataModel(QObject *parent)
+    : QAbstractTableModel(parent)
+{
+}
+
+QVariant CDataModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    // FIXME: Implement me!
+    return QVariant();
+}
+
+int CDataModel::rowCount(const QModelIndex &parent) const
+{
+    if (parent.isValid())
+        return 0;
+
+    // FIXME: Implement me!
+    return m_vecRets.size();
+}
+
+int CDataModel::columnCount(const QModelIndex &parent) const
+{
+    if (parent.isValid())
+        return 0;
+
+    // FIXME: Implement me!
+    return m_vecRets[0].size();
+}
+
+QVariant CDataModel::data(const QModelIndex &index, int role) const
+{
+    if (!index.isValid())
+        return QVariant();
+
+    // FIXME: Implement me!
+    int row = index.row();
+    int column = index.column();
+    ColumnIndex columnEnum = ColumnIndex( column );
+    RoleNames roleEnum = RoleNames( role );
+    CUnitData data = m_vecRets[row][columnEnum];
+    QString ret = data[roleEnum];
+    return ret;
+}
+
+bool CDataModel::insertRows(int row, int count, const QModelIndex &parent)
+{
+    beginInsertRows(parent, row, row + count - 1);
+    // FIXME: Implement me!
+
+    endInsertRows();
+    return true;
+}
+
+bool CDataModel::insertColumns(int column, int count, const QModelIndex &parent)
+{
+    beginInsertColumns(parent, column, column + count - 1);
+    // FIXME: Implement me!
+    endInsertColumns();
+    return true;
+}
+
+bool CDataModel::appendRow(QHash<ColumnIndex, CUnitData> data)
+{
+    if( !isSingleton( data[FirstColumn][UniqueRole] ) ){
+        return false;
+    }
+
+    beginInsertRows( QModelIndex(), m_vecRets.size(), m_vecRets.size() );
+    m_vecRets << data;
+    endInsertRows();
+    emit layoutChanged();
+    return true;
+}
+
+bool CDataModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+    beginRemoveRows(parent, row, row + count - 1);
+    // FIXME: Implement me!
+    endRemoveRows();
+    return true;
+}
+
+bool CDataModel::removeColumns(int column, int count, const QModelIndex &parent)
+{
+    beginRemoveColumns(parent, column, column + count - 1);
+    // FIXME: Implement me!
+    endRemoveColumns();
+    return true;
+}
+
+QHash<int, QByteArray> CDataModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[FirstColumn]      =    "firstColumn";
+    roles[SecondColumn]     =    "secondColumn";
+    roles[ThirdColumn]      =    "thirdColumn";
+    roles[ForthColumn]      =    "forthColumn";
+    roles[FifthColumn]      =    "fifthColumn";
+    roles[SixthColumn]      =    "sixthColumn";
+    roles[SevengthColumn]   =    "sevengthColumn";
+    roles[EightColumn]      =    "eightColumn";
+
+    return roles;
+}
+
+bool CDataModel::isSingleton(QString uniqueString)
+{
+    for( auto &each : m_vecRets ){
+        if( uniqueString == each[FirstColumn][UniqueRole] ){
+            return false;
+        }
+    }
+    return true;
+}
+
+void CDataModel::sizess()
+{
+    qDebug() << "size = " << sizeof ( m_vecRets );
+}
+
+CUnitData::CUnitData()
+{
+    m_data[CDataModel::DisplayRole] = "";
+    m_data[CDataModel::UniqueRole] = "";
+    m_data[CDataModel::DataRole] = "";
+}
+
+CUnitData::~CUnitData()
+{
+
+}
+
+void CUnitData::setDisplayContent(const QString val)
+{
+    m_data[CDataModel::DisplayRole] = val;
+}
+
+QString CUnitData::displayContent() const
+{
+    return m_data[CDataModel::DisplayRole];
+}
+
+void CUnitData::setUnique(const QString val)
+{
+    m_data[CDataModel::UniqueRole] = val;
+}
+
+QString CUnitData::unique() const
+{
+    return m_data[CDataModel::UniqueRole];
+}
+
+void CUnitData::setDataContent(const QString val)
+{
+    m_data[CDataModel::DataRole] = val;
+}
+
+QString CUnitData::data() const
+{
+    return m_data[CDataModel::DataRole];
+}
+
+QString &CUnitData::operator[](CDataModel::RoleNames roleName)
+{
+    return m_data[roleName];
+}
