@@ -41,6 +41,9 @@ QVariant CDataModel::data(const QModelIndex &index, int role) const
     RoleNames roleEnum = RoleNames( role );
     CUnitData data = m_vecRets[row][columnEnum];
     QString ret = data[roleEnum];
+    qDebug() << "row = " << row;
+    qDebug() << "column = " << column;
+    qDebug() << "data = " << ret;
     return ret;
 }
 
@@ -105,6 +108,21 @@ QHash<int, QByteArray> CDataModel::roleNames() const
     return roles;
 }
 
+bool CDataModel::setSingleData(const QString uniqeuString, const ColumnIndex column, const QString val, const RoleNames roleName )
+{
+    bool find = false;
+    for( auto &each : m_vecRets ){
+        if( uniqeuString == each[FirstColumn][UniqueRole] ){
+            each[column][roleName] = val;
+            find = true;
+            break;
+        }
+    }
+    qDebug() << "empty uniquesString...";
+    emit layoutChanged();
+    return find;
+}
+
 bool CDataModel::isSingleton(QString uniqueString)
 {
     for( auto &each : m_vecRets ){
@@ -113,11 +131,6 @@ bool CDataModel::isSingleton(QString uniqueString)
         }
     }
     return true;
-}
-
-void CDataModel::sizess()
-{
-    qDebug() << "size = " << sizeof ( m_vecRets );
 }
 
 CUnitData::CUnitData()
@@ -134,17 +147,18 @@ CUnitData::~CUnitData()
 
 void CUnitData::setDisplayContent(const QString val)
 {
-    m_data[CDataModel::DisplayRole] = val;
+    m_data.insert( CDataModel::DisplayRole, val );
 }
 
 QString CUnitData::displayContent() const
 {
     return m_data[CDataModel::DisplayRole];
+
 }
 
 void CUnitData::setUnique(const QString val)
 {
-    m_data[CDataModel::UniqueRole] = val;
+    m_data.insert( CDataModel::UniqueRole, val );
 }
 
 QString CUnitData::unique() const
@@ -154,7 +168,7 @@ QString CUnitData::unique() const
 
 void CUnitData::setDataContent(const QString val)
 {
-    m_data[CDataModel::DataRole] = val;
+    m_data.insert( CDataModel::DataRole, val );
 }
 
 QString CUnitData::data() const
