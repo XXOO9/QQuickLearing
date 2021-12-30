@@ -3,6 +3,7 @@
 CDataModel::CDataModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
+
 }
 
 QVariant CDataModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -26,24 +27,29 @@ int CDataModel::columnCount(const QModelIndex &parent) const
         return 0;
 
     // FIXME: Implement me!
+    //!!!!!!!!!!!!不加这个的话,在表格为空时要报错！妈哟，把老子整安逸了
+    if( m_vecRets.isEmpty() ){
+        return 0;
+    }
     return m_vecRets[0].size();
 }
 
 QVariant CDataModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid())
-        return QVariant();
-
     // FIXME: Implement me!
     int row = index.row();
     int column = index.column();
+
+    if( row < 0 || row > m_vecRets.size() ){
+        return "";
+    }
     ColumnIndex columnEnum = ColumnIndex( column );
     RoleNames roleEnum = RoleNames( role );
     CUnitData data = m_vecRets[row][columnEnum];
     QString ret = data[roleEnum];
-    qDebug() << "row = " << row;
-    qDebug() << "column = " << column;
-    qDebug() << "data = " << ret;
+//    qDebug() << "row = " << row;
+//    qDebug() << "column = " << column;
+//    qDebug() << "data = " << ret;
     return ret;
 }
 
@@ -115,11 +121,14 @@ bool CDataModel::setSingleData(const QString uniqeuString, const ColumnIndex col
         if( uniqeuString == each[FirstColumn][UniqueRole] ){
             each[column][roleName] = val;
             find = true;
+            emit layoutChanged();
             break;
         }
     }
-    qDebug() << "empty uniquesString...";
-    emit layoutChanged();
+
+    if( !find ){
+        qDebug() << "empty uniquesString...";
+    }
     return find;
 }
 
@@ -135,9 +144,9 @@ bool CDataModel::isSingleton(QString uniqueString)
 
 CUnitData::CUnitData()
 {
-    m_data[CDataModel::DisplayRole] = "";
-    m_data[CDataModel::UniqueRole] = "";
-    m_data[CDataModel::DataRole] = "";
+    m_data.insert( CDataModel::DisplayRole, "" );
+    m_data.insert( CDataModel::UniqueRole, "" );
+    m_data.insert( CDataModel::DataRole, "false" );
 }
 
 CUnitData::~CUnitData()

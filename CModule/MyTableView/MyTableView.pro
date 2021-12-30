@@ -26,6 +26,7 @@ CONFIG( debug, debug | release ){
 }
 
 SOURCES += \
+        CAbstractTableModel.cpp \
         CDataModel.cpp \
         main.cpp
 
@@ -43,4 +44,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    CAbstractTableModel.h \
     CDataModel.h

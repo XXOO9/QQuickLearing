@@ -35,6 +35,9 @@ public:
 public:
     explicit CDataModel(QObject *parent = nullptr);
 
+
+protected:
+
     // Header:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
@@ -47,7 +50,6 @@ public:
     // Add data:
     bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
     bool insertColumns(int column, int count, const QModelIndex &parent = QModelIndex()) override;
-
     bool appendRow(QHash<CDataModel::ColumnIndex, CUnitData> data );
 
     // Remove data:
@@ -57,7 +59,10 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     //change specific data in abstract table, even change it's role value
-    Q_INVOKABLE bool setSingleData( const QString uniqeuString, const ColumnIndex column, const QString val, const RoleNames roleName = RoleNames::DisplayRole );
+    Q_INVOKABLE bool setSingleData( const QString uniqeuString,
+                                    const ColumnIndex column,
+                                    const QString val, const
+                                    RoleNames roleName = RoleNames::DisplayRole );
 
     //check singleton
     bool isSingleton( QString uniqueString );

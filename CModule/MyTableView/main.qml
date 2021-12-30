@@ -9,44 +9,31 @@ Window {
     height: 800
     title: qsTr("Hello World")
 
+    onWidthChanged: {
+        m_tableView.forceLayout()
+    }
+
     Button{
+        id: btn1
+        text: "1"
         onClicked: {
-            DataModel.setSingleData( "first_unique", CDataModel.FirstColumn, "false" )
+            Model.testfunc1()
+            Model.testfunc2()
+            Model.testfunc3()
+            Model.testfunc4()
+            Model.testfunc5()
         }
     }
 
+    Button{
+        text: "2"
+        anchors.top: btn1.bottom
+        onClicked: {
+            Model.testfunc6()
+        }
+    }
 
-    TableView{
-        id:m_tableView
-        implicitWidth: 700
-        implicitHeight: width
-        clip: true
-        model: DataModel
-
+    CustTableView{
         anchors.centerIn: parent
-
-        delegate: Rectangle{
-            id: outSideRect
-            implicitWidth: 130
-            implicitHeight: width
-            border.color: "red"
-            color: "lightgreen"
-            Text {
-                text: DataModel.data( DataModel.index( row, column ), CDataModel.DisplayRole )
-                font{ pixelSize: 20; bold: true}
-                anchors.centerIn: parent
-            }
-            Rectangle{
-                id:insideRect
-                visible: DataModel.data( DataModel.index( row, column ), CDataModel.DataRole ) === "true" ? true : false
-                implicitWidth: outSideRect.width / 4
-                implicitHeight: width
-                radius: width / 2
-                color: "red"
-                anchors.left: outSideRect.left
-                anchors.verticalCenter: outSideRect.verticalCenter
-            }
-        }
     }
-
 }
