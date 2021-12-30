@@ -5,6 +5,7 @@ SUBDIRS += \
 #    unitTest     \
 #    CHttpModule2 \
 #    EnumWithQuick \
- \#    RightMouseClicked
-    MyTableView
+#    RightMouseClicked
+ \#    MyTableView
+    CustQQuickVirtualKeyBoard
 
