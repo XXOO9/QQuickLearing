@@ -1,11 +1,11 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-#    CHttpModule
+    CHttpModule \
 #    unitTest     \
 #    CHttpModule2 \
 #    EnumWithQuick \
 #    RightMouseClicked
- \#    MyTableView
-    CustQQuickVirtualKeyBoard
+#    MyTableView
+#    CustQQuickVirtualKeyBoard
 
