@@ -7,6 +7,7 @@ SUBDIRS += \
 #    EnumWithQuick \
 #    RightMouseClicked
 #    MyTableView
- \#    CustQQuickVirtualKeyBoard
-    CustDialog
+#    CustQQuickVirtualKeyBoard
+ \#    CustDialog
+    DynamicCreateComponent
 
