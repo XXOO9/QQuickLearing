@@ -6,6 +6,7 @@ SUBDIRS += \
 #    CHttpModule2 \
 #    EnumWithQuick \
 #    RightMouseClicked
-    MyTableView
-#    CustQQuickVirtualKeyBoard
+#    MyTableView
+ \#    CustQQuickVirtualKeyBoard
+    CustDialog
 
