@@ -1,7 +1,10 @@
 ﻿#ifndef CIMAGEPROVIDER_H
 #define CIMAGEPROVIDER_H
 
+#include <QObject>
 #include <QMutex>
+#include <QImage>
+#include <QPixmap>
 #include <QMutexLocker>
 #include <QQuickImageProvider>
 
@@ -14,11 +17,10 @@ public:
     virtual ~CImageProvider() override;
 
 
-    virtual QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize) override;
-    virtual QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) override;
+    QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize) override;
+    QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) override;
 
     void setImage( const QImage image );
-
 private:
     QImage m_imgCurFrame;
     QMutex m_mutex;

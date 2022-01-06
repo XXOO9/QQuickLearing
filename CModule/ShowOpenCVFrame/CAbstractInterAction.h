@@ -8,6 +8,7 @@ class CAbstractInterAction : public QObject
     Q_OBJECT
 public:
     explicit CAbstractInterAction(QObject *parent = nullptr);
+    virtual ~CAbstractInterAction() override;
 
 signals:
 

@@ -1,4 +1,4 @@
-﻿#include "CImageProvider.h"
+#include "CImageProvider.h"
 
 CImageProvider::CImageProvider() : QQuickImageProvider ( QQuickImageProvider::Image )
 {
@@ -34,5 +34,5 @@ QPixmap CImageProvider::requestPixmap(const QString &id, QSize *size, const QSiz
 
 void CImageProvider::setImage(QImage image)
 {
-
+    m_imgCurFrame = image;
 }

@@ -3,16 +3,17 @@ TEMPLATE = subdirs
 
 #CONFIG( debug, debug | release ){
 #        DESTDIR     = $$PWD/debug
-#        MOC_DIR     = $$PWD/debug/MOC
-#        RCC_DIR     = $$PWD/debug/RCC
-#        OBJECTS_DIR = $$PWD/debug/OBJ
+#        MOC_DIR     = $$PWD/debug/tmp
+#        RCC_DIR     = $$PWD/debug/tmp
+#        OBJECTS_DIR = $$PWD/debug/tmp
 #}else
 #{
 #        DESTDIR     = $$PWD/release
-#        MOC_DIR     = $$PWD/release/MOC
-#        RCC_DIR     = $$PWD/release/RCC
-#        OBJECTS_DIR = $$PWD/release/OBJ
+#        MOC_DIR     = $$PWD/release/tmp
+#        RCC_DIR     = $$PWD/release/tmp
+#        OBJECTS_DIR = $$PWD/release/tmp
 #}
+
 
 SUBDIRS += \
 #    CHttpModule \
@@ -25,6 +26,6 @@ SUBDIRS += \
 #    CustDialog                      \
 #    CustListView
 #    DynamicCreateComponent
- \#    CustPopup
+#     CustPopup
     ShowOpenCVFrame
 

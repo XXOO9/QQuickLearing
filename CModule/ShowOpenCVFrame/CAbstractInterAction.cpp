@@ -4,3 +4,8 @@ CAbstractInterAction::CAbstractInterAction(QObject *parent) : QObject(parent)
 {
 
 }
+
+CAbstractInterAction::~CAbstractInterAction()
+{
+
+}
