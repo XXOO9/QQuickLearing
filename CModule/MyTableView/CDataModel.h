@@ -43,7 +43,7 @@ protected:
 
     // Basic functionality:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    Q_INVOKABLE int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
@@ -61,8 +61,8 @@ protected:
     //change specific data in abstract table, even change it's role value
     Q_INVOKABLE bool setSingleData( const QString uniqeuString,
                                     const ColumnIndex column,
-                                    const QString val, const
-                                    RoleNames roleName = RoleNames::DisplayRole );
+                                    const QString val,
+                                    const RoleNames roleName = RoleNames::DisplayRole );
 
     //check singleton
     bool isSingleton( QString uniqueString );

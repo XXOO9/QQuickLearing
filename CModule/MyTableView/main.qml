@@ -22,10 +22,12 @@ Window {
             Model.testfunc3()
             Model.testfunc4()
             Model.testfunc5()
+            view.test()
         }
     }
 
     Button{
+        id:btn2
         text: "2"
         anchors.top: btn1.bottom
         onClicked: {
@@ -33,7 +35,18 @@ Window {
         }
     }
 
+    Button{
+        id:btn3
+
+        text: "3"
+        anchors.top: btn2.bottom
+        onClicked: {
+            view.destory()
+        }
+    }
+
     CustTableView{
+        id:view
         anchors.centerIn: parent
     }
 }

@@ -1,4 +1,4 @@
-QT += quick core
+QT += quick qml gui
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -11,7 +11,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-include($$PWD/interaction.pri)
 
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/debug
@@ -26,7 +25,10 @@ CONFIG( debug, debug | release ){
         OBJECTS_DIR = $$PWD/release/OBJ
 }
 
+include($$PWD/InterAction.pri)
+
 SOURCES += \
+        CImageProvider.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -42,4 +44,5 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-
+HEADERS += \
+    CImageProvider.h

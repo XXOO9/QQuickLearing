@@ -1,8 +1,8 @@
 ﻿#include "CAbstractTableModel.h"
 
-CAbstractTableModel::CAbstractTableModel(qint8 rowCount, QObject *parent) : CDataModel (parent)
+CAbstractTableModel::CAbstractTableModel(qint8 columnCount, QObject *parent) : CDataModel (parent)
 {
-    m_rowCount = rowCount;
+    m_columnCount = columnCount;
     m_horizontalHeaderList << QString::fromLocal8Bit( "第一列" );
     m_horizontalHeaderList << QString::fromLocal8Bit( "第二列" );
     m_horizontalHeaderList << QString::fromLocal8Bit( "第三列" );
@@ -18,6 +18,7 @@ CAbstractTableModel::~CAbstractTableModel()
 QVariant CAbstractTableModel::horizontalHeader(int columnIndex)
 {
     if( m_horizontalHeaderList.isEmpty() ){
+        qDebug() << "empty columnindex...";
         return QVariant("empty");
     }
     ColumnIndex targetColumn = ColumnIndex( columnIndex );
@@ -33,6 +34,11 @@ void CAbstractTableModel::setHorizontalHeader(QStringList headers)
     emit layoutChanged();
 }
 
+int CAbstractTableModel::horizontalHeaderCount() const
+{
+    return m_columnCount;
+}
+
 bool CAbstractTableModel::appendRowDatas(QStringList rowDisplayDatas, QString uniqueString)
 {
     if( !isSingleton( uniqueString ) ){
@@ -40,7 +46,7 @@ bool CAbstractTableModel::appendRowDatas(QStringList rowDisplayDatas, QString un
     }
 
     QHash<ColumnIndex, CUnitData> rowData;
-    for( int i = 0; i < m_rowCount; i++ ){
+    for( int i = 0; i < m_columnCount; i++ ){
         CUnitData unitData;
         ColumnIndex column = ColumnIndex( i );
         unitData.setUnique( uniqueString );

@@ -1,4 +1,4 @@
-QT += quick core
+QT += quick
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -11,20 +11,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-include($$PWD/interaction.pri)
-
-CONFIG( debug, debug | release ){
-        DESTDIR     = $$PWD/debug
-        MOC_DIR     = $$PWD/debug/MOC
-        RCC_DIR     = $$PWD/debug/RCC
-        OBJECTS_DIR = $$PWD/debug/OBJ
-}else
-{
-        DESTDIR     = $$PWD/release
-        MOC_DIR     = $$PWD/release/MOC
-        RCC_DIR     = $$PWD/release/RCC
-        OBJECTS_DIR = $$PWD/release/OBJ
-}
 
 SOURCES += \
         main.cpp
@@ -41,5 +27,3 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-

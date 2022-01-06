@@ -12,12 +12,13 @@ class CAbstractTableModel : public CDataModel
 {
     Q_OBJECT
 public:
-    CAbstractTableModel( qint8 rowCount, QObject *parent = nullptr );
+    CAbstractTableModel( qint8 columnCount, QObject *parent = nullptr );
     virtual ~CAbstractTableModel() override;
 
-    //获取水平表头
+    //操作水平表头
     Q_INVOKABLE QVariant horizontalHeader( int columnIndex );
     Q_INVOKABLE void setHorizontalHeader( QStringList headers );
+    Q_INVOKABLE int horizontalHeaderCount() const;
 
 
     //增：
@@ -49,7 +50,7 @@ public:
 
 
 private:
-    qint8                         m_rowCount;
+    qint8                         m_columnCount;
     QStringList                   m_horizontalHeaderList;
     QStringList                   m_rowListContents;
     QHash<ColumnIndex, CUnitData> m_rowMapContents;

@@ -12,6 +12,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+CONFIG( debug, debug | release ){
+        DESTDIR     = $$PWD/debug
+        MOC_DIR     = $$PWD/debug/MOC
+        RCC_DIR     = $$PWD/debug/RCC
+        OBJECTS_DIR = $$PWD/debug/OBJ
+}else
+{
+        DESTDIR     = $$PWD/release
+        MOC_DIR     = $$PWD/release/MOC
+        RCC_DIR     = $$PWD/release/RCC
+        OBJECTS_DIR = $$PWD/release/OBJ
+}
+
+
 SOURCES += \
         main.cpp
 

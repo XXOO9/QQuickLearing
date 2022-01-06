@@ -27,7 +27,7 @@ int CDataModel::columnCount(const QModelIndex &parent) const
         return 0;
 
     // FIXME: Implement me!
-    //!!!!!!!!!!!!不加这个的话,在表格为空时要报错！妈哟，把老子整安逸了
+    //!!!!!!!!!!!!不加这个的话,在表格为空时要报错！
     if( m_vecRets.isEmpty() ){
         return 0;
     }
