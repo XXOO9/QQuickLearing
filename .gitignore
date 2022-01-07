@@ -1,3 +1,9 @@
 
 *.dll
 *.lib
+*.stash
+*.user
+CModule/MyTableView/Makefile
+*.Release
+*.Debug
+CModule/Makefile

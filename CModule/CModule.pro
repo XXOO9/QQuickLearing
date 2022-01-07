@@ -27,5 +27,6 @@ SUBDIRS += \
 #    CustListView
 #    DynamicCreateComponent
 #     CustPopup
-    ShowOpenCVFrame
+ \#    ShowOpenCVFrame
+    CustStackView
 
