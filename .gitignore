@@ -7,3 +7,4 @@ CModule/MyTableView/Makefile
 *.Release
 *.Debug
 CModule/Makefile
+*.pdb

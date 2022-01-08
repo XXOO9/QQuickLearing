@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>CustStackView.qml</file>
+        <file>CustStackLayout.qml</file>
+        <file>HowToTraversalJavaScriptArray.qml</file>
     </qresource>
 </RCC>

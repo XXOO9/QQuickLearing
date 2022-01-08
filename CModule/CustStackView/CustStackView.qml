@@ -9,16 +9,12 @@ Item {
     height: 500
 
     Component.onCompleted: {
-        stack.push( cmp2 )
+//        stack.push( cmp2 )
     }
 
     Rectangle{
         anchors.fill: parent
         color: "gray"
-    }
-
-    Button{
-
     }
 
     StackView{
@@ -44,5 +40,13 @@ Item {
             height: width
             color: "lightgreen"
         }
+    }
+
+    function pushCmp(){
+        stack.push( cmp1 )
+    }
+
+    function getDeepth(){
+        return stackView.depth
     }
 }
