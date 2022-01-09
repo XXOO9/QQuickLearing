@@ -43,9 +43,28 @@ Item {
         anchors.bottom: parent.bottom
         currentIndex: 0
 
+//        Behavior on currentIndex {
+//            PropertyAnimation{
+//                target: stackLayout
+//                property: "currentIndex"
+//                duration: 500
+//            }
+//        }
+
         Component.onCompleted: {
-            menuList.forEach( function( valOfIndex ){
-                contentComponent.createObject( stackLayout, { contentTextt: valOfIndex } )
+            menuList.forEach( function( valOfIndex, index ){
+                var colorType
+                if( index === 0 ) {
+                    colorType = "lightgreen"
+                }
+                if( index === 1 ){
+                    colorType = "yellow"
+                }
+                if( index === 2 ){
+                    colorType = "gray"
+                }
+
+                contentComponent.createObject( stackLayout, { contentTextt: valOfIndex, color:colorType } )
             })
 
             console.log( "deepth = " + count )
@@ -87,10 +106,11 @@ Item {
         id:contentComponent
         Rectangle{
             property string contentTextt: "WDNMD"
-            color: "black"
+            property string contentColor: "black"
+            color: contentColor
             Text {
                 text: contentTextt
-                color: "white"
+                color: "blue"
                 font{ pixelSize: 30 }
                 anchors.centerIn: parent
             }

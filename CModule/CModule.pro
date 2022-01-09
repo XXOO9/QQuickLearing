@@ -26,7 +26,8 @@ SUBDIRS += \
 #    CustDialog                      \
 #    CustListView
 #    DynamicCreateComponent
-#     CustPopup
- \#    ShowOpenCVFrame
-    CustStackView
+#     CustPopup \
+#    ShowOpenCVFrame
+ \#    CustStackView
+    GoogleTest
 
