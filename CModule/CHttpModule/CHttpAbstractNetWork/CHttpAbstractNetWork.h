@@ -33,7 +33,7 @@ public:
 
     Q_ENUM( errorType )
 
-    CHttpAbstractNetWork();
+    CHttpAbstractNetWork( QObject *parent = nullptr );
     virtual ~CHttpAbstractNetWork(){}
 
     virtual void initConfig() = 0;

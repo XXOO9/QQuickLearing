@@ -9,7 +9,7 @@
 class CHTTPMODULESHARED_EXPORT CHttpGetVideoUrls : public CHttpAbstractNetWork
 {
 public:
-    CHttpGetVideoUrls( QString timeStamp );
+    CHttpGetVideoUrls( QString timeStamp, QObject *parent = nullptr );
 
     virtual ~CHttpGetVideoUrls() override;
 

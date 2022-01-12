@@ -1,6 +1,6 @@
 ﻿#include "CHttpGetVideoUrls.h"
 
-CHttpGetVideoUrls::CHttpGetVideoUrls(QString timeStamp)
+CHttpGetVideoUrls::CHttpGetVideoUrls(QString timeStamp, QObject *parent) : CHttpAbstractNetWork( parent )
 {
     setTextPara( timeStamp );
     initConfig();

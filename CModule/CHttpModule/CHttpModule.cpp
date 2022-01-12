@@ -1,5 +1,1 @@
-#include "CHttpModule.h"
-
-CHttpModule::CHttpModule()
-{
-}
+﻿#include "CHttpModule.h"

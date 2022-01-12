@@ -1,6 +1,7 @@
 ﻿#include "CHttpAbstractNetWork.h"
 
-CHttpAbstractNetWork::CHttpAbstractNetWork() : m_pNetWorkMgr( nullptr ),
+CHttpAbstractNetWork::CHttpAbstractNetWork(QObject *parent) : QObject( parent ),
+    m_pNetWorkMgr( nullptr ),
     m_pMultiPart( nullptr )
 {
     m_pNetWorkMgr = new QNetworkAccessManager( this );

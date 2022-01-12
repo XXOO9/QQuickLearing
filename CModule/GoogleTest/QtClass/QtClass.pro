@@ -1,5 +1,5 @@
 QT -= gui
-QT += core
+QT += core network
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -10,12 +10,16 @@ CONFIG -= app_bundle
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
+INCLUDEPATH += $$PWD/../../CTestShardLibrary
+
 
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/debug
         MOC_DIR     = $$PWD/debug/tmp
         RCC_DIR     = $$PWD/debug/tmp
         OBJECTS_DIR = $$PWD/debug/tmp
+#        LIBS       += -L$$PWD/thirdParty -lCHttpModule
+        LIBS       += -L$$PWD/debug -lCTestShardLibrary
 }else
 {
         DESTDIR     = $$PWD/release
@@ -25,6 +29,7 @@ CONFIG( debug, debug | release ){
 }
 
 SOURCES += \
+#        ../../CHttpModule/CHttpModule.cpp \
         QtClassTest.cpp \
         main.cpp
 
@@ -34,4 +39,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+#    ../../CHttpModule/CHttpModule.h \
     QtClassTest.h

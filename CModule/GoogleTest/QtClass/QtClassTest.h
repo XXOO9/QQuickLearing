@@ -1,4 +1,4 @@
-#ifndef QTCLASSTEST_H
+﻿#ifndef QTCLASSTEST_H
 #define QTCLASSTEST_H
 
 #include <QObject>
@@ -6,12 +6,17 @@
 #include <QString>
 #include <QTimer>
 
+#include "../../CHttpModule/CHttpGetVideoUrls/CHttpGetVideoUrls.h"
+#include "../../CHttpModule/CHttpAbstractNetWork/CHttpAbstractNetWork.h"
+
+#include "../../CTestShardLibrary/CTestShardLibrary.h"
+#include "../../CTestShardLibrary/CTestShardLibrary2.h"
+
 class QtClassTest : public QObject
 {
     Q_OBJECT
 public:
     explicit QtClassTest(QObject *parent = nullptr);
-    virtual ~QtClassTest() override;
 
     QString display();
 
@@ -19,9 +24,14 @@ public:
 
     void startTimer();
     bool isFinished();
+    void emitSig();
+
+    void getUrls();
+    void testLibrary();
 
 
 signals:
+    void sigTriggered();
 
 
 public slots:

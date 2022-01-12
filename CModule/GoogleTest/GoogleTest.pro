@@ -2,5 +2,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     CUnitTest \
-    PlainCppTestDemo \
+#    PlainCppTestDemo \
     QtClass
