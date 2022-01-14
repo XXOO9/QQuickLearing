@@ -15,6 +15,11 @@ import QtQuick.Controls 2.12
               verticalAlignment: Text.AlignVCenter
           }
           highlighted: control.highlightedIndex === index
+
+          background: Rectangle{
+              anchors.fill: parent
+              color: highlighted ? "red" : "transparent"
+          }
       }
 
       indicator: Canvas {

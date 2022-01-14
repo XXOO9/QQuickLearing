@@ -7,15 +7,32 @@ ComboBox{
     height: 40
     model: [ "W", "D", "N", "M", "D", "C", "N", "M" ]
 
+//    delegate: ItemDelegate{
+//        width: m_comboBox.width
+//        contentItem: Text {
+//            text: modelData
+//            color: "green"
+//            font{ pixelSize: 30 }
+//            verticalAlignment: Text.AlignVCenter
+//            horizontalAlignment: Text.AlignHCenter
+//        }
+//        highlighted: m_comboBox.highlightedIndex === index
+//    }
+
     delegate: ItemDelegate{
         width: m_comboBox.width
-        contentItem: Text {
-            text: modelData
-            color: "green"
-            font{ pixelSize: 30 }
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
+        Rectangle{
+            anchors.fill: parent
+            color: "red"
+
+            Text {
+                text: modelData
+                font{ pixelSize: 30 }
+                color: "blue"
+                anchors.centerIn: parent
+            }
         }
+
         highlighted: m_comboBox.highlightedIndex === index
     }
 
@@ -39,7 +56,8 @@ ComboBox{
         height: 200
         y: m_comboBox.height + 5
 
-
+        //这个padding他妈的也是个坑，我操他妈，不设置成1或者1附近的数，他妈的批靠是喊高亮框位置不对
+        padding: 1
         contentItem: ListView{
             clip: true
             implicitHeight: contentHeight

@@ -1,12 +1,21 @@
-# here are some learning websits that i have collected science i realize it's pretty important to do so.
+# 这里主要拿来手机一些Qt的神坑:angry:
+
+### 1.QML如果闪屏，别犹豫,直接他妈的把高度(height)加1, 别问为什么，问就是我他妈的也不知道
+
+```javascript
+height: ScreenY + 1
+```
 
 
 
-## this websit i found while i'm learing the QtTestFrameWork [51CTO](https://blog.51cto.com/u_9291927/2114179)
+### 2.QML自定义的comboBox，在弹出框popup的样式中添加padding：1，这他妈也是个坑，不设置成1或者1附近的值，他妈的显示出来靠是喊不居中显示
 
-
-
-
-
-
-
+```javascript
+popup:Popup{
+    width : m_comboBox.width
+    height: 200 * factor
+    padding: 1
+    .....
+    .....
+}
+```

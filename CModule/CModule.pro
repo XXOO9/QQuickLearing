@@ -31,6 +31,6 @@ SUBDIRS += \
 #    CustStackView
 #    CTestShardLibrary \
 #    GoogleTest
- \#    CustComboBox
-    QtTestFramWork
+    CustComboBox
+#    QtTestFramWork
 
