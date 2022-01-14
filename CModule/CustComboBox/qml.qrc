@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>CustComboBox.qml</file>
+        <file>Cust2.qml</file>
+    </qresource>
+</RCC>
