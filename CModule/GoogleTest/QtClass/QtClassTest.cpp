@@ -3,14 +3,13 @@
 QtClassTest::QtClassTest(QObject *parent) : QObject(parent)
 {
     qDebug() << "start...";
-    testLibrary();
     initTimer();
+    connect( this, &QtClassTest::sigTriggered, this, &QtClassTest::onTrigger );
 }
-
 
 QString QtClassTest::display()
 {
-    return "WDNMD_Qt";
+    return "Qt";
 }
 
 void QtClassTest::initTimer()
@@ -44,10 +43,7 @@ void QtClassTest::getUrls()
     //    CHttpGetVideoUrls p( s );
 }
 
-void QtClassTest::testLibrary()
+void QtClassTest::onTrigger()
 {
-    CTestShardLibrary test;
-    CTestShardLibrary2 *test2 = CTestShardLibrary2::getInstance();
-    qDebug() << test.display();
-    qDebug() << test2->display();
+    qDebug() << "this is slot...";
 }

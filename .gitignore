@@ -8,3 +8,15 @@ CModule/MyTableView/Makefile
 *.Debug
 CModule/Makefile
 *.pdb
+CModule/GoogleTest/Makefile
+CModule/GoogleTest/QtClass/debug/QtClass.exe
+CModule/GoogleTest/QtClass/Makefile
+CModule/GoogleTest/UnitTest/debug/UnitTest.exe
+CModule/GoogleTest/UnitTest/Makefile
+CModule/QtTestFramWork/Makefile
+CModule/QtTestFramWork/QMLTest/debug/QMLTest.ilk
+CModule/QtTestFramWork/QMLTest/debug/QMLTest.exe
+CModule/QtTestFramWork/QMLTest/debug/tmp/main.obj
+CModule/QtTestFramWork/QMLTest/Makefile
+CModule/QtTestFramWork/QtNoGuiTest/debug/QtNoGuiTest.exe
+CModule/QtTestFramWork/QtNoGuiTest/Makefile

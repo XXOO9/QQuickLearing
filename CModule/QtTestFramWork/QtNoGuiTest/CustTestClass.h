@@ -18,12 +18,28 @@ public:
     void testFunc();
 
 signals:
-    void sigTest();
+    void sigTestArgument( QString content );
+
+    void sigTestNoArgument();
 
 private slots:
-    void display();
+    void sendSignalWithArgument();
 
-    void onSig();
+    void sendSignalNoArgument();
+
+    void onSigWithArgument( QString content );
+
+    void onSigNoArgument();
+
+    void someMacro();
+
+private slots:
+
+    void testQString_data();
+
+    void testQString();
+
+
 };
 
 #endif // CUSTTESTCLASS_H

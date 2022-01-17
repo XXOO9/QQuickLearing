@@ -30,7 +30,7 @@ SUBDIRS += \
 #    ShowOpenCVFrame
 #    CustStackView
 #    CTestShardLibrary \
-#    GoogleTest
-    CustComboBox
+    GoogleTest
+#    CustComboBox
 #    QtTestFramWork
 

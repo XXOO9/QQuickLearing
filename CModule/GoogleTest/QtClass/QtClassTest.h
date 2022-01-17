@@ -6,36 +6,24 @@
 #include <QString>
 #include <QTimer>
 
-#include "../../CHttpModule/CHttpGetVideoUrls/CHttpGetVideoUrls.h"
-#include "../../CHttpModule/CHttpAbstractNetWork/CHttpAbstractNetWork.h"
-
-#include "../../CTestShardLibrary/CTestShardLibrary.h"
-#include "../../CTestShardLibrary/CTestShardLibrary2.h"
-
 class QtClassTest : public QObject
 {
     Q_OBJECT
+
 public:
     explicit QtClassTest(QObject *parent = nullptr);
-
     QString display();
-
     void initTimer();
-
     void startTimer();
     bool isFinished();
     void emitSig();
-
     void getUrls();
-    void testLibrary();
-
 
 signals:
     void sigTriggered();
 
-
 public slots:
-
+    void onTrigger();
 
 private:
     bool    m_isFinished{ false };

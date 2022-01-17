@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    CUnitTest \
 #    PlainCppTestDemo \
-    QtClass
+    QtClass \
+    UnitTest

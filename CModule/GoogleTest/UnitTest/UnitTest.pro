@@ -1,26 +1,29 @@
+QT += core
+
 include(gtest_dependency.pri)
 
 TEMPLATE = app
 CONFIG += console c++11
-CONFIG -= app_bundle
 CONFIG += thread
 CONFIG += qt
 
-
 CONFIG( debug, debug | release ){
-        DESTDIR     = $$PWD/debug
+        DESTDIR  = $$PWD/debug
 }else
 {
-        DESTDIR     = $$PWD/release
+        DESTDIR  = $$PWD/release
 }
 
+INCLUDEPATH += ../QtClass\
+
+
 HEADERS += \
-        ../PlainCppTestDemo/NoClassTest.h \
         ../QtClass/QtClassTest.h \
-        tst_casename.h
+        tst_testcase.h
 
 SOURCES += \
-        ../PlainCppTestDemo/NoClassTest.cpp \
         ../QtClass/QtClassTest.cpp \
-        DemoTest.cpp \
-        main.cpp
+        main.cpp    \
+        DemoTest.cpp
+
+

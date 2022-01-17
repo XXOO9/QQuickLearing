@@ -26,8 +26,4 @@ INCLUDEPATH *= \
 
 SOURCES += \
     $$GTEST_SRCDIR/src/gtest-all.cc \
-    $$GMOCK_SRCDIR/src/gmock-all.cc \
-    $$PWD/../PlainCppTestDemo/CClassTest.cpp
-
-HEADERS += \
-    $$PWD/../PlainCppTestDemo/CClassTest.h
+    $$GMOCK_SRCDIR/src/gmock-all.cc

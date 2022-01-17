@@ -9,6 +9,8 @@
 # QObject 元对象   https://zhuanlan.zhihu.com/p/43598693
 
 #/*
+
+
 # * 创建一个需要测试的类的对象，然后丢进QTest::qExec里面, Qt会将该类的private slots:里面的所有函数认定为需要测试的函数
 # * 但是怎么测试异步的接口呢?
 # *
@@ -19,4 +21,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
 #    CustTestPro \
-    QtNoGuiTest
+#    QtNoGuiTest
+#    QMLTest

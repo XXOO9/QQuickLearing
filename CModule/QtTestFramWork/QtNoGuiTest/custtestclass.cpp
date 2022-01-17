@@ -3,7 +3,8 @@
 
 CustTestClass::CustTestClass(QObject *parent) : QObject(parent)
 {
-    connect( this, &CustTestClass::sigTest, this, &CustTestClass::onSig );
+    connect( this, &CustTestClass::sigTestArgument, this, &CustTestClass::onSigWithArgument );
+    connect( this, &CustTestClass::sigTestNoArgument, this, &CustTestClass::onSigNoArgument );
 }
 
 void CustTestClass::testFunc()
@@ -14,39 +15,64 @@ void CustTestClass::testFunc()
     }
 }
 
-void CustTestClass::display()
+void CustTestClass::sendSignalWithArgument()
 {
     qDebug() << "this is display...";
     //判断是否相等
     QCOMPARE( 2, 2 );
 
-    QTimer *timer = new QTimer();
-    timer->setSingleShot( true );
-    connect( timer, &QTimer::timeout, [=](){
-        qDebug() << "time out...";
-        QCOMPARE( 2, 2 );
-        emit sigTest();
-    });
+    emit sigTestArgument( "argument" );
 
-    timer->start( 5000 );
-    qDebug() << "state = " << timer->isActive();
+//    QTimer *timer = new QTimer();
+//    timer->setSingleShot( true );
+//    connect( timer, &QTimer::timeout, [=](){
+//        qDebug() << "time out...";
+//        QCOMPARE( 2, 2 );
+//        emit sigTest( false );
+//    });
 
-
-
+//    timer->start( 5000 );
+    //    qDebug() << "state = " << timer->isActive();
 }
 
-void CustTestClass::onSig(/*bool ok*/)
+void CustTestClass::sendSignalNoArgument()
 {
-    //    if( !ok ){
-    //        qDebug() << "not ok...";
-    //    }else{
-    //        qDebug() << "ok !";
-    //    }
+    qDebug() << "going to send signal with no argument...";
+    emit sigTestNoArgument();
+}
 
-    QBENCHMARK{}
-    static int num = 0;
-    ++num;
+void CustTestClass::onSigWithArgument( QString content )
+{
+    qDebug() << "recv content = " << content;
+}
 
-    qDebug() << "ok!, num = " << num;
+void CustTestClass::onSigNoArgument()
+{
+    qDebug() << "this is onSigNoArgument";
+}
+
+void CustTestClass::someMacro()
+{
+    QVERIFY( true );
+    QCOMPARE( 1, 1 );
+}
+
+void CustTestClass::testQString()
+{
+    QFETCH( QString, string );
+    QFETCH( QString, result );
+
+    qDebug() << "string = " << string;
+    qDebug() << "result = " << result;
+}
+
+void CustTestClass::testQString_data()
+{
+    QTest::addColumn<QString>( "string" );
+    QTest::addColumn<QString>( "result" );
+
+    QTest::newRow( "first" ) << "hello" << "HELLO";
+    QTest::newRow( "second" ) << "Hello" << "HELLO";
+    QTest::newRow( "third" ) << "HELLO" << "HELLO";
 }
 
