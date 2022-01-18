@@ -20,3 +20,6 @@ CModule/QtTestFramWork/QMLTest/debug/tmp/main.obj
 CModule/QtTestFramWork/QMLTest/Makefile
 CModule/QtTestFramWork/QtNoGuiTest/debug/QtNoGuiTest.exe
 CModule/QtTestFramWork/QtNoGuiTest/Makefile
+*.obj
+*.ilk
+*.exe

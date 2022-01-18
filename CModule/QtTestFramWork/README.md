@@ -63,18 +63,18 @@
 >```c++
 >void XXX::testQString_data()
 >{
->    QTest::addColumn<QString>( "string" );
->    QTest::addColumn<QString>( "result" );
+>        QTest::addColumn<QString>( "string" );
+>        QTest::addColumn<QString>( "result" );
 >
->    QTest::newRow( "firstRow" ) << "hello" << "HELLO";
->    QTest::newRow( "secondRow" ) << "Hello" << "HELLO";
->    QTest::newRow( "thirdRow" ) << "HELLO" << "HELLO";
+>        QTest::newRow( "firstRow" ) << "hello" << "HELLO";
+>        QTest::newRow( "secondRow" ) << "Hello" << "HELLO";
+>        QTest::newRow( "thirdRow" ) << "HELLO" << "HELLO";
 >}
 >
 >void XXX::testQstring()
 >{
->    QFETCH( QString, string );
->    QFETCH( QString, result ); // 每执行一次QFETCH就会从testQString_data中存入的数据中取一次
+>        QFETCH( QString, string );
+>        QFETCH( QString, result ); // 每执行一次QFETCH就会从testQString_data中存入的数据中取一次
 >}
 >```
 >

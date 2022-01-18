@@ -21,5 +21,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
 #    CustTestPro \
-#    QtNoGuiTest
+    QtNoGuiTest
 #    QMLTest
