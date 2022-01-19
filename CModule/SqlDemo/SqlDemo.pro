@@ -10,10 +10,9 @@ CONFIG -= app_bundle
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-# You can also make your code fail to compile if it uses deprecated APIs.
-# In order to do so, uncomment the following line.
-# You can also select to disable deprecated APIs only up to a certain version of Qt.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+#参考文章: 1.几种ORM的对比  http://blog.sina.com.cn/s/blog_999d1f4c0101e12l.html
+#        2. QxORM 主页: https://www.qxorm.com/qxorm_en/home.html
+#        3. QxORM的一个教程: https://www.ljjyy.com/archives/2021/03/100647.html
 
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/debug

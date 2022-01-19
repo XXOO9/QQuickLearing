@@ -27,7 +27,7 @@ SUBDIRS += \
 #    GoogleTest
 #    CustComboBox
 #    QtTestFramWork
-    MultiThreadDemo \
- \#    SqlDemo
-    CMultiThreadDemo
+#    MultiThreadDemo \
+    SqlDemo
+#    CMultiThreadDemo
 
