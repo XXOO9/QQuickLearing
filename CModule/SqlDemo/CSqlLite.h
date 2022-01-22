@@ -29,6 +29,12 @@ public:
 
     //操作表
 public:
+
+    void testFunc();
+
+    //查询所有表名
+    void queryTables();
+
     //插入一条字段
     bool insertIntoStudent( int id, QString stuName, QString className );
 
