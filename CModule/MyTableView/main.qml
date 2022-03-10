@@ -17,11 +17,11 @@ Window {
         id: btn1
         text: "1"
         onClicked: {
-            Model.testfunc1()
-            Model.testfunc2()
-            Model.testfunc3()
-            Model.testfunc4()
             Model.testfunc5()
+            Model.testfunc4()
+            Model.testfunc3()
+            Model.testfunc2()
+            Model.testfunc1()
             view.test()
         }
     }

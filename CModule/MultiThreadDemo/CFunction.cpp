@@ -10,6 +10,11 @@ CFunction::~CFunction()
 
 }
 
+void CFunction::init()
+{
+
+}
+
 void CFunction::display()
 {
     static int i = 0;
@@ -24,6 +29,7 @@ void CFunction::display()
         qDebug() << "this is CFunction:: " << QThread::currentThreadId();
         QThread::msleep( 500 );
     }
+    emit sigFuncDone();
     qDebug() << "end of display...";
 
 }

@@ -19,8 +19,10 @@ signals:
     void sigFuncDone();
 
 public slots:
+    //耗时函数
     void display();
 
+    //结束耗时函数
     void stopDisplay();
 
 private:

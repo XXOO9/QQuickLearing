@@ -16,6 +16,8 @@ public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
+    void init();
+
 private:
     Ui::Widget *ui;
     CWorkThread w;

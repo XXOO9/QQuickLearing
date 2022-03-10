@@ -16,11 +16,11 @@ SUBDIRS += \
 #    EnumWithQuick \
 #    RightMouseClicked
 #    MyTableView                   \
-#    CustQQuickVirtualKeyBoard      \
+    CustQQuickVirtualKeyBoard      \
 #    CustDialog                      \
 #    CustListView
 #    DynamicCreateComponent
-#     CustPopup
+#    CustPopup
 #    ShowOpenCVFrame
 #    CustStackView
 #    CTestShardLibrary \
@@ -28,6 +28,8 @@ SUBDIRS += \
 #    CustComboBox
 #    QtTestFramWork
 #    MultiThreadDemo \
-    SqlDemo
+#    SqlDemo
 #    CMultiThreadDemo
+#    CustControls
+#    ProcessChat
 

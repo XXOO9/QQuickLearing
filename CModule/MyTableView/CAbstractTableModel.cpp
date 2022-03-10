@@ -100,7 +100,7 @@ bool CAbstractTableModel::check(QString uniqueString)
 void CAbstractTableModel::testfunc1()
 {
     QStringList rowData;
-    rowData << "first" << "second" << "third" << "forth" << "fifth";
+    rowData << "11" << "12" << "13" << "14" << "15";
     QString uniqueString = "339";
 
     bool ok = appendRowDatas( rowData, uniqueString );
@@ -110,7 +110,7 @@ void CAbstractTableModel::testfunc1()
 void CAbstractTableModel::testfunc2()
 {
     QStringList rowData;
-    rowData << "first" << "second" << "third" << "forth" << "fifth";
+    rowData << "21" << "22" << "23" << "24" << "25";
     QString uniqueString = "340";
 
     bool ok = appendRowDatas( rowData, uniqueString );
@@ -120,7 +120,7 @@ void CAbstractTableModel::testfunc2()
 void CAbstractTableModel::testfunc3()
 {
     QStringList rowData;
-    rowData << "first" << "second" << "third" << "forth" << "fifth";
+    rowData << "31" << "32" << "33" << "34" << "35";
     QString uniqueString = "341";
 
     bool ok = appendRowDatas( rowData, uniqueString );
@@ -130,7 +130,7 @@ void CAbstractTableModel::testfunc3()
 void CAbstractTableModel::testfunc4()
 {
     QStringList rowData;
-    rowData << "first" << "second" << "third" << "forth" << "fifth";
+    rowData << "41" << "42" << "43" << "44" << "45";
     QString uniqueString = "342";
 
     bool ok = appendRowDatas( rowData, uniqueString );
@@ -140,8 +140,9 @@ void CAbstractTableModel::testfunc4()
 void CAbstractTableModel::testfunc5()
 {
     QStringList rowData;
-    rowData << "first" << "second" << "third" << "forth" << "fifth";
+    rowData << "51" << "52" << "53" << "54" << "55";
     QString uniqueString = "343";
+    //
 
     bool ok = appendRowDatas( rowData, uniqueString );
     emit layoutChanged();

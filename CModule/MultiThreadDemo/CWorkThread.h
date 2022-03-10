@@ -19,6 +19,8 @@ public:
 
     void startDisplay();
 
+    void stopDisplay();
+
 signals:
     void sigStartDisplay();
 

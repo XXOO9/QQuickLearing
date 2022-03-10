@@ -76,7 +76,8 @@ bool CDataModel::appendRow(QHash<ColumnIndex, CUnitData> data)
         return false;
     }
 
-    beginInsertRows( QModelIndex(), m_vecRets.size(), m_vecRets.size() );
+//    beginInsertRows( QModelIndex(), m_vecRets.size(), m_vecRets.size() );
+    beginInsertRows( QModelIndex(), 0, 0 );
     m_vecRets << data;
     endInsertRows();
     emit layoutChanged();

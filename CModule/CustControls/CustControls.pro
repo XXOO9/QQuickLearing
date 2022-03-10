@@ -1,4 +1,4 @@
-QT += quick virtualkeyboard
+QT += quick
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -7,8 +7,6 @@ CONFIG += c++11
 # deprecated API to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-QTPLUGIN += qtvirtualkeyboardplugin
-
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
@@ -16,23 +14,15 @@ QTPLUGIN += qtvirtualkeyboardplugin
 
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/debug
-        MOC_DIR     = $$PWD/debug/MOC
-        RCC_DIR     = $$PWD/debug/RCC
-        OBJECTS_DIR = $$PWD/debug/OBJ
 }else
 {
         DESTDIR     = $$PWD/release
-        MOC_DIR     = $$PWD/release/MOC
-        RCC_DIR     = $$PWD/release/RCC
-        OBJECTS_DIR = $$PWD/release/OBJ
 }
-
 
 SOURCES += \
         main.cpp
 
-RESOURCES += qml.qrc \
-    WDNMD/virtualkeyboard_default_style.qrc \
+RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

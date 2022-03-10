@@ -4,7 +4,7 @@ CWorkThread::CWorkThread(QObject *parent) : QObject(parent), m_pWorkThread( null
 {
     init();
 
-    startDisplay();
+//    startDisplay();
 }
 
 CWorkThread::~CWorkThread()
@@ -22,10 +22,16 @@ CWorkThread::~CWorkThread()
 
 void CWorkThread::init()
 {
+    //new 出一个用于工作的线程
     m_pWorkThread = new QThread();
+
+    //将目标对象放入工作线程
     m_func.moveToThread( m_pWorkThread );
 
+    //链接信号槽
     initConnection();
+
+    //开启线程, 此刻只是开启线程, 实际耗时函数需要通过信号触发
     m_pWorkThread->start();
 }
 
@@ -41,4 +47,9 @@ void CWorkThread::startDisplay()
 {
     qDebug() << "start display, ThreadID = " << QThread::currentThreadId();
     emit sigStartDisplay();
+}
+
+void CWorkThread::stopDisplay()
+{
+   m_func.stopDisplay();
 }
