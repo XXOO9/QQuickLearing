@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>CustProgressBar.qml</file>
+    </qresource>
+</RCC>

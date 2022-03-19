@@ -20,6 +20,11 @@ Window {
         }
     }
 
+    Component.onCompleted: {
+        console.log( "WDNMD" )
+        textInpuit.forceActiveFocus()
+    }
+
     TextField{
         id: textInpuit
         implicitWidth: 200
@@ -45,7 +50,7 @@ Window {
         id: inputPanel
         z: 99
         x: 0
-        y: window.height
+        y: window.height + 150
         width: window.width
 
         states: State {

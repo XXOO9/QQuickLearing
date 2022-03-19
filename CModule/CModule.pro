@@ -16,7 +16,7 @@ SUBDIRS += \
 #    EnumWithQuick \
 #    RightMouseClicked
 #    MyTableView                   \
-    CustQQuickVirtualKeyBoard      \
+#    CustQQuickVirtualKeyBoard      \
 #    CustDialog                      \
 #    CustListView
 #    DynamicCreateComponent
@@ -32,4 +32,11 @@ SUBDIRS += \
 #    CMultiThreadDemo
 #    CustControls
 #    ProcessChat
+#    ProcessCommunication
+#    QTimerDemo \
+#    widgetSignPainter
+#    SingletonHttpClicentThread
+#    judgeDebugModel
+ \#    SignalSync
+    CustProgressBar
 

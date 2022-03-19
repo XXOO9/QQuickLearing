@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CFunction_t {
-    QByteArrayData data[5];
-    char stringdata0[43];
+    QByteArrayData data[7];
+    char stringdata0[57];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,11 +35,13 @@ QT_MOC_LITERAL(0, 0, 9), // "CFunction"
 QT_MOC_LITERAL(1, 10, 11), // "sigFuncDone"
 QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 7), // "display"
-QT_MOC_LITERAL(4, 31, 11) // "stopDisplay"
+QT_MOC_LITERAL(4, 31, 4), // "data"
+QT_MOC_LITERAL(5, 36, 11), // "stopDisplay"
+QT_MOC_LITERAL(6, 48, 8) // "testFunc"
 
     },
-    "CFunction\0sigFuncDone\0\0display\0"
-    "stopDisplay"
+    "CFunction\0sigFuncDone\0\0display\0data\0"
+    "stopDisplay\0testFunc"
 };
 #undef QT_MOC_LITERAL
 
@@ -49,7 +51,7 @@ static const uint qt_meta_data_CFunction[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -57,16 +59,18 @@ static const uint qt_meta_data_CFunction[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x06 /* Public */,
+       1,    0,   34,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   30,    2, 0x0a /* Public */,
-       4,    0,   31,    2, 0x0a /* Public */,
+       3,    1,   35,    2, 0x0a /* Public */,
+       5,    0,   38,    2, 0x0a /* Public */,
+       6,    0,   39,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::QVariant,    4,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -80,8 +84,9 @@ void CFunction::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->sigFuncDone(); break;
-        case 1: _t->display(); break;
+        case 1: _t->display((*reinterpret_cast< QVariant(*)>(_a[1]))); break;
         case 2: _t->stopDisplay(); break;
+        case 3: _t->testFunc(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -94,7 +99,6 @@ void CFunction::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             }
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject CFunction::staticMetaObject = { {
@@ -126,13 +130,13 @@ int CFunction::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CWorkThread_t {
-    QByteArrayData data[3];
-    char stringdata0[29];
+    QByteArrayData data[4];
+    char stringdata0[34];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,10 +33,11 @@ static const qt_meta_stringdata_CWorkThread_t qt_meta_stringdata_CWorkThread = {
     {
 QT_MOC_LITERAL(0, 0, 11), // "CWorkThread"
 QT_MOC_LITERAL(1, 12, 15), // "sigStartDisplay"
-QT_MOC_LITERAL(2, 28, 0) // ""
+QT_MOC_LITERAL(2, 28, 0), // ""
+QT_MOC_LITERAL(3, 29, 4) // "data"
 
     },
-    "CWorkThread\0sigStartDisplay\0"
+    "CWorkThread\0sigStartDisplay\0\0data"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,10 +55,10 @@ static const uint qt_meta_data_CWorkThread[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x06 /* Public */,
+       1,    1,   19,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QVariant,    3,
 
        0        // eod
 };
@@ -68,20 +69,19 @@ void CWorkThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         auto *_t = static_cast<CWorkThread *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->sigStartDisplay(); break;
+        case 0: _t->sigStartDisplay((*reinterpret_cast< QVariant(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (CWorkThread::*)();
+            using _t = void (CWorkThread::*)(QVariant );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&CWorkThread::sigStartDisplay)) {
                 *result = 0;
                 return;
             }
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject CWorkThread::staticMetaObject = { {
@@ -125,9 +125,10 @@ int CWorkThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void CWorkThread::sigStartDisplay()
+void CWorkThread::sigStartDisplay(QVariant _t1)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

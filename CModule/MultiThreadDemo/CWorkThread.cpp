@@ -2,6 +2,8 @@
 
 CWorkThread::CWorkThread(QObject *parent) : QObject(parent), m_pWorkThread( nullptr )
 {
+
+    qRegisterMetaType<QVariant>("QVariant");
     init();
 
 //    startDisplay();
@@ -46,10 +48,16 @@ void CWorkThread::initConnection()
 void CWorkThread::startDisplay()
 {
     qDebug() << "start display, ThreadID = " << QThread::currentThreadId();
-    emit sigStartDisplay();
+    QMap<QString,QString> tmp;
+    tmp.insert( "1", "A" );
+    tmp.insert( "2", "B" );
+    tmp.insert( "3", "C" );
+    QVariant data;
+    data.setValue( tmp );
+    emit sigStartDisplay( data );
 }
 
 void CWorkThread::stopDisplay()
 {
-   m_func.stopDisplay();
+    m_func.stopDisplay();
 }

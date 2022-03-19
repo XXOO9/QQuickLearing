@@ -89,7 +89,7 @@ KeyboardStyle {
             Text {
                 id: keyText
                 text: control.displayText
-                color: "yellow"
+                color: "green"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 anchors.fill: parent

@@ -4,7 +4,9 @@
 #include <QObject>
 #include <QThread>
 #include <QDebug>
+#include <QMetaType>
 #include "CFunction.h"
+
 
 class CWorkThread : public QObject
 {
@@ -21,12 +23,14 @@ public:
 
     void stopDisplay();
 
+
+
 signals:
-    void sigStartDisplay();
+    void sigStartDisplay( QVariant data );
 
 public slots:
 
-private:
+public:
     CFunction   m_func;
     QThread     *m_pWorkThread;
 };

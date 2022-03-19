@@ -20,10 +20,11 @@ signals:
 
 public slots:
     //耗时函数
-    void display();
+    void display( QVariant data );
 
     //结束耗时函数
     void stopDisplay();
+    void testFunc();
 
 private:
     bool       m_isRunning{ true };
