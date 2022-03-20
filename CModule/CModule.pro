@@ -37,6 +37,7 @@ SUBDIRS += \
 #    widgetSignPainter
 #    SingletonHttpClicentThread
 #    judgeDebugModel
- \#    SignalSync
-    CustProgressBar
+#    SignalSync
+#    CustProgressBar
+#    UsageCfile
 
