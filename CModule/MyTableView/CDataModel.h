@@ -67,6 +67,8 @@ protected:
     //check singleton
     bool isSingleton( QString uniqueString );
 
+    void addColumn();
+
 private:
     QVector< QHash<ColumnIndex, CUnitData> >  m_vecRets;
 };

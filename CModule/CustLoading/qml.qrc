@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>CustLoading.qml</file>
+    </qresource>
+</RCC>

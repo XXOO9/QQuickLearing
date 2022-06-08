@@ -1,0 +1,8 @@
+﻿<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Boom.js</file>
+        <file>Calculate.js</file>
+        <file>TotalJs.js</file>
+    </qresource>
+</RCC>

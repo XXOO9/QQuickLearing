@@ -11,8 +11,9 @@ Item {
         height: width
         anchors.right: parent.right
         onClicked: {
-            setColor( CPPENUM.BLUE )
+            CInteraction.setEnum( CPPENUM.BLUE )
         }
+        text: "1"
     }
 
     Button{

@@ -78,7 +78,7 @@ bool CDataModel::appendRow(QHash<ColumnIndex, CUnitData> data)
 
 //    beginInsertRows( QModelIndex(), m_vecRets.size(), m_vecRets.size() );
     beginInsertRows( QModelIndex(), 0, 0 );
-    m_vecRets << data;
+    m_vecRets.push_front( data );
     endInsertRows();
     emit layoutChanged();
     return true;
@@ -141,6 +141,11 @@ bool CDataModel::isSingleton(QString uniqueString)
         }
     }
     return true;
+}
+
+void CDataModel::addColumn()
+{
+
 }
 
 CUnitData::CUnitData()

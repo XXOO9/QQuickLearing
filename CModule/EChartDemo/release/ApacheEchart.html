@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <script src="./echarts.js"></script>
+    <script type="text/javascript" src="./createApacheChart.js"></script>
+
+    <body>
+        <!-- 定义一个用于存放表格的dom容器 -->
+        <div id="apache_echart", style="width: 600px; height: 600px; padding: 0px;"></div>
+        <script type="text/javascript">
+            // 1.首先获取用于摆放表格的dom容器
+            var chartDom = document.getElementById('apache_echart')
+
+            // 2.使用获取到的dom来初始化chart
+            var myChart = echarts.init( chartDom )
+
+            // 3.定义一个存放数据的optiopn
+            var option
+
+            var dateArray = [1, 2, 3, 4, 5]
+            var valArray = [ 'A', 'B', 'C', 'D', 'E' ]
+
+            /** @type EChartsOption **/
+            option = {
+                title:{
+                    text:"这个是title"
+                },
+                xAxis:{
+                    type:"category",
+                    name: "横起的",
+                    nameLocation: "start",
+                    data: dateArray
+                },
+                yAxis:{
+                    type: "value",
+                    name: "竖起的",
+                    data: valArray,
+                },
+                grid:{
+                    show: true,
+                }
+            }
+            myChart.setOption( option )
+            // 开始写js脚本
+        </script>
+    </body>
+</html>

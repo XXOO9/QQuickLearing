@@ -15,7 +15,7 @@ void testFunc( CAbstractTableModel &dataModel )
 int main(int argc, char *argv[])
 {
 
-    CAbstractTableModel DataModel(5);
+    CAbstractTableModel DataModel(4);
 //    DataModel.testfunc1();
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

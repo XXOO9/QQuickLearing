@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            eChartDemo
+        </title>
+        <script src="./echarts.js"></script>
+        <script src="./purple-passion.js"></script>
+    </head>
+    
+    <!-- <body> -->
+    <div id="main" style="width: 500px; height: 500px; margin: 0px; background-color: #5B5C6E; padding: 0%;"></div>
+    <script type="text/javascript">
+
+var chartDom = document.getElementById('main');
+var myChart = echarts.init(chartDom, 'purple-passion');
+var option;
+
+function randomData() {
+  now = new Date(+now + oneDay);
+  value = value + Math.random() * 21 - 10;
+  return {
+    name: now.toString(),
+    value: [
+      [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+      Math.round(value)
+    ]
+  };
+}
+let data = [];
+let now = new Date(1997, 9, 3);
+let oneDay = 24 * 3600 * 1000;
+let value = Math.random() * 1000;
+for (var i = 0; i < 1000; i++) {
+  data.push(randomData());
+}
+option = {
+  title: {
+    text: 'Dynamic Data & Time Axis'
+  },
+  tooltip: {
+    trigger: 'axis',
+    formatter: function (params) {
+      params = params[0]
+      var date = new Date(params.name)
+      return (
+        date.getDate() +
+        '/' +
+        (date.getMonth() + 1) +
+        '/' +
+        date.getFullYear() +
+        ' : ' +
+        params.value[1]
+      );
+    },
+    axisPointer: {
+      animation: true
+    }
+  },
+  xAxis: {
+    type: 'time',
+    splitLine: {
+      show: false
+    }
+  },
+  yAxis: {
+    type: 'value',
+    boundaryGap: [0, '20%'],
+    splitLine: {
+      show: false
+    }
+  },
+  series: [
+    {
+      name: 'Fake Data',
+      type: 'line',
+      showSymbol: false,
+      data: data
+    }
+  ]
+};
+
+setInterval(function () {
+  for (var i = 0; i < 5; i++) {
+    data.shift();
+    data.push(randomData());
+  }
+  myChart.setOption({
+    series: [
+      {
+        data: data
+      }
+    ]
+  });
+}, 1000);
+
+function resiezeWindow( _width, _height ){
+    myChart.resize( {width: _width, height: _height} )
+    return '老表, 你给我的是这么多-> ' + _width + "," + _height
+}
+
+function fullScreen(){
+    const html = document.querySelector('main')
+    html.requestFullscreen()
+}
+
+function appendData( date, value ){
+    data.push( date )
+    value.push( value )
+}
+
+option && myChart.setOption(option);
+        </script>
+<button type = "button" onclick="resiezeWindow( 200, 200)">改变大小</button>
+<button type = "button" onclick="resiezeWindow( 200, 200)">全屏</button>
+
+    <!-- </body> -->
+</html>

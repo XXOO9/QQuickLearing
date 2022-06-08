@@ -10,8 +10,8 @@ TEMPLATE = subdirs
 
 
 SUBDIRS += \
-#    CHttpModule \
-#    unitTest     \
+#    CHttpModule \               ##Qt自带的Http网络模块
+#    unitTest     \              ## 单元测试
 #    CHttpModule2 \
 #    EnumWithQuick \
 #    RightMouseClicked
@@ -26,7 +26,6 @@ SUBDIRS += \
 #    CTestShardLibrary \
 #    GoogleTest
 #    CustComboBox
-#    QtTestFramWork
 #    MultiThreadDemo \
 #    SqlDemo
 #    CMultiThreadDemo
@@ -40,4 +39,14 @@ SUBDIRS += \
 #    SignalSync
 #    CustProgressBar
 #    UsageCfile
+#    TableView_Version_2
+#    CustLoading
+#    QDateTimeIntervalDemo
+#     EChartDemo
+#    RegularExpressionDemo
+#    QtTestFrameWork
+#    gmy
+#    DemoRadioBtn
+ \#    QThreadControl
+    CreateDmpFile
 

@@ -9,15 +9,18 @@ ApplicationWindow {
     height: 480
     title: qsTr("Hello World")
 
-    CPPENUM{
-        id: cpp
-        name: "PPC"
-        //此处也会调用函数setColor
-        color: CPPENUM.GREEN
-        onSigColorChanged: {
-
-        }
+    Component.onCompleted: {
     }
+
+//    CPPENUM{
+//        id: cpp
+//        name: "PPC"
+//        //此处也会调用函数setColor
+//        color: CPPENUM.GREEN
+//        onSigColorChanged: {
+
+//        }
+//    }
 
     SubComponent{
         anchors.right: parent.right
