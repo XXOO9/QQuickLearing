@@ -27,3 +27,4 @@ CModule/SqlDemo/Makefile
 CModule/SqlDemo/debug/moc_predefs.h
 CModule/SqlDemo/debug/moc_CSqlLite.cpp
 CModule/SqlDemo/debug/moc_CDataBase.cpp
+*.dmp
