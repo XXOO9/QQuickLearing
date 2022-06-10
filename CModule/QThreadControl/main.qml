@@ -9,6 +9,11 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
+    Component.onCompleted: {
+//        test()
+    }
+
+
     Button{
         id: btn1
         text: "暂停"
@@ -22,7 +27,7 @@ Window {
         anchors.top: btn1.bottom
         text: "开始"
         onClicked: {
-            ThreadMgr.startPrint()
+            ThreadMgr.timerControler( true )
         }
     }
 
@@ -41,5 +46,12 @@ Window {
         onClicked: {
             ThreadMgr.deletePrinter()
         }
+    }
+
+
+    function test(){
+        let tmp = "4.0+4.2";
+        let a = tmp.split( "+" )
+        console.log( a[0] + "---" + a[1] )
     }
 }

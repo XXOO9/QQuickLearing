@@ -19,7 +19,7 @@ public:
 
     Q_INVOKABLE void killThread();
 
-    Q_INVOKABLE void timerControler();
+    Q_INVOKABLE void timerControler( bool ok );
 
     Q_INVOKABLE void deletePrinter();
 

@@ -62,7 +62,7 @@ bool CAbstractTableModel::appendRowDatas(QStringList rowDisplayDatas, QString un
     }
 
     bool ok = appendRow( rowData );
-//    qDebug() << "is append row success ? ->" << ok;
+    //    qDebug() << "is append row success ? ->" << ok;
     return ok;
 }
 
@@ -104,7 +104,7 @@ void CAbstractTableModel::testfunc1()
     QString uniqueString = "339";
 
     bool ok = appendRowDatas( rowData, uniqueString );
-    emit layoutChanged();
+//    emit layoutChanged();
 }
 
 void CAbstractTableModel::testfunc2()
@@ -153,4 +153,14 @@ void CAbstractTableModel::testfunc6()
     QStringList l;
     l << "W" << "D" << "N" << "M" << "D";
     setHorizontalHeader( l );
+}
+
+void CAbstractTableModel::testfunc7()
+{
+    QVector< QStringList > vecLists;
+    QStringList tmpList;
+    for( int i = 0 ; i < 100000; i++ ){
+        tmpList <<"11" << "22" << "33" << "44" << "55";
+        appendRowDatas( tmpList, QString::number( i ) );
+    }
 }

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadMgr_t {
-    QByteArrayData data[7];
-    char stringdata0[73];
+    QByteArrayData data[8];
+    char stringdata0[76];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,11 +37,12 @@ QT_MOC_LITERAL(2, 21, 0), // ""
 QT_MOC_LITERAL(3, 22, 10), // "stopThread"
 QT_MOC_LITERAL(4, 33, 10), // "killThread"
 QT_MOC_LITERAL(5, 44, 14), // "timerControler"
-QT_MOC_LITERAL(6, 59, 13) // "deletePrinter"
+QT_MOC_LITERAL(6, 59, 2), // "ok"
+QT_MOC_LITERAL(7, 62, 13) // "deletePrinter"
 
     },
     "ThreadMgr\0startPrint\0\0stopThread\0"
-    "killThread\0timerControler\0deletePrinter"
+    "killThread\0timerControler\0ok\0deletePrinter"
 };
 #undef QT_MOC_LITERAL
 
@@ -62,14 +63,14 @@ static const uint qt_meta_data_ThreadMgr[] = {
        1,    0,   39,    2, 0x02 /* Public */,
        3,    0,   40,    2, 0x02 /* Public */,
        4,    0,   41,    2, 0x02 /* Public */,
-       5,    0,   42,    2, 0x02 /* Public */,
-       6,    0,   43,    2, 0x02 /* Public */,
+       5,    1,   42,    2, 0x02 /* Public */,
+       7,    0,   45,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,    6,
     QMetaType::Void,
 
        0        // eod
@@ -84,12 +85,11 @@ void ThreadMgr::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 0: _t->startPrint(); break;
         case 1: _t->stopThread(); break;
         case 2: _t->killThread(); break;
-        case 3: _t->timerControler(); break;
+        case 3: _t->timerControler((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 4: _t->deletePrinter(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject ThreadMgr::staticMetaObject = { {

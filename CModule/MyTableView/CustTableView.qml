@@ -86,4 +86,9 @@ Item {
             list[i].destroy()
         }
     }
+
+
+    function loadData(){
+        m_tableView.model = Model
+    }
 }

@@ -50,6 +50,8 @@ public:
     Q_INVOKABLE void testfunc5();
     Q_INVOKABLE void testfunc6();
 
+    Q_INVOKABLE void testfunc7();
+
 
 private:
     qint8                         m_columnCount;

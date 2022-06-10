@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CAbstractTableModel_t {
-    QByteArrayData data[19];
-    char stringdata0[224];
+    QByteArrayData data[20];
+    char stringdata0[234];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -49,7 +49,8 @@ QT_MOC_LITERAL(14, 174, 9), // "testfunc2"
 QT_MOC_LITERAL(15, 184, 9), // "testfunc3"
 QT_MOC_LITERAL(16, 194, 9), // "testfunc4"
 QT_MOC_LITERAL(17, 204, 9), // "testfunc5"
-QT_MOC_LITERAL(18, 214, 9) // "testfunc6"
+QT_MOC_LITERAL(18, 214, 9), // "testfunc6"
+QT_MOC_LITERAL(19, 224, 9) // "testfunc7"
 
     },
     "CAbstractTableModel\0horizontalHeader\0"
@@ -58,7 +59,7 @@ QT_MOC_LITERAL(18, 214, 9) // "testfunc6"
     "setSpecificData\0uniqueString\0ColumnIndex\0"
     "targetColumn\0val\0check\0testfunc1\0"
     "testfunc2\0testfunc3\0testfunc4\0testfunc5\0"
-    "testfunc6"
+    "testfunc6\0testfunc7"
 };
 #undef QT_MOC_LITERAL
 
@@ -68,7 +69,7 @@ static const uint qt_meta_data_CAbstractTableModel[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -76,17 +77,18 @@ static const uint qt_meta_data_CAbstractTableModel[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags
-       1,    1,   69,    2, 0x02 /* Public */,
-       4,    1,   72,    2, 0x02 /* Public */,
-       6,    0,   75,    2, 0x02 /* Public */,
-       7,    3,   76,    2, 0x02 /* Public */,
-      12,    1,   83,    2, 0x02 /* Public */,
-      13,    0,   86,    2, 0x02 /* Public */,
-      14,    0,   87,    2, 0x02 /* Public */,
-      15,    0,   88,    2, 0x02 /* Public */,
-      16,    0,   89,    2, 0x02 /* Public */,
-      17,    0,   90,    2, 0x02 /* Public */,
-      18,    0,   91,    2, 0x02 /* Public */,
+       1,    1,   74,    2, 0x02 /* Public */,
+       4,    1,   77,    2, 0x02 /* Public */,
+       6,    0,   80,    2, 0x02 /* Public */,
+       7,    3,   81,    2, 0x02 /* Public */,
+      12,    1,   88,    2, 0x02 /* Public */,
+      13,    0,   91,    2, 0x02 /* Public */,
+      14,    0,   92,    2, 0x02 /* Public */,
+      15,    0,   93,    2, 0x02 /* Public */,
+      16,    0,   94,    2, 0x02 /* Public */,
+      17,    0,   95,    2, 0x02 /* Public */,
+      18,    0,   96,    2, 0x02 /* Public */,
+      19,    0,   97,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::QVariant, QMetaType::Int,    3,
@@ -94,6 +96,7 @@ static const uint qt_meta_data_CAbstractTableModel[] = {
     QMetaType::Int,
     QMetaType::Bool, QMetaType::QString, 0x80000000 | 9, QMetaType::QString,    8,   10,   11,
     QMetaType::Bool, QMetaType::QString,    8,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -125,6 +128,7 @@ void CAbstractTableModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         case 8: _t->testfunc4(); break;
         case 9: _t->testfunc5(); break;
         case 10: _t->testfunc6(); break;
+        case 11: _t->testfunc7(); break;
         default: ;
         }
     }
@@ -159,13 +163,13 @@ int CAbstractTableModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 12)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 12;
     }
     return _id;
 }

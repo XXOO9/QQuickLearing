@@ -5,16 +5,11 @@ ThreadPrint::ThreadPrint(QObject *parent) : QObject(parent)
     qDebug() << "main threadID = " << QThread::currentThreadId();
     init();
 
-    emit insideStartTimer();
 }
 
 ThreadPrint::~ThreadPrint()
 {
-    bool ok = stopTimer();
-
-    if( m_printThread.isRunning() ){
-        m_printThread.quit();
-    }
+    qDebug() << "destory func Thread ID = " << QThread::currentThreadId();
     qDebug() << "start destory thread obj...";
 }
 
@@ -30,7 +25,7 @@ void ThreadPrint::startPrint()
 void ThreadPrint::stopThread()
 {
 
-    if( !m_printThread.isRunning() ){
+    if( !m_printThread->isRunning() ){
         return;
     }
 
@@ -40,30 +35,35 @@ void ThreadPrint::stopThread()
 
 
 
-    if( m_printThread.isRunning() ){
+    if( m_printThread->isRunning() ){
         qDebug() << "GG..";
     }
 }
 
-void ThreadPrint::killThread()
+void ThreadPrint::onKillThread()
 {
     stopThread();
-    stopTimer();
-    m_printThread.quit();
+//    stopTimer();
+    m_printThread->quit();
 
-    qDebug() <<" level =  " << m_printThread.loopLevel();
-    bool ok = m_printThread.wait();
-    ok = m_printThread.isFinished();
+    qDebug() <<" level =  " << m_printThread->loopLevel();
+    bool ok = false;
+    ok = m_printThread->isFinished();
+
+    if( m_printThread->isRunning() ){
+        qDebug() << "still running...";
+    }
     qDebug() << "wait ret = " << ok;
 }
 
 bool ThreadPrint::stopTimer()
 {
-    if( m_timer.isActive() ){
-        m_timer.stop();
+    if( m_timer->isActive() ){
+        m_timer->stop();
+        qDebug() << "stop timer ThreadID = " <<QThread::currentThreadId();
     }
 
-    return m_timer.isActive();
+    return m_timer->isActive();
 }
 
 void ThreadPrint::onStartPrint()
@@ -101,12 +101,16 @@ void ThreadPrint::onConnection()
 void ThreadPrint::onThreadFinished()
 {
     qDebug() << "thread finished...!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+    if( nullptr != m_printThread ){
+        m_printThread->deleteLater();
+        m_printThread = nullptr;
+    }
 }
 
 void ThreadPrint::onStartTimer()
 {
     qDebug() << "start timer ThreadID = " << QThread::currentThreadId();
-    m_timer.start( 1000 );
+    m_timer->start( 1000 );
 }
 
 void ThreadPrint::onTimerTimeout()
@@ -116,23 +120,34 @@ void ThreadPrint::onTimerTimeout()
 
 void ThreadPrint::init()
 {
-    initConnection();
+    m_printThread = new QThread();
+    connect( m_printThread, &QThread::started, [=](){
+        qDebug() << "on start ThreadID = " << QThread::currentThreadId();
+        m_timer = new QTimer( this );
+        initConnection();
+        if( m_printThread->isRunning() ){
+            qDebug() << "kaishile...";
+        }
+    });
+    this->moveToThread( m_printThread );
 
-    this->moveToThread( &m_printThread );
-    m_timer.moveToThread( &m_printThread );
-    m_printThread.start();
-    if( m_printThread.isRunning() ){
-        qDebug() << "kaishile...";
-    }
+    //这个信号一定要在start之前连接!!!!!!!!!!!
+    connect( m_printThread, &QThread::finished, this, &ThreadPrint::onThreadFinished );
+    m_printThread->start();
 }
 
 void ThreadPrint::initConnection()
 {
     qDebug() << "initConnection threadID = " << QThread::currentThreadId();
-    //    connect( this, &ThreadPrint::insideSigInitConnection, this, &ThreadPrint::onConnection );
     connect( this, &ThreadPrint::insideSigStartPrint, this, &ThreadPrint::onStartPrint, Qt::QueuedConnection );
     connect( this, &ThreadPrint::insideSigStartCount, this, &ThreadPrint::onStartCount, Qt::QueuedConnection );
-    connect( &m_printThread, &QThread::finished, this, &ThreadPrint::onThreadFinished, Qt::QueuedConnection );
+    connect( m_printThread, &QThread::finished, this, &ThreadPrint::onThreadFinished, Qt::QueuedConnection );
     connect( this, &ThreadPrint::insideStartTimer, this, &ThreadPrint::onStartTimer, Qt::QueuedConnection );
-    connect( &m_timer, &QTimer::timeout, this, &ThreadPrint::onTimerTimeout, Qt::QueuedConnection );
+    connect( m_timer, &QTimer::timeout, this, &ThreadPrint::onTimerTimeout, Qt::QueuedConnection );
+    connect( this, &ThreadPrint::insideSigKillThread, this, &ThreadPrint::onKillThread, Qt::QueuedConnection );
+}
+
+QThread *ThreadPrint::printThread() const
+{
+    return m_printThread;
 }

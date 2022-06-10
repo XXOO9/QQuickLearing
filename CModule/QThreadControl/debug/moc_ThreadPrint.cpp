@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadPrint_t {
-    QByteArrayData data[12];
-    char stringdata0[178];
+    QByteArrayData data[14];
+    char stringdata0[211];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,19 +37,22 @@ QT_MOC_LITERAL(2, 32, 0), // ""
 QT_MOC_LITERAL(3, 33, 19), // "insideSigStartCount"
 QT_MOC_LITERAL(4, 53, 16), // "insideStartTimer"
 QT_MOC_LITERAL(5, 70, 23), // "insideSigInitConnection"
-QT_MOC_LITERAL(6, 94, 12), // "onStartPrint"
-QT_MOC_LITERAL(7, 107, 12), // "onStartCount"
-QT_MOC_LITERAL(8, 120, 12), // "onConnection"
-QT_MOC_LITERAL(9, 133, 16), // "onThreadFinished"
-QT_MOC_LITERAL(10, 150, 12), // "onStartTimer"
-QT_MOC_LITERAL(11, 163, 14) // "onTimerTimeout"
+QT_MOC_LITERAL(6, 94, 19), // "insideSigKillThread"
+QT_MOC_LITERAL(7, 114, 12), // "onStartPrint"
+QT_MOC_LITERAL(8, 127, 12), // "onStartCount"
+QT_MOC_LITERAL(9, 140, 12), // "onConnection"
+QT_MOC_LITERAL(10, 153, 16), // "onThreadFinished"
+QT_MOC_LITERAL(11, 170, 12), // "onStartTimer"
+QT_MOC_LITERAL(12, 183, 12), // "onKillThread"
+QT_MOC_LITERAL(13, 196, 14) // "onTimerTimeout"
 
     },
     "ThreadPrint\0insideSigStartPrint\0\0"
     "insideSigStartCount\0insideStartTimer\0"
-    "insideSigInitConnection\0onStartPrint\0"
-    "onStartCount\0onConnection\0onThreadFinished\0"
-    "onStartTimer\0onTimerTimeout"
+    "insideSigInitConnection\0insideSigKillThread\0"
+    "onStartPrint\0onStartCount\0onConnection\0"
+    "onThreadFinished\0onStartTimer\0"
+    "onKillThread\0onTimerTimeout"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,34 +62,38 @@ static const uint qt_meta_data_ThreadPrint[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       4,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   64,    2, 0x06 /* Public */,
-       3,    0,   65,    2, 0x06 /* Public */,
-       4,    0,   66,    2, 0x06 /* Public */,
-       5,    0,   67,    2, 0x06 /* Public */,
+       1,    0,   74,    2, 0x06 /* Public */,
+       3,    0,   75,    2, 0x06 /* Public */,
+       4,    0,   76,    2, 0x06 /* Public */,
+       5,    0,   77,    2, 0x06 /* Public */,
+       6,    0,   78,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   68,    2, 0x08 /* Private */,
-       7,    0,   69,    2, 0x08 /* Private */,
-       8,    0,   70,    2, 0x08 /* Private */,
-       9,    0,   71,    2, 0x08 /* Private */,
-      10,    0,   72,    2, 0x08 /* Private */,
-      11,    0,   73,    2, 0x08 /* Private */,
+       7,    0,   79,    2, 0x08 /* Private */,
+       8,    0,   80,    2, 0x08 /* Private */,
+       9,    0,   81,    2, 0x08 /* Private */,
+      10,    0,   82,    2, 0x08 /* Private */,
+      11,    0,   83,    2, 0x08 /* Private */,
+      12,    0,   84,    2, 0x08 /* Private */,
+      13,    0,   85,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -107,12 +114,14 @@ void ThreadPrint::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 1: _t->insideSigStartCount(); break;
         case 2: _t->insideStartTimer(); break;
         case 3: _t->insideSigInitConnection(); break;
-        case 4: _t->onStartPrint(); break;
-        case 5: _t->onStartCount(); break;
-        case 6: _t->onConnection(); break;
-        case 7: _t->onThreadFinished(); break;
-        case 8: _t->onStartTimer(); break;
-        case 9: _t->onTimerTimeout(); break;
+        case 4: _t->insideSigKillThread(); break;
+        case 5: _t->onStartPrint(); break;
+        case 6: _t->onStartCount(); break;
+        case 7: _t->onConnection(); break;
+        case 8: _t->onThreadFinished(); break;
+        case 9: _t->onStartTimer(); break;
+        case 10: _t->onKillThread(); break;
+        case 11: _t->onTimerTimeout(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -142,6 +151,13 @@ void ThreadPrint::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             using _t = void (ThreadPrint::*)();
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadPrint::insideSigInitConnection)) {
                 *result = 3;
+                return;
+            }
+        }
+        {
+            using _t = void (ThreadPrint::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadPrint::insideSigKillThread)) {
+                *result = 4;
                 return;
             }
         }
@@ -178,13 +194,13 @@ int ThreadPrint::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 12)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 10;
+        _id -= 12;
     }
     return _id;
 }
@@ -211,6 +227,12 @@ void ThreadPrint::insideStartTimer()
 void ThreadPrint::insideSigInitConnection()
 {
     QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
+}
+
+// SIGNAL 4
+void ThreadPrint::insideSigKillThread()
+{
+    QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

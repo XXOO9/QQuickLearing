@@ -47,6 +47,8 @@ SUBDIRS += \
 #    QtTestFrameWork
 #    gmy
 #    DemoRadioBtn
- \#    QThreadControl
-    CreateDmpFile
+#    QThreadControl
+#    CreateDmpFile
+#    DemoQMLUI
+    DemoJsModelTableView
 

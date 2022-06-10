@@ -22,17 +22,23 @@ void ThreadMgr::stopThread()
 
 void ThreadMgr::killThread()
 {
-    m_pPrintThread->killThread();
+//    m_pPrintThread->onKillThread();
 }
 
-void ThreadMgr::timerControler()
+void ThreadMgr::timerControler( bool ok )
 {
-    m_pPrintThread->stopTimer();
+    if( ok ){
+        emit m_pPrintThread->insideStartTimer();
+    }else{
+        m_pPrintThread->stopTimer();
+    }
 }
 
 void ThreadMgr::deletePrinter()
 {
     if( nullptr != m_pPrintThread ){
+//        emit m_pPrintThread->insideSigKillThread();
+        m_pPrintThread->printThread()->exit();
         m_pPrintThread->deleteLater();
         m_pPrintThread = nullptr;
     }
