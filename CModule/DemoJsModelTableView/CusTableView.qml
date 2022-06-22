@@ -30,7 +30,7 @@ Item {
         implicitHeight: 700
 
         anchors.centerIn: parent
-        //        model: m_dataModel
+                model: m_dataModel
         delegate: Row{
             spacing: 10
             Rectangle{
@@ -54,8 +54,9 @@ Item {
     Button{
         anchors.bottom: parent.bottom
         onClicked: {
-//            loadData()
-            InterAction.testFunc()
+            for( let i = 0 ; i < 10000; i++ ){
+                InterAction.testFunc()
+            }
         }
     }
 
@@ -67,7 +68,6 @@ Item {
     Connections{
         target: InterAction
         onSigPassJson:{
-            console.log( "ret = " + jsString )
             DataModel.parseJson( m_dataModel, jsString )
         }
     }

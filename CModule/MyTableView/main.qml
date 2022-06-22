@@ -21,7 +21,11 @@ Window {
 //            Model.testfunc4()
 //            Model.testfunc3()
 //            Model.testfunc2()
-            Model.testfunc1()
+            for( let i = 0; i < 10000; i++ ){
+                Model.testfunc1()
+            }
+
+
 //            view.test()
         }
     }

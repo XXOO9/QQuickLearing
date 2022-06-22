@@ -28,3 +28,12 @@ CModule/SqlDemo/debug/moc_predefs.h
 CModule/SqlDemo/debug/moc_CSqlLite.cpp
 CModule/SqlDemo/debug/moc_CDataBase.cpp
 *.dmp
+build-CModule-Desktop_Qt_5_15_2_MSVC2015_64bit-Debug/Makefile
+Makefile
+*.user*
+*qrc_qml.cpp
+*_qml.cpp
+*qmlcache*
+*moc*
+*.mp4
+*_js.cpp

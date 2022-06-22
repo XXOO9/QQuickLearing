@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>CusTabView.qml</file>
+        <file>CusRect.qml</file>
+        <file>CusRectRed.qml</file>
+    </qresource>
+</RCC>

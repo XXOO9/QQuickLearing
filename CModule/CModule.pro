@@ -50,5 +50,13 @@ SUBDIRS += \
 #    QThreadControl
 #    CreateDmpFile
 #    DemoQMLUI
-    DemoJsModelTableView
+#    Demo
+#    DemoJsModelTableView
+#    DemoTextCode
+#    DemoGrid
+#    DemoTabView
+#    DemoCircle
+#    DemoQCustomplot
+ \#    DemoVideoPlayer
+    DemoTextDisplayDifferentStyleText
 

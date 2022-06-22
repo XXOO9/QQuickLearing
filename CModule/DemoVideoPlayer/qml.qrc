@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>CusVideoPlayer.qml</file>
+    </qresource>
+</RCC>

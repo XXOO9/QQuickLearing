@@ -2,6 +2,7 @@
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 //import QtWebEngine 1.8
+ import QtWebEngine 1.10
 import "./TotalJs.js" as Total
 import "./Boom.js" as Boom
 import "./Calculate.js" as Car
@@ -13,7 +14,7 @@ ApplicationWindow {
     title: qsTr("Hello World")
 
     Component.onCompleted: {
-        testFunc1()
+//        testFunc1()
     }
 
     Rectangle{
@@ -27,16 +28,16 @@ ApplicationWindow {
         anchors.top: parent.top
         width: 600
         height: 600
-//        WebEngineView{
-//            id: view
-//            width: 600
-//            height: 600
-//            backgroundColor: "#5B5C6E"
-//            anchors.left: parent.left
-///////////            @disable-check M7
-//            url: "file:///../demo1.html"
+        WebEngineView{
+            id: view
+            width: 600
+            height: 600
+            backgroundColor: "#5B5C6E"
+            anchors.left: parent.left
+/////////            @disable-check M7
+            url: "file:///../demo1.html"
 
-//        }
+        }
     }
 
     Rectangle{
@@ -51,10 +52,7 @@ ApplicationWindow {
         id: btn1
         text: "1"
         onClicked: {
-//            timer.start()
-            Boom.func()
-            console.log( "ret = " + Boom.person.age )
-            resizeWindow( view.width, view.height )
+            timer.start()
         }
     }
 
@@ -75,7 +73,7 @@ ApplicationWindow {
         repeat: true
         onTriggered: {
             var val = Math.round(Math.random()*80)
-            var funName = "addData( '1', " + val + " )"
+            var funName = "appendData( '1', " + val + " )"
             console.log( "val = " + funName )
             view.runJavaScript( funName )
         }

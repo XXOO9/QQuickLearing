@@ -41,9 +41,9 @@ int CAbstractTableModel::horizontalHeaderCount() const
 
 bool CAbstractTableModel::appendRowDatas(QStringList rowDisplayDatas, QString uniqueString)
 {
-    if( !isSingleton( uniqueString ) ){
-        return false;
-    }
+//    if( !isSingleton( uniqueString ) ){
+//        return false;
+//    }
 
     QHash<ColumnIndex, CUnitData> rowData;
     for( int i = 0; i < m_columnCount; i++ ){
@@ -100,8 +100,9 @@ bool CAbstractTableModel::check(QString uniqueString)
 void CAbstractTableModel::testfunc1()
 {
     QStringList rowData;
+    static int i = 1;
     rowData << "11" << "12" << "13" << "14" << "15";
-    QString uniqueString = "339";
+    QString uniqueString = QString::number( i++ );
 
     bool ok = appendRowDatas( rowData, uniqueString );
 //    emit layoutChanged();

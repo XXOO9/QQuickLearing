@@ -22,9 +22,10 @@ ApplicationWindow {
 
 
     function testttttt(){
-        let a = 'aaaaa';
-        let tmp = `${a} + WDNMD`;
+        let js = {"name": "zmc", "age": 18}
+        console.log( "js = " + js )
+        let obj = JSON.parse( js )
 
-        console.log( tmp )
+        console.log( "name = " + obj.name )
     }
 }
