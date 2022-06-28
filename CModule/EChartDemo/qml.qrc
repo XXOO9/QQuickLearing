@@ -4,5 +4,6 @@
         <file>Boom.js</file>
         <file>Calculate.js</file>
         <file>TotalJs.js</file>
+        <file>CusEChart.qml</file>
     </qresource>
 </RCC>

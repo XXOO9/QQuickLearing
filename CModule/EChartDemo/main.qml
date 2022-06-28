@@ -22,62 +22,106 @@ ApplicationWindow {
         color: "lightgreen"
     }
 
-    Item{
-        id: webItem
-        anchors.left: parent.left
-        anchors.top: parent.top
-        width: 600
-        height: 600
-        WebEngineView{
-            id: view
-            width: 600
-            height: 600
-            backgroundColor: "#5B5C6E"
-            anchors.left: parent.left
-/////////            @disable-check M7
-            url: "file:///../demo1.html"
+    Grid{
+        width: parent.width
+        height: parent.height
+        rows: 4
+        columns: 4
+        anchors.centerIn: parent
+        rowSpacing: 1
+        columnSpacing: 1
+        CusEChart{
+
+        }
+
+        CusEChart{
+
+        }
+
+        CusEChart{
+
+        }
+
+        CusEChart{
+
+        }
+
+        CusEChart{
+
+        }
+
+        CusEChart{
+
+        }
+
+        CusEChart{
+
+        }
+
+        CusEChart{
+
+        }
+
+        CusEChart{
+
+        }
+        CusEChart{
+
+        }
+        CusEChart{
+
+        }
+        CusEChart{
+
+        }
+        CusEChart{
+
+        }
+        CusEChart{
 
         }
     }
 
-    Rectangle{
-        width: 200
-        height: width
-        color: "red"
-        anchors.left: webItem.right
-        anchors.top: webItem.top
-    }
 
-    Button{
-        id: btn1
-        text: "1"
-        onClicked: {
-            timer.start()
-        }
-    }
 
-    Button{
-        id: btn2
-        text: "2"
-        anchors.top: btn1.bottom
-        onClicked: {
+//    Rectangle{
+//        width: 200
+//        height: width
+//        color: "red"
+//        anchors.left: webItem.right
+//        anchors.top: webItem.top
+//    }
+
+//    Button{
+//        id: btn1
+//        text: "1"
+//        onClicked: {
 //            timer.start()
-            resizeWindow( 592, 592 )
-//            resizeWindow( 590, 590 )
-        }
-    }
+//        }
+//    }
 
-    Timer{
-        id: timer
-        interval: 100
-        repeat: true
-        onTriggered: {
-            var val = Math.round(Math.random()*80)
-            var funName = "appendData( '1', " + val + " )"
-            console.log( "val = " + funName )
-            view.runJavaScript( funName )
-        }
-    }
+//    Button{
+//        id: btn2
+//        text: "2"
+//        anchors.top: btn1.bottom
+//        onClicked: {
+////            timer.start()
+//            resizeWindow( 592, 592 )
+////            resizeWindow( 590, 590 )
+//        }
+//    }
+
+//    Timer{
+//        id: timer
+//        interval: 100
+//        repeat: true
+//        onTriggered: {
+//            var val = Math.round(Math.random()*80)
+//            var funName = "appendData( '1', " + val + " )"
+//            console.log( "val = " + funName )
+//            view.runJavaScript( funName )
+//        }
+//    }
 
     function displayResult( ret ){
         console.log( "ret = " + ret )

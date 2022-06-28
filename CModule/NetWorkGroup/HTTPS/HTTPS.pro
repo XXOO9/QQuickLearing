@@ -1,4 +1,4 @@
-QT += quick qml gui widgets printsupport
+QT += quick network core
 
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/debug
@@ -8,9 +8,8 @@ CONFIG( debug, debug | release ){
 }
 
 SOURCES += \
-        CusQQuickPainterItem.cpp \
-        main.cpp \
-        qcustomplot.cpp
+        CHttpsDemo.cpp \
+        main.cpp
 
 RESOURCES += qml.qrc
 
@@ -26,5 +25,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    CusQQuickPainterItem.h \
-    qcustomplot.h
+    CHttpsDemo.h

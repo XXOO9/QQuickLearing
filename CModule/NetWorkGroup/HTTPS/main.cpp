@@ -1,17 +1,17 @@
 ﻿#include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QApplication>
-#include "CusQQuickPainterItem.h"
-
+#include "CHttpsDemo.h"
 
 
 int main(int argc, char *argv[])
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QApplication app(argc, argv);
+#endif
+    QGuiApplication app(argc, argv);
+    CHttpsDemo t;
 
     QQmlApplicationEngine engine;
-    qmlRegisterType<CusQQuickPainterItem>( "com.TME.CusQQuickPainterItem", 1, 0, "CusPaninter" );
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

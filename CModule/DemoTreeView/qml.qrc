@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>TreeWidget.qml</file>
+        <file>TreeItem.js</file>
+        <file>btn_expand@2x.png</file>
+        <file>btn_collapse@2x.png</file>
+        <file>btn_collapse.png</file>
+        <file>btn_expand.png</file>
+        <file>ico_item@2x.png</file>
+        <file>ico_item.png</file>
+        <file>CusTreeView.qml</file>
+        <file>CusColumn.qml</file>
+    </qresource>
+</RCC>

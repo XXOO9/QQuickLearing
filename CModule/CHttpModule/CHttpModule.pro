@@ -33,6 +33,7 @@ include($$PWD/CHttpTouristRecord/CHttpTouristRecord.pri)
 include($$PWD/CHttpQueryBodyElement/CHttpQueryBodyElement.pri)
 include($$PWD/CHttpGetVideoUrls/CHttpGetVideoUrls.pri)
 include($$PWD/CHttpDownLoadFile/CHttpDownLoadFile.pri)
+include($$PWD/CHttps/CHttps.pri)
 
 
 CONFIG( debug, debug | release ){
@@ -61,3 +62,6 @@ unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
+DISTFILES += \
+    CHttps/CHttps.pri

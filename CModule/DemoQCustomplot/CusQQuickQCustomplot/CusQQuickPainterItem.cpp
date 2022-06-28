@@ -1,57 +1,46 @@
 ﻿#include "CusQQuickPainterItem.h"
 
-CusQQuickPainterItem::CusQQuickPainterItem()
+CusQQuickPainterItem::CusQQuickPainterItem(QQuickPaintedItem *parent)
 {
-//    drawCircle();
-}
-
-CusQQuickPainterItem::~CusQQuickPainterItem()
-{
-
-}
-
-void CusQQuickPainterItem::paint(QPainter *painter)
-{
-    if( nullptr != m_painter ){
-        return;
-    }
-
-    QPen pen;
-    pen.setWidth( 12 );
-    pen.setColor( Qt::red );
-    m_painter->setPen( pen );
-    m_painter->drawRect( 0, 0, 200, 200 );
-
-    update();
+    m_pCustomplot = new QCustomPlot();
+    connect( m_pCustomplot, &QCustomPlot::afterReplot, this, &CusQQuickPainterItem::onCustomPlotReplot );
+    connect( this, &QQuickPaintedItem::widthChanged,  this, &CusQQuickPainterItem::updateCustomPlotSize );
+    connect( this, &QQuickPaintedItem::heightChanged, this, &CusQQuickPainterItem::updateCustomPlotSize );
 }
 
 void CusQQuickPainterItem::init()
 {
-    paint( m_painter );
+    updateCustomPlotSize();
+    m_pCustomplot->addGraph();
+    m_pCustomplot->graph( 0 )->setPen( QPen(Qt::red) );
 }
 
-int CusQQuickPainterItem::width() const
+void CusQQuickPainterItem::paint(QPainter *painter)
 {
-    return m_width;
-}
-
-void CusQQuickPainterItem::setWidth(int newWidth)
-{
-    if (m_width == newWidth)
+    qDebug() << "paint";
+    if( nullptr == m_pCustomplot ){
         return;
-    m_width = newWidth;
-    emit widthChanged();
+    }
+
+    QPixmap    picture( boundingRect().size().toSize() );
+    QCPPainter qcpPainter( &picture );
+    m_pCustomplot->toPainter( &qcpPainter );
+    setRenderTarget(QQuickPaintedItem::FramebufferObject);
+
+    painter->drawPixmap( QPoint(), picture );
 }
 
-int CusQQuickPainterItem::getHeight() const
+void CusQQuickPainterItem::updateCustomPlotSize()
 {
-    return height;
+    if( nullptr != m_pCustomplot )
+    {
+        m_pCustomplot->setGeometry(0, 0, (int)width(), (int)height());
+        m_pCustomplot->setViewport(QRect(0, 0, (int)width(), (int)height()));
+    }
 }
 
-void CusQQuickPainterItem::setHeight(int newHeight)
+void CusQQuickPainterItem::onCustomPlotReplot()
 {
-    if (height == newHeight)
-        return;
-    height = newHeight;
-    emit heightChanged();
+    qDebug() << "on replot";
+    update();
 }

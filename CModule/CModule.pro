@@ -12,7 +12,6 @@ TEMPLATE = subdirs
 SUBDIRS += \
 #    CHttpModule \               ##Qt自带的Http网络模块
 #    unitTest     \              ## 单元测试
-#    CHttpModule2 \
 #    EnumWithQuick \
 #    RightMouseClicked
 #    MyTableView                   \
@@ -57,6 +56,12 @@ SUBDIRS += \
 #    DemoTabView
 #    DemoCircle
 #    DemoQCustomplot
- \#    DemoVideoPlayer
-    DemoTextDisplayDifferentStyleText
+#    DemoVideoPlayer
+#    DemoTextDisplayDifferentStyleText
+#    DemoChartjs
+#    DemoTreeView  #not yet
+#    DemoChart
+#    QQuickControls
+ \#    NetWorkGroup
+    FileAutoBackup
 
