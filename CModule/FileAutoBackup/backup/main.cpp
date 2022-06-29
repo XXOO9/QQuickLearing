@@ -1,8 +1,6 @@
 ﻿#include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQmlContext>
 #include "CFileAutoBackup.h"
-
 
 int main(int argc, char *argv[])
 {
@@ -13,7 +11,6 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     CFileAutoBackup a;
-    engine.rootContext()->setContextProperty( "InterAction", &a );
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

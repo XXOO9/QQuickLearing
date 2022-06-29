@@ -1,43 +1,19 @@
 ﻿#include "CFileAutoBackup.h"
 
-CFileAutoBackup::CFileAutoBackup(const QString &backupDir, const BackupPolicy &policy, QObject *parent)
+CFileAutoBackup::CFileAutoBackup(const QString &backupDir, QObject *parent)
 {
     qDebug() << "exe dir = " << QCoreApplication::applicationDirPath();
-
     m_backupDir = translatePath( backupDir );
-    setBackupPolicy( AutoDetectedChange );
-    isExisted( backupDir, true );
 
+    isExisted( backupDir, true );
     init();
 
-//    test();
-    //    startBackup();
+    test();
 }
 
 CFileAutoBackup::~CFileAutoBackup()
 {
 
-}
-
-void CFileAutoBackup::startBackup()
-{
-    QFileInfo tmpFileInfo;
-    foreach (auto &ele, m_monitPaths) {
-
-        tmpFileInfo.setFile( ele );
-
-        //如果是文件夹，则直接对比文件差异
-        if( tmpFileInfo.isDir() ){
-            onDirContentChanged( ele );
-        }
-
-        //如果是文件，则对比修改时间是否一致
-        if( tmpFileInfo.isFile() ){
-            if( isSpecificFileChanged( ele ) ){
-                onFileChanged( ele );
-            }
-        }
-    }
 }
 
 bool CFileAutoBackup::isExisted(const QString &path, bool create)
@@ -53,56 +29,41 @@ bool CFileAutoBackup::isExisted(const QString &path, bool create)
     return ok;
 }
 
-void CFileAutoBackup::appendPath(QString path)
-{
-    appendMonitorPath( path );
-}
-
-void CFileAutoBackup::appendFile(QString filePath)
-{
-    appendMonitorFile( filePath );
-}
-
 void CFileAutoBackup::test()
 {
+//    copyDir( "../srcDir/", "../backup/" );
     QString path = "../srcDir";
+
     appendMonitorPath( path );
-
-    QString filePath = "../1.txt";
-    appendMonitorFile( filePath );
-
 }
 
 void CFileAutoBackup::appendMonitorPath(QString &path)
 {
-    QDir dir( path );
-    if( dir.isRelative() ){
-        path = translatePath( path );
-    }
-
+    path = translatePath( path );
     bool ok = m_sysFileWatcher.addPath( path );
     if( !ok ){
         qDebug() << "monitor failed...";
         return;
     }
-
     m_monitPaths.append( path );
+    qDebug( "monitor %1 success...", path );
+
 }
 
-void CFileAutoBackup::appendMonitorFile(QString &filePath)
+void CFileAutoBackup::appendMonitorFile(QString &fileName)
 {
-    QDir dir( filePath );
-    if( dir.isRelative() ){
-        filePath = translatePath( filePath );
-    }
-
-    bool ok = m_sysFileWatcher.addPath( filePath );
+    bool ok = m_sysFileWatcher.addPath( fileName );
     if( !ok ){
         qDebug() << "monitor path failed...";
         return;
     }
-    m_monitPaths.append( filePath );
-    m_mapFileChangeTimeStamp.insert( filePath, getFileRecentlyChangedTime( filePath ) );
+
+    qDebug( "monitor %1 success...", fileName );
+}
+
+void CFileAutoBackup::startBackup()
+{
+
 }
 
 void CFileAutoBackup::copyFile(const QString &srcFile, const QString &dstFile)
@@ -115,7 +76,7 @@ void CFileAutoBackup::copyFile(const QString &srcFile, const QString &dstFile)
     }
     ok = QFile::copy( srcFile, dstFile );
     if( !ok ){
-        qDebug() << "copy file failed, src = " << srcFile;
+        qDebug() << "copy file failed...";
         return;
     }
 
@@ -124,26 +85,13 @@ void CFileAutoBackup::copyFile(const QString &srcFile, const QString &dstFile)
 
 void CFileAutoBackup::copyDir(const QString &srcDir, const QString &dstDir)
 {
-    qDebug() << "going to copy dir " << srcDir << " to " << dstDir;
-    //如果目标文件夹不存在，则创建
     QDir dir( srcDir );
-//    isExisted( dstDir + "/" + dir.dirName(), true );
-    isExisted( dstDir, true );
-
+    isExisted( dstDir + "/" + dir.dirName(), true );
     QString tmplate = "%1/%2";
     QString dstFilePath = "";
-
-    qDebug() << "src dir name" << dir.path();
-
-    //获取文件列表前延时500ms,防止太快读不出文件列表信息
-    QEventLoop eveLoop;
-    QTimer::singleShot( 200, &eveLoop, &QEventLoop::quit );
-    eveLoop.exec();
+    qDebug() << dir.dirName();
     QFileInfoList fileInfoList = dir.entryInfoList( QDir::Dirs | QDir::Files | QDir::NoDot | QDir::NoDotAndDotDot );
-    qDebug() << "size = " << fileInfoList.size();
-
     foreach (auto &ele, fileInfoList) {
-        qDebug() << "WDNMD";
         //如果是文件夹,则开始递归
         dstFilePath = tmplate.arg( dstDir ).arg( ele.fileName() );
         qDebug() << dstFilePath;
@@ -151,39 +99,24 @@ void CFileAutoBackup::copyDir(const QString &srcDir, const QString &dstDir)
             copyDir( ele.filePath(), dstFilePath );
             continue;
         }
-
-        //如果是文件,则直接复制到目标路径下
-        bool ok = QFile::copy( ele.filePath(), dstFilePath );
-        QString logIngo = QString( "copy file %1, src path: %2, dst path: %3" );
-        qDebug() << logIngo.arg( ok ).arg( ele.filePath() ).arg( dstFilePath );
+        QFile::copy( ele.filePath(), dstFilePath );
     }
 }
 
 void CFileAutoBackup::deleteDir(const QString &dirPath)
 {
-    qDebug() << "dst dir path = " << dirPath;
-    QDir dir( dirPath );
-    QFileInfoList fileInfos = dir.entryInfoList( QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot );
-
-    foreach (auto &ele, fileInfos) {
-        if( ele.isFile() ){
-            QFile::remove( ele.absoluteFilePath() );
-        }
-
-        if( ele.isDir() ){
-            qDebug() << "dir name = " << ele.fileName();
-            deleteDir( ele.absolutePath() + "/" + ele.fileName() );
-        }
+    QDir dir;
+    if( !dir.rmpath( dirPath ) ){
+        qDebug() << "remove dir failed, path = " << dirPath;
+        return;
     }
 
-    if( dir.isEmpty() ){
-        dir.rmpath( dirPath );
-    }
+    qDebug() << "remove dir ok, path = " << dirPath;
 }
 
 void CFileAutoBackup::init()
 {
-
+    initConnection();
 }
 
 void CFileAutoBackup::initConnection()
@@ -192,9 +125,19 @@ void CFileAutoBackup::initConnection()
     connect( &m_sysFileWatcher, &QFileSystemWatcher::fileChanged, this, &CFileAutoBackup::onFileChanged );
 }
 
+void CFileAutoBackup::createBackupDir(const QString &dstPath)
+{
+    //如果备份路径不存在，则创建
+    if( !QFileInfo::exists( dstPath ) ){
+
+    }
+}
+
 QStringList CFileAutoBackup::getSpecificDirFileList( const QString &path )
 {
     QDir dir( path );
+//    QFileInfoList fileInfos = dir.entryInfoList( QDir::Dirs | QDir::Files | QDir::NoDot | QDir::NoDotDot);
+
     QStringList fileInfos = dir.entryList( QDir::Dirs | QDir::Files | QDir::NoDot | QDir::NoDotDot);
     return fileInfos;
 }
@@ -244,7 +187,7 @@ QVector<CDifferFile> CFileAutoBackup::compareFileInfos(const QString &rootMonitP
             tmpDifferFile.m_flag = false;
 
             //判断是文件还是路径
-            tmpPath = templateString.arg( m_backupDir ).arg( ele );
+            tmpPath = templateString.arg( rootMonitPath ).arg( ele );
             tmpFileInfo.setFile( tmpPath );
             if( tmpFileInfo.isDir() ){
                 tmpDifferFile.m_isDir = true;
@@ -283,39 +226,14 @@ void CFileAutoBackup::dirFilesChangedHandler(QVector<CDifferFile> &vecDifferFile
                 bool ok = QFile::remove( tmpFile.m_path );
                 qDebug() << "ret = " << ok;
             }
-            else{
-                deleteDir( m_backupDir + "/" + tmpFile.m_name );
-            }
         }
     }
-}
-
-QString CFileAutoBackup::getFileRecentlyChangedTime(const QString &filePath)
-{
-    QFileInfo fileInfo( filePath );
-    return fileInfo.fileTime( QFileDevice::FileModificationTime ).toString( "yyyy-MM-dd_hh:mm:ss" );
-}
-
-bool CFileAutoBackup::isSpecificFileChanged(const QString &filePath)
-{
-    if( m_mapFileChangeTimeStamp.contains( filePath ) ){
-        QString curChangedTime = getFileRecentlyChangedTime( filePath );
-
-        if( curChangedTime == m_mapFileChangeTimeStamp.value( filePath ) ){
-            return false;
-        }else{
-            return true;
-        }
-    }
-
-    //如果没有监测这个文件，则直接返回false
-    return false;
 }
 
 void CFileAutoBackup::onDirContentChanged(const QString &dirPath)
 {
     //检测到文件夹有变动（一般是增加或者减少文件），
-    qDebug() << "dir content chanegd, dirpath = " << dirPath;
+    qDebug() << "dir chanegd, dirpath = " << dirPath;
 
     //获取变动后备份路径下的文件列表
     QStringList backupPathFileInfoList = getSpecificDirFileList( m_backupDir );
@@ -323,7 +241,6 @@ void CFileAutoBackup::onDirContentChanged(const QString &dirPath)
     //获取变动后该路径下的文件列表
     QStringList monitPathInfoList = getSpecificDirFileList( dirPath );
 
-    //对比备份路径与监测路径下的文件信息，以监测路径下的文件信息为依据获取备份路径下需要新增或删除的文件
     QVector<CDifferFile> vecDifferFiles = compareFileInfos( dirPath, monitPathInfoList, backupPathFileInfoList );
 
     dirFilesChangedHandler( vecDifferFiles );
@@ -334,41 +251,4 @@ void CFileAutoBackup::onFileChanged(const QString &filePath)
     QFileInfo fileInfo( filePath );
     copyFile( filePath, m_backupDir + "/" + fileInfo.fileName() );
     qDebug() << "file chanegd, file path = " << filePath;
-}
-
-QString CFileAutoBackup::getBackupDir() const
-{
-    return m_backupDir;
-}
-
-void CFileAutoBackup::setBackupDir(const QString &backupDir)
-{
-    QDir dir( backupDir );
-
-    if( !dir.exists() ){
-        return;
-    }
-
-    if( !dir.isAbsolute() ){
-        m_backupDir = dir.absolutePath();
-    }
-
-    m_backupDir = backupDir;
-}
-
-CFileAutoBackup::BackupPolicy CFileAutoBackup::getBackupPolicy() const
-{
-    return m_backupPolicy;
-}
-
-void CFileAutoBackup::setBackupPolicy(const BackupPolicy &backupPolicy)
-{
-    m_backupPolicy = backupPolicy;
-    if( ManualOnceRunning == m_backupPolicy ){
-        disconnect( &m_sysFileWatcher, 0, 0, 0 );
-    }
-
-    if( AutoDetectedChange == m_backupPolicy ){
-        initConnection();
-    }
 }

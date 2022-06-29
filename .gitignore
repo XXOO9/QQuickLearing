@@ -37,3 +37,6 @@ Makefile
 *moc*
 *.mp4
 *_js.cpp
+CModule/FileAutoBackup/222222222222222*
+*.autosave
+*.bin
