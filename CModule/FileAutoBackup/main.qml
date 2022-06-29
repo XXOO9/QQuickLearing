@@ -32,11 +32,19 @@ Window {
         onClicked: fileDialog.open()
     }
 
+
     Button{
         id:btn3
         text: "确定"
         anchors{ left: btn2.right; verticalCenter: btn2.verticalCenter }
         onClicked: InterAction.appendPath( textInput.text )
+    }
+
+    Button{
+        id: btn4
+        text: "手动备份"
+        anchors{ left: btn3.right; verticalCenter: btn2.verticalCenter }
+        onClicked: InterAction.manualBackup()
     }
 
     TextField{
@@ -62,6 +70,9 @@ Window {
         id: folderDialog
 
 
-        onAccepted: textInput.text = String( folderDialog.currentFolder ).substring( 8 )
+        onAccepted: {
+            textInput.text = String( folderDialog.currentFolder ).substring( 8 )
+            InterAction.appendPath( textInput.text )
+        }
     }
 }

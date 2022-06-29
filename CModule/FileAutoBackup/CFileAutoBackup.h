@@ -37,6 +37,7 @@ public:
 public:
     Q_INVOKABLE void appendPath( QString path );
     Q_INVOKABLE void appendFile( QString filePath );
+    Q_INVOKABLE void manualBackup();
 
 public:
     CFileAutoBackup( const QString &backupDir = "../backup", const BackupPolicy &policy = ManualOnceRunning, QObject *parent = nullptr );

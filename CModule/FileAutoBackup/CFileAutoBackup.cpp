@@ -63,6 +63,11 @@ void CFileAutoBackup::appendFile(QString filePath)
     appendMonitorFile( filePath );
 }
 
+void CFileAutoBackup::manualBackup()
+{
+    startBackup();
+}
+
 void CFileAutoBackup::test()
 {
     QString path = "../srcDir";
@@ -87,6 +92,7 @@ void CFileAutoBackup::appendMonitorPath(QString &path)
     }
 
     m_monitPaths.append( path );
+    qDebug() << "success monit path " << path;
 }
 
 void CFileAutoBackup::appendMonitorFile(QString &filePath)
@@ -103,6 +109,7 @@ void CFileAutoBackup::appendMonitorFile(QString &filePath)
     }
     m_monitPaths.append( filePath );
     m_mapFileChangeTimeStamp.insert( filePath, getFileRecentlyChangedTime( filePath ) );
+    qDebug() << "success monit file " << filePath;
 }
 
 void CFileAutoBackup::copyFile(const QString &srcFile, const QString &dstFile)
