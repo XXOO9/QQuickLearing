@@ -62,6 +62,9 @@ SUBDIRS += \
 #    DemoTreeView  #not yet
 #    DemoChart
 #    QQuickControls
- \#    NetWorkGroup
-    FileAutoBackup
+#    NetWorkGroup
+#    FileAutoBackup
+#    CusWidgetControl
+ \#    JavaScriptDemos
+    QSqlTableModelDemo
 

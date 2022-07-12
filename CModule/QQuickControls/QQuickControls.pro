@@ -1,4 +1,17 @@
+
+
+#CONFIG( debug, debug | release ){
+#        DESTDIR     = $$PWD/debug
+#}else
+#{
+#        DESTDIR     = $$PWD/release
+#}
+
 TEMPLATE = subdirs
 
+
 SUBDIRS += \
-    CusGridView
+#    CusGridView
+#    BarView \
+#    CusTableView \
+DemoFlowLayout
