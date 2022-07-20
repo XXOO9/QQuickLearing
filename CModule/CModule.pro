@@ -61,10 +61,10 @@ SUBDIRS += \
 #    DemoChartjs
 #    DemoTreeView  #not yet
 #    DemoChart
-#    QQuickControls
+    QQuickControls
 #    NetWorkGroup
 #    FileAutoBackup
 #    CusWidgetControl
- \#    JavaScriptDemos
-    QSqlTableModelDemo
+#    JavaScriptDemos
+#    QSqlTableModelDemo
 

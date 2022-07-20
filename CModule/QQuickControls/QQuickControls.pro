@@ -14,4 +14,5 @@ SUBDIRS += \
 #    CusGridView
 #    BarView \
 #    CusTableView \
-DemoFlowLayout
+ \#DemoFlowLayout
+    CusDynamicCreateComponent

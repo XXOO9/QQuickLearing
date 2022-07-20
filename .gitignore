@@ -1,4 +1,3 @@
-
 *.dll
 *.lib
 *.stash
@@ -40,3 +39,6 @@ Makefile
 CModule/FileAutoBackup/222222222222222*
 *.autosave
 *.bin
+CModule/QThreadControl/debug/moc_predefs.h
+
+moc*

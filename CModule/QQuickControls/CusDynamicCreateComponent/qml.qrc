@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>CusRect.qml</file>
+        <file>Assistant.js</file>
+    </qresource>
+</RCC>
