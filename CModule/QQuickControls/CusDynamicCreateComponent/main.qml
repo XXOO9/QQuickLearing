@@ -22,7 +22,7 @@ ApplicationWindow {
         onClicked:  obj = Assistant.createObj( root, mainRect, { "anchors.top": root.bottom, color: "yellow" } )
 
         //还玩不转这种方法
-//        onClicked: obj = Assistant.createObjFromUrl( "qrc:/CusRect.qml", root )
+        //        onClicked: obj = Assistant.createObjFromUrl( "qrc:/CusRect.qml", root )
     }
 
     Button{
@@ -49,9 +49,6 @@ ApplicationWindow {
             height: width
             color: "green"
         }
-    }
 
-    function createObj(){
-        mainRect.createObject( root, { "anchors.top": btn.bottom, color: "red" } )
     }
 }
