@@ -1,7 +1,4 @@
-*.dll
-*.lib
 *.stash
-*.user
 CModule/MyTableView/Makefile
 *.Release
 *.Debug
@@ -34,11 +31,8 @@ Makefile
 *_qml.cpp
 *qmlcache*
 *moc*
-*.mp4
 *_js.cpp
 CModule/FileAutoBackup/222222222222222*
 *.autosave
-*.bin
 CModule/QThreadControl/debug/moc_predefs.h
-
 moc*
