@@ -3,7 +3,7 @@
 CHttpsDemo::CHttpsDemo(QObject *parent)
     : QObject{parent}
 {
-    test();
+    testInsertMulti();
 }
 
 void CHttpsDemo::test()
@@ -15,6 +15,18 @@ void CHttpsDemo::test()
 
 
     m_pNetWorkMgr->get( request );
+}
+
+void CHttpsDemo::testInsertMulti()
+{
+    QVariantMap map;
+    map.insertMulti( "key", 1 );
+    map.insertMulti( "key", 2 );
+
+    auto ret = map.value( "key" );
+    auto rets = map.values( "key" );
+    qDebug() << "ret = " << ret;
+    qDebug() << "rets = " << rets;
 }
 
 void CHttpsDemo::onNewReplyAvaulable(QNetworkReply *pReply)

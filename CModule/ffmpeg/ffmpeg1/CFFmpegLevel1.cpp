@@ -1,4 +1,4 @@
-#include "CFFmpegLevel1.h"
+﻿#include "CFFmpegLevel1.h"
 
 CFFmpegLevel1::CFFmpegLevel1(QObject *parent)
     : QObject{parent}
@@ -20,7 +20,7 @@ void CFFmpegLevel1::displayVideoInfos()
     AVFormatContext *fmt_ctx = avformat_alloc_context();
 
     //视频文件路径
-    const char *fileName = "D:/Programme/CModule/CModule/ffmpeg/resources/1.mp4";
+    const char *fileName = "H:/installaddress/Steam/steamapps/workshop/content/431960/1724962823/A7.mp4";
 
     int ret = avformat_open_input( &fmt_ctx, fileName, nullptr, nullptr );
 
@@ -43,7 +43,7 @@ void CFFmpegLevel1::displayVideoInfos()
 
 void CFFmpegLevel1::decodeVideoStream()
 {
-    const char *fileName = "D:/Programme/CModule/CModule/ffmpeg/resources/1.mp4";
+    const char *fileName = "H:/installaddress/Steam/steamapps/workshop/content/431960/1724962823/A7.mp4";
 
     //视频流所在流序列中的索引
     int videoStreamIndex = -1;

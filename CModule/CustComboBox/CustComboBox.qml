@@ -1,78 +1,86 @@
 ﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
+Item {
+    id: root
 
-ComboBox{
-    id: m_comboBox
-    width: 220
-    height: 40
-    model: [ "W", "D", "N", "M", "D", "C", "N", "M" ]
+    property int contentheight: 40
+    property int maxContentCount: 5
+    property string contentBkgColor: "yellow"
+    property string contentHightlightColor: "lightgreen"
 
-//    delegate: ItemDelegate{
-//        width: m_comboBox.width
-//        contentItem: Text {
-//            text: modelData
-//            color: "green"
-//            font{ pixelSize: 30 }
-//            verticalAlignment: Text.AlignVCenter
-//            horizontalAlignment: Text.AlignHCenter
-//        }
-//        highlighted: m_comboBox.highlightedIndex === index
-//    }
+    ComboBox{
+        id: m_combobox
+        width: 400
+        height: width / 4
 
-    delegate: ItemDelegate{
-        width: m_comboBox.width
-        Rectangle{
+        model: [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" ]
+
+        background: Rectangle{
             anchors.fill: parent
-            color: "red"
+            radius: 10
+            smooth: true
+            color: "skyblue"
+            border.color: "red"
+        }
 
-            Text {
+        delegate: ItemDelegate{
+            id: comboboxDelegate
+            width: m_combobox.width
+            height: contentheight
+
+            highlighted: m_combobox.highlightedIndex === index
+
+            background: Rectangle{
+                border.color: "blue"
+                color: parent.highlighted ? contentHightlightColor : contentBkgColor
+            }
+
+            contentItem: Text {
                 text: modelData
-                font{ pixelSize: 30 }
-                color: "blue"
+                color: "gray"
                 anchors.centerIn: parent
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
             }
         }
 
-        highlighted: m_comboBox.highlightedIndex === index
+        popup: Popup{
+            id: popHeight
+            y: parent.height
+            width: parent.width
+            height: popHeihgtProvider()
+            padding: 1
+            contentItem: ListView{
+                anchors.fill: parent
+                clip: true
+                snapMode: ListView.SnapToItem
+                model: m_combobox.popup.visible ? m_combobox.delegateModel : null
+                ScrollIndicator.vertical: ScrollIndicator { }
+            }
+        }
+        onAccepted: onComboboxAccept()
+
+        onActivated: onComboboxActived()
     }
 
-    contentItem: Text {
-        text: m_comboBox.displayText
-        color: "red"
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        font{ pixelSize: 30 }
+    function setModel( dataModel ){
+        m_combobox.model = dataModel
     }
 
-    background: Rectangle{
-        width: m_comboBox.width
-        height: m_comboBox.height
-        color: "gray"
-        radius: 20
-    }
-
-    popup: Popup{
-        width: m_comboBox.width
-        height: 200
-        y: m_comboBox.height + 5
-
-        //这个padding他妈的也是个坑，我操他妈，不设置成1或者1附近的数，他妈的批靠是喊高亮框位置不对
-        padding: 1
-        contentItem: ListView{
-            clip: true
-            implicitHeight: contentHeight
-            //这一句把老子坑安逸了，woc， 妈的应该写 m_comboBox.delegateModel， 不是写 m_comboBox.model
-            model: m_comboBox.popup.visible ? m_comboBox.delegateModel : null
-//            currentIndex: m_comboBox.highlightedIndex
-
-            ScrollIndicator.vertical: ScrollIndicator { }
+    function popHeihgtProvider(){
+        if( m_combobox.model.count < maxContentCount ){
+            return contentheight * m_combobox.model.count
         }
 
-        background: Rectangle{
-            width: m_comboBox.width
-            height: parent.height
-            color: "gray"
-            radius: 20
-        }
+        return maxContentCount * contentheight
+    }
+
+    function onComboboxAccept(){
+        console.log( m_combobox.currentIndex )
+    }
+
+    function onComboboxActived(){
+        console.log( m_combobox.currentIndex )
     }
 }
+

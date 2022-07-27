@@ -8,6 +8,12 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+win* {
+QMAKE_CXXFLAGS_EXCEPTIONS_ON = /EHa
+QMAKE_CXXFLAGS_STL_ON = /EHa
+}
+ CONFIG += exception
+
 TARGET = MultiThreadDemo
 TEMPLATE = app
 

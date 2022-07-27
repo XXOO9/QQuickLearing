@@ -16,3 +16,7 @@ SUBDIRS += \
 #    CusTableView \
  \#DemoFlowLayout
     CusDynamicCreateComponent
+#DemoFlowLayout
+#    CusDynamicCreateCmp
+#    WorkScript ## qml 线程， 貌似没啥用
+#    DemoDrag

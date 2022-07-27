@@ -1,88 +1,85 @@
 ﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
+ComboBox{
+    id: m_combobox
 
-  ComboBox {
-      id: control
-      model: ["First", "Second", "Third"]
+    property int contentheight: 40
+    property int maxContentCount: 5
+    property string contentBkgColor: "yellow"
+    property string contentHightlightColor: "lightgreen"
 
-      delegate: ItemDelegate {
-          width: control.width
-          contentItem: Text {
-              text: modelData
-              color: "#21be2b"
-              font: control.font
-              elide: Text.ElideRight
-              verticalAlignment: Text.AlignVCenter
-          }
-          highlighted: control.highlightedIndex === index
+    width: 400
+    height: width / 4
 
-          background: Rectangle{
-              anchors.fill: parent
-              color: highlighted ? "red" : "transparent"
-          }
-      }
+    model: [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" ]
 
-      indicator: Canvas {
-          id: canvas
-          x: control.width - width - control.rightPadding
-          y: control.topPadding + (control.availableHeight - height) / 2
-          width: 12
-          height: 8
-          contextType: "2d"
+    background: Rectangle{
+        anchors.fill: parent
+        radius: 10
+        smooth: true
+        color: "skyblue"
+        border.color: "red"
+    }
 
-          Connections {
-              target: control
-              onPressedChanged: canvas.requestPaint()
-          }
+    delegate: ItemDelegate{
+        id: comboboxDelegate
+        width: m_combobox.width
+        height: contentheight
 
-          onPaint: {
-              context.reset();
-              context.moveTo(0, 0);
-              context.lineTo(width, 0);
-              context.lineTo(width / 2, height);
-              context.closePath();
-              context.fillStyle = control.pressed ? "#17a81a" : "#21be2b";
-              context.fill();
-          }
-      }
+        highlighted: m_combobox.highlightedIndex === index
 
-      contentItem: Text {
-          leftPadding: 0
-          rightPadding: control.indicator.width + control.spacing
+        background: Rectangle{
+            border.color: "blue"
+            color: parent.highlighted ? contentHightlightColor : contentBkgColor
+        }
 
-          text: control.displayText
-          font: control.font
-          color: control.pressed ? "#17a81a" : "#21be2b"
-          verticalAlignment: Text.AlignVCenter
-          elide: Text.ElideRight
-      }
+        contentItem: Text {
+            text: modelData
+            color: "gray"
+            anchors.centerIn: parent
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+    }
 
-      background: Rectangle {
-          implicitWidth: 120
-          implicitHeight: 40
-          border.color: control.pressed ? "#17a81a" : "#21be2b"
-          border.width: control.visualFocus ? 2 : 1
-          radius: 2
-      }
+    popup: Popup{
+        id: popHeight
+        y: parent.height
+        width: parent.width
+        height: popHeihgtProvider()
+        padding: 1
+        contentItem: ListView{
+            anchors.fill: parent
+            clip: true
+            snapMode: ListView.SnapToItem
+            model: m_combobox.popup.visible ? m_combobox.delegateModel : null
+            ScrollIndicator.vertical: ScrollIndicator { }
+        }
+    }
 
-      popup: Popup {
-          y: control.height - 1
-          width: control.width
-          implicitHeight: contentItem.implicitHeight
-          padding: 1
+    onAccepted: onComboboxAccept()
 
-          contentItem: ListView {
-              clip: true
-              implicitHeight: contentHeight
-              model: control.popup.visible ? control.delegateModel : null
-              currentIndex: control.highlightedIndex
+    onActivated: onComboboxActived()
 
-              ScrollIndicator.vertical: ScrollIndicator { }
-          }
 
-          background: Rectangle {
-              border.color: "#21be2b"
-              radius: 2
-          }
-      }
-  }
+    function setModel( dataModel ){
+        m_combobox.model = dataModel
+    }
+
+    function popHeihgtProvider(){
+        if( m_combobox.model.count < maxContentCount ){
+            return contentheight * m_combobox.model.count
+        }
+
+        return maxContentCount * contentheight
+    }
+
+    function onComboboxAccept(){
+        console.log( m_combobox.currentIndex )
+    }
+
+    function onComboboxActived(){
+        console.log( m_combobox.currentIndex )
+    }
+}
+

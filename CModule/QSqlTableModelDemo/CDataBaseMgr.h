@@ -24,6 +24,8 @@ public:
 
     void change();
 
+    void getSpecificRecord();
+
 private:
     void init();
 

@@ -14,6 +14,8 @@ class CHttpsDemo : public QObject
 public:
     explicit CHttpsDemo(QObject *parent = nullptr);
     void test();
+
+    void testInsertMulti();
 signals:
 
 public slots:

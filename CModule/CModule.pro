@@ -61,11 +61,13 @@ SUBDIRS += \
 #    DemoChartjs
 #    DemoTreeView  #not yet
 #    DemoChart
-#    QQuickControls
+#     QQuickControls         #####    qml demo
 #    NetWorkGroup
 #    FileAutoBackup
 #    CusWidgetControl
 #    JavaScriptDemos
- \#    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
-    ffmpeg
+#    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
+     ffmpeg
+#    QSqlTableModelDemo
+#    opencvDemo
 

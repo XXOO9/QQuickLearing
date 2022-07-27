@@ -1,5 +1,7 @@
 ﻿#include "CDataBaseMgr.h"
 
+#include <QSqlRecord>
+
 CDataBaseMgr::CDataBaseMgr(QObject *parent) : QObject(parent)
 {
     createConnection();
@@ -11,6 +13,8 @@ CDataBaseMgr::CDataBaseMgr(QObject *parent) : QObject(parent)
     change();
 
 //    deleRecord();
+
+    getSpecificRecord();
 }
 
 bool CDataBaseMgr::createConnection()
@@ -32,7 +36,7 @@ void CDataBaseMgr::insertNewRecord()
     int id = 66;
 
     m_pMentalTable->insertRow( rowCount );
-    bool ok = m_pMentalTable->setData( m_pMentalTable->index(rowCount, 0), 89 );
+    bool ok = m_pMentalTable->setData( m_pMentalTable->index(rowCount, 0), id );
     ok = m_pMentalTable->setData( m_pMentalTable->index(rowCount, 1), "type" );
     ok = m_pMentalTable->setData( m_pMentalTable->index(rowCount, 2), "name" );
     ok = m_pMentalTable->setData( m_pMentalTable->index(rowCount, 3), "passwd" );
@@ -128,6 +132,19 @@ void CDataBaseMgr::change()
     }
 
     m_pMentalTable->submit();
+}
+
+void CDataBaseMgr::getSpecificRecord()
+{
+    m_pMentalTable->revertAll();
+    QSqlRecord tmpRecord = m_pMentalTable->record( 0 );
+    int count = tmpRecord.count();
+
+    QSqlField tmpField;
+
+    for( int i = 0; i < count; i++ ){
+        qDebug() << "field name = "<< tmpRecord.fieldName( i );
+    }
 }
 
 void CDataBaseMgr::init()

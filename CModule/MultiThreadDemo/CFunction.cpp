@@ -34,6 +34,7 @@ void CFunction::display(QVariant data)
 //        qDebug() << "ret1 = " << tmp.value( "3" );
         QThread::msleep( 500 );
     }
+
     emit sigFuncDone();
     qDebug() << "end of display...";
 

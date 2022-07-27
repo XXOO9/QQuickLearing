@@ -1,4 +1,5 @@
 ﻿#include "CWorkThread.h"
+#include <iostream>
 
 CWorkThread::CWorkThread(QObject *parent) : QObject(parent), m_pWorkThread( nullptr )
 {
@@ -41,7 +42,7 @@ void CWorkThread::initConnection()
 {
     connect( this, &CWorkThread::sigStartDisplay, &m_func, &CFunction::display );
     connect( &m_func, &CFunction::sigFuncDone, m_pWorkThread, &QThread::quit );
-    connect( m_pWorkThread, &QThread::finished, this, &QObject::deleteLater );
+//    connect( m_pWorkThread, &QThread::finished, this, &QObject::deleteLater );
     connect( m_pWorkThread, &QThread::finished, m_pWorkThread, &QObject::deleteLater );
 }
 
