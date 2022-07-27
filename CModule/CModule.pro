@@ -67,7 +67,8 @@ SUBDIRS += \
 #    CusWidgetControl
 #    JavaScriptDemos
 #    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
-     ffmpeg
+#     ffmpeg            #### ffmpeg 学习例子
 #    QSqlTableModelDemo
-#    opencvDemo
+ \#    opencvDemo
+    callQmlFuncsInCpp
 
