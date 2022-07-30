@@ -55,6 +55,8 @@ void CFFmpegLevel1::decodeVideoStream()
     AVCodecContext      *codecCtx = nullptr;
     AVCodecParameters   *codecParameters = nullptr;
     AVCodec             *codec = nullptr;
+    AVFrame             *yuvFrame = av_frame_alloc();
+    AVFrame             *rgbFrame = av_frame_alloc();
 
     do{
         //创建AVFormatContext 结构体
@@ -126,17 +128,33 @@ void CFFmpegLevel1::decodeVideoStream()
         av_new_packet( pkt, codecCtx->width * codecCtx->height );
 
         //读取视频信息
-        while( av_read_frame( fmt_ctx, pkt ) >= 0 ){
+        while( av_read_frame( fmt_ctx, pkt ) >= 0 )
+        {
             if( pkt->stream_index == videoStreamIndex ){
                 i++; //只计数视频帧
+                ret = avcodec_send_packet( codecCtx, pkt );
+                if( ret == 0 ){
+                    while( avcodec_receive_frame( codecCtx, yuvFrame ) == 0 ){
+                        if (++i <= 500 && i >= 455){
+                            sws_scale(img_ctx,
+                                      (const uint8_t* const*)yuvFrame->data,
+                                      yuvFrame->linesize,
+                                      0,
+                                      codecCtx->height,
+                                      rgbFrame->data,
+                                      rgbFrame->linesize);
+                            saveFrame(rgbFrame, codecCtx->width, codecCtx->height, i );
+                        }
+                    }
+                }
+
+                //充值pkt
+                av_packet_unref( pkt );
             }
 
-            //充值pkt
-            av_packet_unref( pkt );
+            qDebug() << "there are " << i << "frames in total...";
+
         }
-
-        qDebug() << "there are " << i << "frames in total...";
-
     }while( 0 );
 
     av_packet_free( &pkt );
@@ -146,7 +164,32 @@ void CFFmpegLevel1::decodeVideoStream()
     avformat_free_context( fmt_ctx );
 
     av_free( codec );
+}
 
+void CFFmpegLevel1::saveFrame(AVFrame *pFrame, int width, int height, int frame)
+{
+    FILE    *pFile = nullptr;
+    char    szFileName[32];
+    int y;
+
+    //打开文件
+    sprintf( szFileName, "frame%d.ppm", frame );
+
+    pFile = fopen( szFileName, "wb" );
+
+    if( nullptr == pFile ){
+        return;
+    }
+
+    //写入文件头
+    fprintf( pFile, "P6\n%d %d\n255\n", width, height );
+
+    //写入像素数据
+    for( y = 0; y < height; y++ ){
+        fwrite( pFrame->data[ 0 ] + y * pFrame->linesize[ 0 ], 1, width * 3, pFile );
+    }
+
+    fclose( pFile );
 }
 
 

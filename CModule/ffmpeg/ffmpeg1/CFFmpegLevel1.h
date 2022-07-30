@@ -19,11 +19,19 @@ public:
 
 
 private:
+    //测试输出ffmpeg的版本号
     void displayFFmpegVersion();
 
+    //测试输出视频详细信息
     void displayVideoInfos();
 
+    //测试保存一帧为图片
     void decodeVideoStream();
+    //921,600 + 230400
+
+private:
+    void saveFrame( AVFrame *pFrame, int width, int height, int frame );
+
 };
 
 #endif // CFFMPEGLEVEL1_H
