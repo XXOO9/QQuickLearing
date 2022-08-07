@@ -3,7 +3,7 @@
 CFFmpegLevel1::CFFmpegLevel1(QObject *parent)
     : QObject{parent}
 {
-    displayFFmpegVersion();
+    //    displayFFmpegVersion();
 
     decodeVideoStream();
 }
@@ -11,7 +11,7 @@ CFFmpegLevel1::CFFmpegLevel1(QObject *parent)
 void CFFmpegLevel1::displayFFmpegVersion()
 {
     unsigned ffmpegVersion = avcodec_version();
-    qDebug() << "version = " << ffmpegVersion;
+    qDebug() << "ffmpeg version = " << ffmpegVersion;
 }
 
 void CFFmpegLevel1::displayVideoInfos()
@@ -19,16 +19,12 @@ void CFFmpegLevel1::displayVideoInfos()
     //创建对象
     AVFormatContext *fmt_ctx = avformat_alloc_context();
 
-    //视频文件路径
-    const char *fileName = "H:/installaddress/Steam/steamapps/workshop/content/431960/1724962823/A7.mp4";
-
     int ret = avformat_open_input( &fmt_ctx, fileName, nullptr, nullptr );
 
     //如果打开文件失败
     if( ret < 0 ){
         qDebug() << "can't open file...";
     }else{
-
         ret = avformat_find_stream_info( fmt_ctx, nullptr );
         if( ret < 0 ){
             qDebug() << "can't find stream with given path...";
@@ -43,8 +39,6 @@ void CFFmpegLevel1::displayVideoInfos()
 
 void CFFmpegLevel1::decodeVideoStream()
 {
-    const char *fileName = "H:/installaddress/Steam/steamapps/workshop/content/431960/1724962823/A7.mp4";
-
     //视频流所在流序列中的索引
     int videoStreamIndex = -1;
 
@@ -120,6 +114,14 @@ void CFFmpegLevel1::decodeVideoStream()
             break;
         }
 
+        //设置转换参数
+        struct SwsContext *img_ctx = sws_getContext( codecCtx->width, codecCtx->height, codecCtx->pix_fmt,
+                                                     codecCtx->width, codecCtx->height, AV_PIX_FMT_RGB32,
+                                                     SWS_BICUBIC, nullptr, nullptr, nullptr );
+        //分配空间
+        int numBytes = av_image_get_buffer_size( AV_PIX_FMT_RGB32, codecCtx->width, codecCtx->height, 1 );
+        unsigned char *out_buffer = ( unsigned char* )av_malloc( numBytes * sizeof( unsigned char* ) );
+
         //分配AVPacket 结构体
 
         //用于计数帧数
@@ -131,7 +133,9 @@ void CFFmpegLevel1::decodeVideoStream()
         while( av_read_frame( fmt_ctx, pkt ) >= 0 )
         {
             if( pkt->stream_index == videoStreamIndex ){
-                i++; //只计数视频帧
+                //只计数视频帧
+                i++;
+
                 ret = avcodec_send_packet( codecCtx, pkt );
                 if( ret == 0 ){
                     while( avcodec_receive_frame( codecCtx, yuvFrame ) == 0 ){
@@ -151,10 +155,9 @@ void CFFmpegLevel1::decodeVideoStream()
                 //充值pkt
                 av_packet_unref( pkt );
             }
-
-            qDebug() << "there are " << i << "frames in total...";
-
         }
+
+        qDebug() << "there are " << i << "frames in total...";
     }while( 0 );
 
     av_packet_free( &pkt );

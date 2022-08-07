@@ -1,4 +1,6 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    ffmpeg1
+    ffmpeg1 \
+#    ffmpegDisplayOnWidget
+    displayByQml

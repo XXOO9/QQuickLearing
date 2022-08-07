@@ -1,0 +1,48 @@
+QT += quick core gui
+CONFIG += c++17
+
+INCLUDEPATH += $$PWD/../thirdPart/ffmpeg/include/
+
+CONFIG( debug, debug | release ){
+        DESTDIR = $$PWD/debug
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavcodec
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavdevice
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavfilter
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavformat
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavutil
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lpostproc
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lswresample
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lswscale
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavutil
+}else{
+        DESTDIR = $$PWD/release
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavcodec
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavdevice
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavfilter
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavformat
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavutil
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lpostproc
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lswresample
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lswscale
+        LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavutil
+}
+
+SOURCES += \
+        main.cpp \
+        videoDecoder.cpp
+
+RESOURCES += qml.qrc
+
+# Additional import path used to resolve QML modules in Qt Creator's code model
+QML_IMPORT_PATH =
+
+# Additional import path used to resolve QML modules just for Qt Quick Designer
+QML_DESIGNER_IMPORT_PATH =
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+HEADERS += \
+    videoDecoder.h

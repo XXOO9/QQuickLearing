@@ -5,10 +5,15 @@
 #include <QDebug>
 
 extern "C"{
-   #include "libavcodec/avcodec.h"
-   #include "libavformat/avformat.h"
-   #include "libswscale/swscale.h"
-   #include "libavdevice/avdevice.h"
+#include "libavcodec/avcodec.h"
+#include "libavfilter/avfilter.h"
+#include "libavformat/avformat.h"
+#include "libavutil/avutil.h"
+#include "libavutil/ffversion.h"
+#include "libswresample/swresample.h"
+#include "libswscale/swscale.h"
+#include "libpostproc/postprocess.h"
+#include "libavutil/imgutils.h"
 }
 
 class CFFmpegLevel1 : public QObject
@@ -31,6 +36,9 @@ private:
 
 private:
     void saveFrame( AVFrame *pFrame, int width, int height, int frame );
+
+
+    const char *fileName = "D:/videos/box.mp4";
 
 };
 
