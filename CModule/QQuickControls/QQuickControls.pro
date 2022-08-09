@@ -14,9 +14,9 @@ SUBDIRS += \
 #    CusGridView
 #    BarView \
 #    CusTableView \
- \#DemoFlowLayout
-    CusDynamicCreateComponent
+#DemoFlowLayout
+#    CusDynamicCreateComponent
 #DemoFlowLayout
 #    CusDynamicCreateCmp
 #    WorkScript ## qml 线程， 貌似没啥用
-#    DemoDrag
+    DemoDrag    ##  控件拖动demo
