@@ -24,7 +24,7 @@ SUBDIRS += \
 #    CustStackView
 #    CTestShardLibrary \
 #    GoogleTest
-#    CustComboBox
+#    CustComboBox       ##### 自定义的下拉框( 基本完 成, 可移植)
 #    MultiThreadDemo \
 #    SqlDemo
 #    CMultiThreadDemo
@@ -61,7 +61,7 @@ SUBDIRS += \
 #    DemoChartjs
 #    DemoTreeView  #not yet
 #    DemoChart
-     QQuickControls         #####    qml demo
+#     QQuickControls         #####    qml demo
 #    NetWorkGroup
 #    FileAutoBackup
 #    CusWidgetControl
@@ -70,5 +70,6 @@ SUBDIRS += \
 #     ffmpeg            #### ffmpeg 学习例子
 #    QSqlTableModelDemo
 #    opencvDemo
-#    callQmlFuncsInCpp
+ \#    callQmlFuncsInCpp
+    DemoModelFilter
 

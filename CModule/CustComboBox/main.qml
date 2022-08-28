@@ -22,22 +22,16 @@ ApplicationWindow {
 //        ListElement{ name: "xhy" }
     }
 
-    CustComboBox{
-        id: cus
-        Component.onCompleted: {
-            cus.setModel( list )
-        }
-
-        anchors.left: parent.left
-        anchors.leftMargin: 20
-        z:5
+    CusComboBox{
+        model: list
+        anchors.centerIn: parent
     }
 
-    Cust2{
-        width: 800
-        height: 200
-        anchors.right: parent.right
-        anchors.rightMargin: 20
-
-    }
+//    CustComboBox{
+//        id: cus
+//        dataModel: list
+//        anchors.left: parent.left
+//        anchors.leftMargin: 20
+//        z:5
+//    }
 }

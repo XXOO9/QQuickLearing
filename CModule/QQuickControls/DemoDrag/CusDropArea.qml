@@ -13,6 +13,12 @@ Item {
         keys: [ "WDNMD" ]
         anchors.fill: parent
 
+        Text {
+            text: index
+            color: "red"
+            anchors.centerIn: parent
+        }
+
         Rectangle{
             id: dropRectArea
             color: "gray"
@@ -26,22 +32,29 @@ Item {
             }
         }
 
-
-
-        onChildrenChanged: {
-            console.log( children.length )
+        onDropped: {
+            console.log( "text = " + drop.text )
         }
 
-        onContainsDragChanged: {
-            let obj = drag.source
-            console.log( "drag.source = " + obj )
-
-            if( obj !== null ){
-                console.log( "width = " + obj.width )
-            }
-
-
+        onEntered: {
+            console.log( "entered..." )
+            console.log( "obj name = " + dropAera.drag.source.objectName )
         }
+
+        onExited: console.log( "exited..." )
+
+//        onChildrenChanged: {
+//            console.log( children.length )
+//        }
+
+//        onContainsDragChanged: {
+//            let obj = drag.source
+////            console.log( "drag.source = " + obj )
+
+//            if( obj !== null ){
+////                console.log( "width = " + obj.width )
+//            }
+//        }
 
     }
 }

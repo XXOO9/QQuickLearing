@@ -7,13 +7,12 @@ Item {
     property int maxContentCount: 5
     property string contentBkgColor: "yellow"
     property string contentHightlightColor: "lightgreen"
+    property alias dataModel: m_combobox.model
 
     ComboBox{
         id: m_combobox
         width: 400
         height: width / 4
-
-        model: [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" ]
 
         background: Rectangle{
             anchors.fill: parent
