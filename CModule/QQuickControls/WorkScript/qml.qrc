@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>CusWorkScript.qml</file>
+        <file>wokerThread.js</file>
     </qresource>
 </RCC>

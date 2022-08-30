@@ -41,7 +41,7 @@ SUBDIRS += \
 #    TableView_Version_2
 #    CustLoading
 #    QDateTimeIntervalDemo
-#     EChartDemo
+#    EChartDemo
 #    RegularExpressionDemo
 #    QtTestFrameWork
 #    gmy
@@ -59,17 +59,17 @@ SUBDIRS += \
 #    DemoVideoPlayer
 #    DemoTextDisplayDifferentStyleText
 #    DemoChartjs
-#    DemoTreeView  #not yet
+#    DemoTreeView           #not yet
 #    DemoChart
-#     QQuickControls         #####    qml demo
+    QQuickControls         #####    qml demo
 #    NetWorkGroup
 #    FileAutoBackup
 #    CusWidgetControl
 #    JavaScriptDemos
 #    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
-#     ffmpeg            #### ffmpeg 学习例子
+#    ffmpeg            #### ffmpeg 学习例子
 #    QSqlTableModelDemo
 #    opencvDemo
- \#    callQmlFuncsInCpp
-    DemoModelFilter
+#    callQmlFuncsInCpp
+#    DemoModelFilter
 

@@ -18,6 +18,6 @@ SUBDIRS += \
 #    CusDynamicCreateComponent
 #DemoFlowLayout
 #    CusDynamicCreateCmp
-#    WorkScript ## qml 线程， 貌似没啥用
+    WorkScript ## qml 线程， 貌似没啥用
 #    DemoDrag    ##  控件拖动demo
-    DemoPassParameters
+#    DemoPassParameters
