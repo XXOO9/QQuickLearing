@@ -7,20 +7,28 @@ CSqlLite::CSqlLite(QObject *parent) : QObject(parent)
     //    deleteFromStudent( 20220101 );
     //    updateStudent( 20220101, "name", "张三" );
     //    query( 20220101, "name" );
+    //    testFunc();
+    //    queryTables();
+
 //    testFunc();
-    queryTables();
+    insertIntoCppDepartment();
+
+
+
 }
 
 void CSqlLite::testFunc()
 {
     QSqlQuery sql;
-    QString sqlString = QString( "select * from student" );
+    QString sqlString = QString( "select count(*) from PersonnelInfoTable_" );
     bool ok = sql.exec( sqlString );
+
     if( !ok ){
         qDebug() << "error string = " << sql.lastError();
         return;
     }
-    qDebug() << "count = " << sql.size();
+
+    int count = 0;
     while( sql.next() ){
         qDebug() << "ret 1 = " << sql.value( 0 );
         qDebug() << "ret 2 = " << sql.value( 1 );
@@ -39,7 +47,7 @@ void CSqlLite::queryTables()
         return;
     }
     while( sql.next() ){
-        qDebug() << "ret 1 = " << sql.value( "name" );
+        qDebug() << "table name = " << sql.value( "name" );
     }
 }
 
@@ -55,6 +63,59 @@ bool CSqlLite::insertIntoStudent(int id, QString stuName, QString className)
         qDebug() << "insert into student success...";
     }
     return true;
+}
+
+void CSqlLite::insertGECGUserTable(QStringList list )
+{
+    QSqlQuery sql;
+    QString sqlString = QString( "insert into PersonnelInfoTable_ values( %1, \"%2\", \"%3\", \"%4\", \"%5\", \"%6\", \"%7\", \"%8\", \"%9\", \"%10\")" ).arg( list[ 0 ] ).arg( list[ 1 ] )
+            .arg( list[ 2 ] ).arg( list[ 3 ] ).arg( list[ 4 ] ).arg( list[ 5 ] )
+            .arg( list[ 6 ] ).arg( list[ 7 ] ).arg( list[ 8 ] ).arg( list[ 9 ] );
+
+    qDebug() << "sql = " << sqlString;
+
+    bool ok = sql.exec( sqlString );
+}
+
+void CSqlLite::insertIntoCppDepartment()
+{
+    QVariantList infoList;
+    QStringList list;
+
+    QString dpName = "java";
+
+    int startRowIndex = getRowsCount( "PersonnelInfoTable_" ) + 1;
+
+    for( int i = 0; i < 9000; i++ ){
+
+        list.clear();
+        list << QString::number( startRowIndex + i ) << "PersonnelInfoTable" << dpName + "_" + QString::number( i ) << "2022-02-02" << "1" << QString::number( 150 + i )
+             << QString::number( 50 + i ) << dpName << QString::number( startRowIndex + i ) << "1";
+
+        insertGECGUserTable( list );
+
+    }
+
+    qDebug() << "finished...";
+}
+
+int CSqlLite::getRowsCount(QString tableName)
+{
+    QSqlQuery sql;
+    QString sqlString = QString( "select count(*) from %1" ).arg( tableName );
+    bool ok = sql.exec( sqlString );
+
+    if( !ok ){
+        qDebug() << "error string = " << sql.lastError();
+        return 0;
+    }
+
+    int count = 0;
+    while( sql.next() ){
+        count = sql.value( 0 ).toInt();
+    }
+
+    return count;
 }
 
 bool CSqlLite::deleteFromStudent(int id)
@@ -123,7 +184,7 @@ void CSqlLite::initDataBase()
 {
     m_dataBase = QSqlDatabase::addDatabase( "QSQLITE" );
     qDebug() << "ret = " << m_dataBase.isValid();
-    m_dataBase.setDatabaseName( "demo.db" );
+    m_dataBase.setDatabaseName( "GECGDatabase.db" );
     if( !m_dataBase.open() ){
         qDebug() << "Error::failed to open database, errorstring is::" << m_dataBase.lastError();
     }

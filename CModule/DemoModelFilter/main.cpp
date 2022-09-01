@@ -3,6 +3,33 @@
 #include <QSortFilterProxyModel>
 #include <QStringListModel>
 #include <QQmlContext>
+#include <QStringList>
+#include <QDebug>
+#include <QElapsedTimer>
+#include "CModelDataFilter.h"
+#include "CModelUserSelect.h"
+
+void testQStringList()
+{
+    QStringList list;
+    QElapsedTimer timer;
+
+    timer.start();
+
+    for( int i = 0; i < 10; i++ ){
+        list << "this is number:: " + QString::number( i );
+    }
+
+    qDebug() << "load cost = " << timer.restart();
+
+    qDebug() << "index = " << list.indexOf( "this is number:: 99999" );
+
+    qDebug() << "cost 1 = " << timer.restart();
+
+    qDebug() << "index = " << list.indexOf( "this is number:: 50000" );
+
+    qDebug() << "cost 1 = " << timer.elapsed();
+}
 
 QSortFilterProxyModel* initFilterModel()
 {
@@ -36,28 +63,13 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    QStringList Suggestions;
+    CModelDataFilter a;
+    CModelUserSelect b;
 
-    Suggestions << "马孝权";
-    Suggestions << "陈鹏程";
-    Suggestions << "孙伟";
-    Suggestions << "谢映";
-    Suggestions << "陈磊";
-    Suggestions << "吴世洲";
-    Suggestions << "张三";
-    Suggestions << "李四";
-    Suggestions << "Oran6";
+    testQStringList();
 
-    QStringListModel SuggestionModel;
-    SuggestionModel.setStringList( Suggestions);
-
-    QSortFilterProxyModel ProxyModel;
-    ProxyModel.setSourceModel(&SuggestionModel);
-    ProxyModel.setFilterCaseSensitivity(Qt::CaseInsensitive);
-
-    //按第一列排序
-    ProxyModel.sort(0);
-    engine.rootContext()->setContextProperty( "SuggestionsModel", &ProxyModel);
+    engine.rootContext()->setContextProperty( "SuggestionsModel", a.m_proxyModel );
+    engine.rootContext()->setContextProperty( "CModelUserSelect", &b );
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

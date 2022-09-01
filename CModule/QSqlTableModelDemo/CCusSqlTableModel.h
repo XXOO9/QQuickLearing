@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QSqlTableModel>
 
 class CCusSqlTableModel : public QSqlTableModel
 {
@@ -10,8 +11,6 @@ class CCusSqlTableModel : public QSqlTableModel
 public:
     CCusSqlTableModel();
     virtual ~CCusSqlTableModel() override;
-
-    virtual QVariant data() override;
 
 private:
 

@@ -38,6 +38,13 @@ public:
     //插入一条字段
     bool insertIntoStudent( int id, QString stuName, QString className );
 
+    //2022.08.30  心电数据库, 插入
+    void insertGECGUserTable( QStringList list );
+
+    void insertIntoCppDepartment();
+
+    int getRowsCount( QString tableName );
+
     bool deleteFromStudent( int id );
 
     bool updateStudent( int id, QString key, QString val );

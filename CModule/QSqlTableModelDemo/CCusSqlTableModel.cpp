@@ -9,8 +9,3 @@ CCusSqlTableModel::~CCusSqlTableModel()
 {
 
 }
-
-QVariant CCusSqlTableModel::data()
-{
-
-}

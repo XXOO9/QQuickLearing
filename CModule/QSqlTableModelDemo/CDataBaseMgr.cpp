@@ -1,20 +1,26 @@
 ﻿#include "CDataBaseMgr.h"
 
+#include <QSqlField>
 #include <QSqlRecord>
 
 CDataBaseMgr::CDataBaseMgr(QObject *parent) : QObject(parent)
 {
     createConnection();
     init();
+
     insertNewRecord();
 
-    query();
-    queryFilter();
-    change();
+//    for( int i = 0; i < 1000; i++ ){
+//        insertNewRecord();
+//    }
 
-//    deleRecord();
+    //    query();
+    //    queryFilter();
+    //    change();
 
-    getSpecificRecord();
+    ////    deleRecord();
+
+    //    getSpecificRecord();
 }
 
 bool CDataBaseMgr::createConnection()
@@ -33,14 +39,20 @@ bool CDataBaseMgr::createConnection()
 void CDataBaseMgr::insertNewRecord()
 {
     int rowCount = m_pMentalTable->rowCount();
-    int id = 66;
+    int id = rowCount;
 
-    m_pMentalTable->insertRow( rowCount );
-    bool ok = m_pMentalTable->setData( m_pMentalTable->index(rowCount, 0), id );
-    ok = m_pMentalTable->setData( m_pMentalTable->index(rowCount, 1), "type" );
-    ok = m_pMentalTable->setData( m_pMentalTable->index(rowCount, 2), "name" );
-    ok = m_pMentalTable->setData( m_pMentalTable->index(rowCount, 3), "passwd" );
-    ok = m_pMentalTable->setData( m_pMentalTable->index(rowCount, 4), "role" );
+    bool ok = m_pMentalTable->insertRow( rowCount );
+
+    ok      = m_pMentalTable->setData( m_pMentalTable->index( rowCount, 0 ), id );
+    ok      = m_pMentalTable->setData( m_pMentalTable->index( rowCount, 1 ), "PersonnelInfoTable" );
+    ok      = m_pMentalTable->setData( m_pMentalTable->index( rowCount, 2 ), "C++_" + QString::number( id ) );
+    ok      = m_pMentalTable->setData( m_pMentalTable->index( rowCount, 3 ), "2022-08-30_" + QString::number( id ) );
+    ok      = m_pMentalTable->setData( m_pMentalTable->index( rowCount, 4 ), 1 );
+    ok      = m_pMentalTable->setData( m_pMentalTable->index( rowCount, 5 ), QString::number( 160 + id ) );
+    ok      = m_pMentalTable->setData( m_pMentalTable->index( rowCount, 6 ), QString::number( 30 + id ) );
+    ok      = m_pMentalTable->setData( m_pMentalTable->index( rowCount, 7 ), "c++" );
+    ok      = m_pMentalTable->setData( m_pMentalTable->index( rowCount, 8 ), "TME_C++_" + QString::number( id ) );
+    ok      = m_pMentalTable->setData( m_pMentalTable->index( rowCount, 9 ), 1 );
 
     ok = m_pMentalTable->submit();
 
@@ -153,12 +165,14 @@ void CDataBaseMgr::init()
         m_pMentalTable = new QSqlTableModel( this, m_db );
     }
 
-    m_pMentalTable->setTable( "AccountInfoTable_" );
+    m_pMentalTable->setTable( "PersonnelInfoTable_" );
     bool ok = m_pMentalTable->select();
-    qDebug() << "data = " << m_pMentalTable->data( m_pMentalTable->index( 0, 2 ) );
+    qDebug() << "data( 0, 2 ) = " << m_pMentalTable->data( m_pMentalTable->index( 0, 2 ) );
     if( !ok ){
         qDebug()<< "error: " << m_pMentalTable->lastError().text();
         m_pMentalTable->revert();
     }
     qDebug() << "set table success";
+
+    m_pMentalTable->revert();
 }

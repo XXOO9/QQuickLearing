@@ -26,7 +26,7 @@ SUBDIRS += \
 #    GoogleTest
 #    CustComboBox       ##### 自定义的下拉框( 基本完 成, 可移植)
 #    MultiThreadDemo \
-#    SqlDemo
+#     SqlDemo     #####   数据库sql操作
 #    CMultiThreadDemo
 #    CustControls
 #    ProcessChat
@@ -71,5 +71,6 @@ SUBDIRS += \
 #    QSqlTableModelDemo
 #    opencvDemo
 #    callQmlFuncsInCpp
-#    DemoModelFilter
+#    DemoModelFilter     ##数据模型排序过滤
+#    DemoEnumVal2KeyString
 

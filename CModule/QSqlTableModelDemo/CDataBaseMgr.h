@@ -34,7 +34,7 @@ signals:
 public slots:
 
 private:
-    QSqlTableModel  *m_pMentalTable = nullptr;
+    QSqlTableModel  *m_pMentalTable = nullptr;  //
     QSqlDatabase m_db;
 };
 

@@ -5,31 +5,40 @@ import QtQuick.Controls 2.12
 
 ApplicationWindow {
     visible: true
-    width: 640
-    height: 480
+    width: 800
+    height: 800
     title: qsTr("Hello World")
 
-    Column{
-        spacing: 10
+    Component.onCompleted: {
+        console.log( "111111111111111 " + CModelUserSelect.rowCount() )
 
-        anchors.centerIn: parent
+    }
 
-        Repeater{
-            model: SuggestionsModel
-//            model: 10
-            delegate: Rectangle{
-                width: 50
-                height: width
-                color: "gray"
+    TextField{
+        onFocusChanged: console.log( "focus changed, ret = " + focus )
 
-                Text {
-                    text: display
-                }
-            }
-        }
+        onActiveFocusChanged: console.log( "activeFocus changed, ret = " + activeFocus )
     }
 
     Button{
-        onClicked: SuggestionsModel.setFilterWildcard( "马*" )
+        anchors.bottom: parent.bottom
     }
+
+    Rectangle{
+        width: 50
+        height: width
+        color: "red"
+        anchors.centerIn: parent
+    }
+
+    //    ListModel{
+    //        id: list
+    //    }
+
+    //    CusTextInputFilter{
+    //        anchors.centerIn: parent
+    //        candidateModel: SuggestionsModel
+    //    }
+
+
 }
