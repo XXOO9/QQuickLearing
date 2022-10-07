@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QJsonArray>
+#include <QJsonObject>
 
 class CInterAction : public QObject
 {
@@ -13,6 +15,10 @@ public:
     Q_INVOKABLE void test_variant( QVariantMap val );
     Q_INVOKABLE void test_vector();
     Q_INVOKABLE void test_variantList( QVariantList list );
+
+    Q_INVOKABLE QJsonArray test_JsonArray_to_qml();
+    Q_INVOKABLE QVariantMap test_JsonObject_to_qml();
+    Q_INVOKABLE QJsonArray test_JsonArrayObject_to_qml();
 };
 
 #endif // CINTERACTION_H

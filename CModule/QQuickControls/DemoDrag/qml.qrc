@@ -4,5 +4,7 @@
         <file>CusDragRect.qml</file>
         <file>CusListView.qml</file>
         <file>CusDropArea.qml</file>
+        <file>CusDragArea_ListView.qml</file>
+        <file>CusDropArea_ListView.qml</file>
     </qresource>
 </RCC>

@@ -64,3 +64,13 @@ void CUserSelectItem::setBindDevOrderNum(const QString &bindDevOrderNum)
 {
     m_bindDevOrderNum = bindDevOrderNum;
 }
+
+QString CUserSelectItem::departmentName() const
+{
+    return m_departmentName;
+}
+
+void CUserSelectItem::setDepartmentName(const QString &departmentName)
+{
+    m_departmentName = departmentName;
+}

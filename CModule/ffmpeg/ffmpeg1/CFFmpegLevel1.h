@@ -38,7 +38,7 @@ private:
     void saveFrame( AVFrame *pFrame, int width, int height, int frame );
 
 
-    const char *fileName = "D:/videos/box.mp4";
+    const char *fileName = "D:/videos/CFD.mp4";
 
 };
 

@@ -4,8 +4,12 @@
 #include <QObject>
 #include <QMetaEnum>
 #include <QDebug>
-namespace MyEnums {
-    Q_NAMESPACE
+
+class CEnumClass : public QObject
+{
+    Q_OBJECT
+public:
+
     enum Day{
         SunDay = 0,
         MonDay,
@@ -16,13 +20,8 @@ namespace MyEnums {
         SaturyDay
 
     };
-}
+    Q_ENUM( Day )
 
-
-class CEnumClass : public QObject
-{
-    Q_OBJECT
-public:
     explicit CEnumClass(QObject *parent = nullptr);
 
     void Int2Enum( int val );

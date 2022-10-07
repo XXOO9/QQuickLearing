@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>CusTextInputFilter.qml</file>
+        <file>ListModel2QVariantList.qml</file>
     </qresource>
 </RCC>

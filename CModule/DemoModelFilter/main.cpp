@@ -8,52 +8,8 @@
 #include <QElapsedTimer>
 #include "CModelDataFilter.h"
 #include "CModelUserSelect.h"
+#include "CInteraction.h"
 
-void testQStringList()
-{
-    QStringList list;
-    QElapsedTimer timer;
-
-    timer.start();
-
-    for( int i = 0; i < 10; i++ ){
-        list << "this is number:: " + QString::number( i );
-    }
-
-    qDebug() << "load cost = " << timer.restart();
-
-    qDebug() << "index = " << list.indexOf( "this is number:: 99999" );
-
-    qDebug() << "cost 1 = " << timer.restart();
-
-    qDebug() << "index = " << list.indexOf( "this is number:: 50000" );
-
-    qDebug() << "cost 1 = " << timer.elapsed();
-}
-
-QSortFilterProxyModel* initFilterModel()
-{
-    QStringList Suggestions;
-    Suggestions << "Blue";
-    Suggestions << "Red";
-    Suggestions << "Orange";
-    Suggestions << "Ass";
-    Suggestions << "Apple";
-    Suggestions << "Apple1";
-    Suggestions << "Apple2";
-    Suggestions << "Oran";
-    Suggestions << "Oran6";
-
-    QStringListModel SuggestionModel;
-    SuggestionModel.setStringList(Suggestions);
-
-    QSortFilterProxyModel *ProxyModel = new QSortFilterProxyModel();
-    ProxyModel->setSourceModel( &SuggestionModel );
-    ProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-    ProxyModel->sort( 0 );
-
-    return ProxyModel;
-}
 
 int main(int argc, char *argv[])
 {
@@ -63,13 +19,9 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    CModelDataFilter a;
-    CModelUserSelect b;
-
-    testQStringList();
-
-    engine.rootContext()->setContextProperty( "SuggestionsModel", a.m_proxyModel );
-    engine.rootContext()->setContextProperty( "CModelUserSelect", &b );
+    CInteraction interaction;
+    interaction.setEnigne( &engine );
+    engine.rootContext()->setContextProperty( "InterAction", &interaction );
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

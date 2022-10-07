@@ -13,7 +13,6 @@ Item {
 
         onReleased: {
             parent = ( drapRect.Drag.target === null ? root : drapRect.Drag.target )
-//            console.log( "拖拽区域的parent = " + parent )
         }
 
         onParentChanged: {
@@ -32,6 +31,7 @@ Item {
             AnchorChanges{ target: drapRect; anchors.verticalCenter: undefined; anchors.horizontalCenter: undefined }
         }
 
+
         Rectangle {
             id: drapRect
             width: 80; height: width
@@ -42,14 +42,6 @@ Item {
             Drag.active: dragArea.drag.active
             Drag.keys: [ "WDNMD" ]
 
-//            onParentChanged: {
-//                console.log( "parent = " + parent )
-//                if( parent === root ){
-//                    console.log( "是root " )
-//                }else{
-//                    console.log( "不是 root" )
-//                }
-//            }
         }
     }
 

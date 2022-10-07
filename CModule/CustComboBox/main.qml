@@ -14,24 +14,16 @@ ApplicationWindow {
         id: list
         ListElement{ name: "ppc" }
         ListElement{ name: "zmc" }
-//        ListElement{ name: "cyq" }
-//        ListElement{ name: "bpk" }
-//        ListElement{ name: "llb" }
-//        ListElement{ name: "gwq" }
-//        ListElement{ name: "slf" }
-//        ListElement{ name: "xhy" }
+        ListElement{ name: "cyq" }
+        ListElement{ name: "bpk" }
+        ListElement{ name: "llb" }
+        ListElement{ name: "gwq" }
+        ListElement{ name: "slf" }
+        ListElement{ name: "xhy" }
     }
 
     CusComboBox{
         model: list
-        anchors.centerIn: parent
+        anchors{ top: parent.top; horizontalCenter: parent.horizontalCenter }
     }
-
-//    CustComboBox{
-//        id: cus
-//        dataModel: list
-//        anchors.left: parent.left
-//        anchors.leftMargin: 20
-//        z:5
-//    }
 }

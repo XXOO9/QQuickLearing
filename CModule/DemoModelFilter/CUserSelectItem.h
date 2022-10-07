@@ -29,6 +29,9 @@ public:
     QString bindDevOrderNum() const;
     void setBindDevOrderNum(const QString &bindDevOrderNum);
 
+    QString departmentName() const;
+    void setDepartmentName(const QString &departmentName);
+
 private:
     bool    m_checkFlag = false;
     QString m_photoPath = "null";
@@ -36,6 +39,7 @@ private:
     QString m_userNumber = "-1";
     QString m_userWeight = "0";
     QString m_bindDevOrderNum = "-1";
+    QString m_departmentName = "";
 
 };
 

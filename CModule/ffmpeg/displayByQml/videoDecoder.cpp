@@ -33,7 +33,7 @@ void videoDecoder::init()
 
 void videoDecoder::run()
 {
-    m_curPlayFileName = "D:/videos/box.mp4";
+    m_curPlayFileName = "D:/videos/CFD.mp4";
     //检查文件是否有效
     if( m_curPlayFileName.isEmpty() ){
         return;

@@ -24,9 +24,9 @@ SUBDIRS += \
 #    CustStackView
 #    CTestShardLibrary \
 #    GoogleTest
-#    CustComboBox       ##### 自定义的下拉框( 基本完 成, 可移植)
+#     CustComboBox       ##### 自定义的下拉框( 可移植 )
 #    MultiThreadDemo \
-#     SqlDemo     #####   数据库sql操作
+#    SqlDemo     #####   数据库sql操作( 批量插入GECG的假数据 )
 #    CMultiThreadDemo
 #    CustControls
 #    ProcessChat
@@ -69,8 +69,11 @@ SUBDIRS += \
 #    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
 #    ffmpeg            #### ffmpeg 学习例子
 #    QSqlTableModelDemo
-#    opencvDemo
+#    opencvDemo     ############   opencv 例子
 #    callQmlFuncsInCpp
 #    DemoModelFilter     ##数据模型排序过滤
-#    DemoEnumVal2KeyString
+#    DemoEnumVal2KeyString  ## 枚举转字符串       包含了注册枚举类型到qml
+#    QPainterDemo        ##  可以参考 opencv例子
+#    CusTools
+#    QQuickRender        #### qml 渲染
 

@@ -8,7 +8,7 @@ Window {
     title: qsTr("Hello World")
 
     Component.onCompleted: {
-        testArray()
+        testObjectArrayFromCpp()
     }
 
     ListModel{
@@ -28,6 +28,30 @@ Window {
         let objArray = [ obj1, obj2 ]
 
         CInterAction.test_variantList( objArray )    //通过
+    }
+
+    function testGetJsonArrayFromCpp(){
+        let arr = CInterAction.test_JsonArray_to_qml()
+
+        console.log( "length = " + arr.length )
+    }
+
+    function testGetJsonObjectFromCpp(){
+        let arr = CInterAction.test_JsonObject_to_qml()
+
+        console.log( arr )
+    }
+
+    function testObjectArrayFromCpp(){
+        let arr = CInterAction.test_JsonArrayObject_to_qml()
+        console.log( "list size = " + list.count )
+
+        for( let ele of arr ){
+            list.append( ele )
+            console.log( "ret = " + ele )
+        }
+
+        console.log( "list size = " + list.count )
     }
 
 

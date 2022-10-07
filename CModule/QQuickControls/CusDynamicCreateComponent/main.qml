@@ -13,15 +13,29 @@ ApplicationWindow {
 
     property var obj
 
+    property var objMap: new Map()
+
+    Component.onCompleted: {
+        testMap()
+    }
+
     Item {
         id: root
     }
 
     Button{
         id: btn1
-        onClicked:  obj = Assistant.createObj( root, mainRect, { "anchors.top": root.bottom, color: "yellow" } )
+//        onClicked:  obj = Assistant.createObj( root, mainRect, { "anchors.top": root.bottom, color: "yellow" } )
 
-        //还玩不转这种方法
+        onClicked: {
+            obj = mainRect.createObject( mainn, { "anchors.centerIn": mainn, color: "yellow" } )
+            objMap.set( "rect", obj )
+
+            //不能转换为 QMap
+            InterAction.testVariantMap( objMap )
+        }
+
+        //还玩不转这种方法----->  不推荐
         //        onClicked: obj = Assistant.createObjFromUrl( "qrc:/CusRect.qml", root )
     }
 
@@ -29,8 +43,9 @@ ApplicationWindow {
         id: btn2
         anchors.left: btn1.right
         onClicked: {
-            console.log( typeof( obj ) )
-            obj.color = "red"
+            if( objMap.has( "rect" ) ){
+                objMap.get( "rect" ).color = "red"
+            }
         }
     }
 
@@ -44,11 +59,38 @@ ApplicationWindow {
 
     Component{
         id: mainRect
+
         Rectangle{
-            width: 200
+
+            Component.onCompleted: {
+                console.log( "going to construction..." )
+            }
+
+            Component.onDestruction: {
+                console.log( "going to destruction..." )
+            }
+            width: 150
             height: width
             color: "green"
         }
 
+    }
+
+    function testMap(){
+        let tmpMap = new Map()
+
+        tmpMap.set( "1", "A" )
+        tmpMap.set( "2", "B" )
+        tmpMap.set( "3", "C" )
+        tmpMap.set( "4", "D" )
+        tmpMap.set( "1", "K" )
+
+        for( let ele of tmpMap ){
+            console.log( "ele = " + ele )
+        }
+
+        console.log( "size = " + tmpMap.size )
+        console.log( "has = " + tmpMap.has( "1" ) )
+        console.log( "has = " + tmpMap.keys().size )
     }
 }

@@ -17,8 +17,10 @@ public:
         UserName,
         UserNumber,
         UserWeight_KG,
+        UserDepartment,
         BindDevOrderNumber
     };
+
     Q_ENUM( UserItem )
 
     explicit CModelUserSelect(QObject *parent = nullptr);
@@ -32,6 +34,9 @@ public:
     QVariant data(const QModelIndex &index, int role = UserItem::UserName) const override;
     virtual QHash<int, QByteArray>  roleNames() const override;
 
+
+private:
+    void generateTestData();
 private:
     QVector<CUserSelectItem>  m_vecUsers;
 };

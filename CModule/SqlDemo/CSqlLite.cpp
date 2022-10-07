@@ -82,17 +82,19 @@ void CSqlLite::insertIntoCppDepartment()
     QVariantList infoList;
     QStringList list;
 
-    QString dpName = "java";
+    QString dpName = "产品部";
 
     int startRowIndex = getRowsCount( "PersonnelInfoTable_" ) + 1;
 
-    for( int i = 0; i < 9000; i++ ){
+    for( int i = 0; i < 20000; i++ ){
 
         list.clear();
         list << QString::number( startRowIndex + i ) << "PersonnelInfoTable" << dpName + "_" + QString::number( i ) << "2022-02-02" << "1" << QString::number( 150 + i )
              << QString::number( 50 + i ) << dpName << QString::number( startRowIndex + i ) << "1";
 
         insertGECGUserTable( list );
+
+        qDebug() << "index = " << i;
 
     }
 

@@ -14,7 +14,6 @@ public:
     virtual ~CInterAction() override;
 
 private:
-    CCameraControler    m_cameraControler;
 };
 
 #endif // CINTERACTION_H

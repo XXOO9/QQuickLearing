@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     CEnumClass a;
 
     //将枚举注册进qml
-    qmlRegisterUncreatableMetaObject( CEnumClass::staticMetaObject, "MyEnums", 1, 0, "MyEnums", "ErrorMsg:: only enums..." );
+    qmlRegisterUncreatableMetaObject( CEnumClass::staticMetaObject, "MyEnums.cmopany.TME", 1, 0, "ProjectEnums", "ErrorMsg:: only enums..." );
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

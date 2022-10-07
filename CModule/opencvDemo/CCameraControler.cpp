@@ -2,6 +2,7 @@
 
 CCameraControler::CCameraControler(QObject *parent) : QObject(parent)
 {
+    qRegisterMetaType<cv::Mat>( "Mat" );
     qDebug() << "construct thread = " << QThread::currentThreadId();
     init();
 
@@ -18,6 +19,28 @@ CCameraControler::~CCameraControler()
     }
 }
 
+void CCameraControler::cvMat2QImage(const Mat &srcMat, QImage &targetImage)
+{
+//    cv::imshow( "123",srcMat );
+//    waitKey( 1 );
+    if (srcMat.channels()==3)
+    {
+        cvtColor(srcMat, srcMat, CV_BGR2RGB);
+        targetImage = QImage(reinterpret_cast<const unsigned char *>(srcMat.data), srcMat.cols, srcMat.rows,
+                srcMat.cols*srcMat.channels(), QImage::Format_RGB888);
+    }
+    else if (srcMat.channels()==1)
+    {
+        targetImage = QImage(reinterpret_cast<const unsigned char *>(srcMat.data), srcMat.cols, srcMat.rows,
+                srcMat.cols*srcMat.channels(), QImage::Format_ARGB32);
+    }
+    else
+    {
+        targetImage = QImage(reinterpret_cast<const unsigned char *>(srcMat.data), srcMat.cols, srcMat.rows,
+                srcMat.cols*srcMat.channels(), QImage::Format_RGB888);
+    }
+}
+
 void CCameraControler::openCamera()
 {
     qDebug() << "open camera thread = " << QThread::currentThreadId();
@@ -25,9 +48,14 @@ void CCameraControler::openCamera()
         m_camera.open( 0 );
     }
 
+    QElapsedTimer cntTimer;
     while( true ){
+        cntTimer.restart();
         m_camera >> m_frame;
-        QThread::msleep( 20 );
+        cvMat2QImage( m_frame, m_img );
+        emit sigNewFrameAvailable( m_img );
+        qDebug() << "cost " << cntTimer.elapsed();
+//        QThread::msleep( 5 );
     }
 }
 
@@ -49,5 +77,5 @@ void CCameraControler::initThread()
 
 void CCameraControler::initInsideConnection()
 {
-    connect( this, &CCameraControler::insideSigOpenCamera, this, &CCameraControler::openCamera );
+    connect( this, &CCameraControler::insideSigOpenCamera, this, &CCameraControler::openCamera, Qt::QueuedConnection );
 }

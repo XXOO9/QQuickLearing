@@ -7,6 +7,8 @@ CONFIG += c++11
 # deprecated API to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
+include( $$PWD/CusFiltListModel/CusFiltListModel.pri )
+
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/debug
 }else
@@ -15,6 +17,7 @@ CONFIG( debug, debug | release ){
 }
 
 SOURCES += \
+        CInteraction.cpp \
         CModelDataFilter.cpp \
         CModelUserSelect.cpp \
         CUserSelectItem.cpp \
@@ -34,6 +37,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    CInteraction.h \
     CModelDataFilter.h \ \
     CModelUserSelect.h \
-    CUserSelectItem.h
+    CUserSelectItem.h \
+

@@ -3,7 +3,8 @@ import QtQuick.Controls 2.12
 
 Item {
     id: root
-    implicitWidth: 150; implicitHeight: width
+    implicitWidth: 150;
+    implicitHeight: width
     Component.onCompleted: {
         console.log( "1111:  " +  dropAera.children[0].width )
     }
@@ -38,23 +39,9 @@ Item {
 
         onEntered: {
             console.log( "entered..." )
-            console.log( "obj name = " + dropAera.drag.source.objectName )
         }
 
         onExited: console.log( "exited..." )
-
-//        onChildrenChanged: {
-//            console.log( children.length )
-//        }
-
-//        onContainsDragChanged: {
-//            let obj = drag.source
-////            console.log( "drag.source = " + obj )
-
-//            if( obj !== null ){
-////                console.log( "width = " + obj.width )
-//            }
-//        }
 
     }
 }

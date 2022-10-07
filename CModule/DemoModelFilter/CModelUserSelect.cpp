@@ -3,13 +3,7 @@
 CModelUserSelect::CModelUserSelect(QObject *parent)
     : QAbstractListModel(parent)
 {
-    CUserSelectItem tmp;
-    for( int i = 0; i < 10; i++ ){
-        tmp.setUserName( "name_" + QString::number( i ) );
-        tmp.setUserNumber( QString::number( i ) );
-
-        m_vecUsers << tmp;
-    }
+    generateTestData();
 }
 
 QVariant CModelUserSelect::headerData(int section, Qt::Orientation orientation, int role) const
@@ -58,6 +52,9 @@ QVariant CModelUserSelect::data(const QModelIndex &index, int role) const
     case BindDevOrderNumber:
         return tmp.bindDevOrderNum();
 
+    case UserDepartment:
+        return tmp.departmentName();
+
     default: return QVariant();
     }
 }
@@ -71,6 +68,24 @@ QHash<int, QByteArray> CModelUserSelect::roleNames() const
     roleNames[ UserItem::UserNumber ]         = "userNumber";
     roleNames[ UserItem::UserWeight_KG ]      = "userWeight_KG";
     roleNames[ UserItem::BindDevOrderNumber ] = "bindDevOrderNumber";
+    roleNames[ UserItem::UserDepartment ]     = "userDepartment";
 
     return roleNames;
+}
+
+void CModelUserSelect::generateTestData()
+{
+    CUserSelectItem tmp;
+    QString departmentNameA = "departmentName_A";
+    QString departmentNameB = "departmentName_B";
+    QString index = "";
+
+    for( int i = 0; i < 10; i++ ){
+        index = QString::number( i );
+        tmp.setUserName( "name_" + index );
+        tmp.setUserNumber( index );
+
+        tmp.setDepartmentName(  i % 2 == 0 ? departmentNameA : departmentNameB );
+        m_vecUsers << tmp;
+    }
 }

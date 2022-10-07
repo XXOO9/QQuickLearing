@@ -9,36 +9,37 @@ ApplicationWindow {
     height: 800
     title: qsTr("Hello World")
 
-    Component.onCompleted: {
-        console.log( "111111111111111 " + CModelUserSelect.rowCount() )
+    ListView{
 
-    }
+        width: 150
+        height: 400
+        Component.onCompleted: {
+            console.log( "size = " + FilterModel.rowCount() )
+        }
 
-    TextField{
-        onFocusChanged: console.log( "focus changed, ret = " + focus )
-
-        onActiveFocusChanged: console.log( "activeFocus changed, ret = " + activeFocus )
+        model: OrginalFilterModel
+        spacing: 5
+        delegate: Rectangle{
+            width: 150
+            height: width
+            color: "gray"
+            Text {
+                text: userName + "\n" + userDepartment
+            }
+        }
     }
 
     Button{
-        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        onClicked: filteTargetModel()
     }
 
-    Rectangle{
-        width: 50
-        height: width
-        color: "red"
-        anchors.centerIn: parent
+    function filteTargetModel(){
+        OrginalFilterModel.setFilterWildcard( "*B" )
     }
 
-    //    ListModel{
-    //        id: list
-    //    }
+    function queryIndexOfTargetUserNumber(){
 
-    //    CusTextInputFilter{
-    //        anchors.centerIn: parent
-    //        candidateModel: SuggestionsModel
-    //    }
-
+    }
 
 }
