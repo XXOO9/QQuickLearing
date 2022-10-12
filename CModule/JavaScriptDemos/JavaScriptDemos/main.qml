@@ -8,7 +8,7 @@ Window {
     title: qsTr("Hello World")
 
     Button{
-        onClicked: str.func_subString()
+        onClicked: str.func_replaceChar()
     }
 
     StringFuncs{

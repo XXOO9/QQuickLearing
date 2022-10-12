@@ -9,4 +9,11 @@ Item {
 
         console.log( ret )
     }
+
+    function  func_replaceChar(){
+        let name = "xtc"
+        let srcString = `My name is ${name}`
+
+        console.log( srcString )
+    }
 }
