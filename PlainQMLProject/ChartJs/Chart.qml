@@ -136,4 +136,6 @@ Canvas {
             jsChart.resize();
         }
     }
+
+    onChartDataChanged: root.requestPaint()
 }

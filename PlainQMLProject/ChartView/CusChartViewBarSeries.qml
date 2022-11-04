@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtCharts 2.3
 import QtQuick.Controls 2.12
 
@@ -45,7 +45,7 @@ Item{
     function generateCategories(){
         let categories = []
         for( let index = 0; index < 5; index++ ){
-            categories.push( "类目" + index )
+            categories.push( "类目wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww" + index )
         }
 
         return categories

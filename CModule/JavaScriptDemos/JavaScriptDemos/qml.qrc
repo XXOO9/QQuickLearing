@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>StringFuncs.js</file>
         <file>StringFuncs.qml</file>
+        <file>Test.js</file>
     </qresource>
 </RCC>

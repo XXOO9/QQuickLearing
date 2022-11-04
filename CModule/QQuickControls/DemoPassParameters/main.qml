@@ -8,7 +8,7 @@ Window {
     title: qsTr("Hello World")
 
     Component.onCompleted: {
-        testObjectArrayFromCpp()
+        testGetJsonObjectFromCpp()
     }
 
     ListModel{
@@ -39,7 +39,7 @@ Window {
     function testGetJsonObjectFromCpp(){
         let arr = CInterAction.test_JsonObject_to_qml()
 
-        console.log( arr )
+        console.log( 'ret = ' + arr.index1 )
     }
 
     function testObjectArrayFromCpp(){
@@ -52,6 +52,12 @@ Window {
         }
 
         console.log( "list size = " + list.count )
+    }
+
+    function test_get_variantList_from_cpp(){
+        let ret = CInterAction.test_VariantList_to_qml()
+
+        console.log( 'ret = ' + ret.devList1.map1_2 )
     }
 
 
