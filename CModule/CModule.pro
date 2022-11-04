@@ -59,7 +59,9 @@ SUBDIRS += \
 #    DemoQCustomplot
 #    DemoVideoPlayer
 #    DemoTextDisplayDifferentStyleText
+
 #    DemoChartjs             ## chartJs demo, 更详细的Demo在 PlainQml工程
+
 #    DemoTreeView           #not yet
 #    DemoChart
 #    QQuickControls         #####    qml 自定义控件demo
@@ -91,4 +93,5 @@ SUBDIRS += \
 #    CusTools
 
 #    QQuickRender        #### qml 渲染
+    Algorithm       ###算法小例子
 
