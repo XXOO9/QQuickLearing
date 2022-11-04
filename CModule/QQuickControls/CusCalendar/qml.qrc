@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>CusTestCalendar.qml</file>
+        <file>resource/arrow.png</file>
+    </qresource>
+</RCC>

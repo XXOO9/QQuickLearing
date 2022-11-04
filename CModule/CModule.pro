@@ -61,7 +61,7 @@ SUBDIRS += \
 #    DemoChartjs
 #    DemoTreeView           #not yet
 #    DemoChart
-#    QQuickControls         #####    qml 自定义控件demo
+    QQuickControls         #####    qml 自定义控件demo
 #    NetWorkGroup
 #    FileAutoBackup
 #    CusWidgetControl
@@ -76,5 +76,5 @@ SUBDIRS += \
 #    QPainterDemo        ##  可以参考 opencv例子
 #    CusTools
 #    QQuickRender        #### qml 渲染
-    Algorithm       ###算法小例子
+#    Algorithm       ###算法小例子
 
