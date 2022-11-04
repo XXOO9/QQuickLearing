@@ -6,19 +6,22 @@ ComboBox{
     implicitWidth: 200
     implicitHeight: width / 4
 
+    model: listModel
 
     // name
     ListModel{
         id: listModel
+        ListElement{ name: '111' }
+        ListElement{ name: '222' }
     }
 
     //配置项
-    property string bkgRectBorderColor: "green"                //主体部分边框颜色
-    property real   bkgRectBorderWidth: 1                      //主体部分边框宽度
+    property string bkgRectBorderColor: "red"                //主体部分边框颜色
+    property real   bkgRectBorderWidth: 2                      //主体部分边框宽度
 
-    property string displayContentTextColor: "blue"             //主体部分文字颜色
-    property string displayContentRectColor: "red"             //主体部分指示器左边部分矩形颜色
-    property string displayContentRectBorderColor: "blue"      //主体部分指示器左边部分矩形边框颜色
+    property string displayContentTextColor: "blue"                    //主体部分 文字颜色
+    property string displayContentRectColor: "transparent"             //主体部分 指示器左边部分矩形颜色
+    property string displayContentRectBorderColor: "transparent"      //主体部分  指示器左边部分矩形边框颜色
 
     property string selectContentHighLightColor: "red"         //候选部分矩形高亮颜色
     property string selectContentColor:          "green"       //候选部分矩形的颜色
@@ -57,26 +60,26 @@ ComboBox{
         onClicked: pop.open()
     }
 
-//    indicator: Image {
-//        id: name
-//        x: root.width - width
-//        y: root.y + root.height / 2 - 10
-//        width: 20
-//        height: 12
-//        source: "qrc:/xiala01.png"
+    indicator: Image {
+        id: name
+        x: root.width - width
+        y: root.y + root.height / 2 - 10
+        width: 20
+        height: 12
+        source: "./xiala01.png"
 
-//        Behavior on rotation {
-//            NumberAnimation{ duration: 200 }
-//        }
+        Behavior on rotation {
+            NumberAnimation{ duration: 200 }
+        }
 
-//        states: [
-//            State{
-//                when: pop.visible
-//                PropertyChanges{ target: name; rotation: 180 }
-//            }
+        states: [
+            State{
+                when: pop.visible
+                PropertyChanges{ target: name; rotation: 180 }
+            }
 
-//        ]
-//    }
+        ]
+    }
 
 
     delegate: ItemDelegate{

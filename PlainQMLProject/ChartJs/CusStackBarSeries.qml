@@ -46,6 +46,7 @@ Item {
         let optionScales = {
             yAxes: [{
                     type: "linear",
+                    stacked: true,
                     scaleLabel: {
                         display: true,
                         labelString: 'Y-Title',   // Y轴的标题
@@ -71,6 +72,7 @@ Item {
 
             xAxes: [{
                     type: 'category',
+                    stacked: true,
                     gridLines: {
                         color: "green",
                         drawOnChartArea: false,    //是否绘制该轴的网格线
@@ -129,13 +131,20 @@ Item {
         let barOptions = {}
 
         let dataArray = []
-        let bar = {
-            backgroundColor: "#02C2EA",
+        let bar1 = {
+            backgroundColor: "green",
             hoverBackgroundColor: "blue",
             data : generateCategoryDatas()
         }
 
-        dataArray.push( bar )
+        let bar2 = {
+            backgroundColor: "red",
+            hoverBackgroundColor: "yellow",
+            data : generateCategoryDatas()
+        }
+
+        dataArray.push( bar1 )
+        dataArray.push( bar2 )
 
         barDataObj.labels = barLabels
         barDataObj.datasets = dataArray

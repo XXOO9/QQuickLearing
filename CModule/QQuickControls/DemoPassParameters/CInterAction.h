@@ -19,6 +19,7 @@ public:
     Q_INVOKABLE QJsonArray test_JsonArray_to_qml();
     Q_INVOKABLE QVariantMap test_JsonObject_to_qml();
     Q_INVOKABLE QJsonArray test_JsonArrayObject_to_qml();
+    Q_INVOKABLE QVariantMap test_VariantList_to_qml();
 };
 
 #endif // CINTERACTION_H

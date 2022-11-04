@@ -1,4 +1,4 @@
-#include "CInteraction.h"
+﻿#include "CInteraction.h"
 
 CInteraction::CInteraction(QObject *parent) : QObject(parent)
 {
@@ -30,6 +30,7 @@ void CInteraction::registMember()
 {
     m_pEngine->rootContext()->setContextProperty( "FilterModel", m_pFilterModel );
     m_pEngine->rootContext()->setContextProperty( "OrginalFilterModel", &m_orginalFilterModel );
+    qmlRegisterType<CusFiltListModel>( "App", 1, 0, "CusFiltModel" );
 }
 
 void CInteraction::initOrginalFilterModel()
