@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "CTestDate.h"
+#include "CInterAction.h"
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -8,9 +9,11 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    CTestDate a;
+    CInterAction a;
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty( "InterAction", &a );
+    engine.rootContext()->setContextProperty( "CusDateModel", a.dateMdoel() );
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

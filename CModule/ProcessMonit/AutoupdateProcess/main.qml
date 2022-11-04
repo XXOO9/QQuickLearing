@@ -25,7 +25,7 @@ Window {
         }
         Button{
             text: 'close'
-            onClicked: CInterAction.sendCommandMsg()
+            onClicked: CInterAction.closeProcess()
         }
         Button{
             text: 'run'

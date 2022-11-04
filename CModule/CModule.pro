@@ -10,7 +10,11 @@ TEMPLATE = subdirs
 
 
 SUBDIRS += \
+     QQuickControls         #####    qml 自定义控件demo
 #    CHttpModule \               ##Qt自带的Http网络模块
+#     ProcessMonit      ### 进程控制
+
+
 #    unitTest     \              ## 单元测试
 #    EnumWithQuick \
 #    RightMouseClicked
@@ -61,7 +65,7 @@ SUBDIRS += \
 #    DemoChartjs
 #    DemoTreeView           #not yet
 #    DemoChart
-    QQuickControls         #####    qml 自定义控件demo
+
 #    NetWorkGroup
 #    FileAutoBackup
 #    CusWidgetControl

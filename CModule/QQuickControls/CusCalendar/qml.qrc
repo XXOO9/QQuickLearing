@@ -3,5 +3,9 @@
         <file>main.qml</file>
         <file>CusTestCalendar.qml</file>
         <file>resource/arrow.png</file>
+        <file>Components/NumberAdjustSpin.qml</file>
+        <file>JavaScript/CommonDefine.js</file>
+        <file>CusDetailInfo.qml</file>
+        <file>Components/CusClickBtn.qml</file>
     </qresource>
 </RCC>

@@ -14,3 +14,22 @@ void CTestDate::testQueryDays()
     qDebug() << curDate.daysInMonth();
     qDebug() << curDate.daysInYear();
 }
+
+QVariantMap CTestDate::queryResult(int year, int month) const
+{
+    QVariantMap retMap;
+    QString strYear  = QString::number( year );
+    QString strMonth = QString::number( month );
+    QString strDate = strYear + strMonth + "01";
+
+    QDate targetDate;
+    targetDate.setDate( year, month, 1 );
+
+    retMap =
+    {
+        { Keys::daysInMonth, targetDate.daysInMonth() },
+        { Keys::startWeekDay, targetDate.dayOfWeek() }
+    };
+
+    return retMap;
+}

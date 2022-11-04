@@ -28,6 +28,8 @@ public:
     //检查是否有更新文件
     Q_INVOKABLE bool checkExistedUpdateFiles();
 
+    Q_INVOKABLE void closeProcess();
+
     //将需要更新的文件复制到目标路径
     Q_INVOKABLE void copyNewExecuteToTargetDir( const QString targetDir, bool delAfterFinished = true );
 

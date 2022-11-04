@@ -39,6 +39,11 @@ bool CInterAction::checkExistedUpdateFiles()
     }
 }
 
+void CInterAction::closeProcess()
+{
+    closeTargetProcess( Keys::targetExecuteName );
+}
+
 void CInterAction::copyNewExecuteToTargetDir(const QString targetDir, bool delAfterFinished)
 {
 //    checkUpdateDirExisted( targetDir );
