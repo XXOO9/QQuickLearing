@@ -167,17 +167,10 @@ Item {
 
     function generateListModelData( days, startWeekDay, dayInfos ){
         dateInfoModel.clear()
-
-        for( let offsetIndex = 1; offsetIndex <= startWeekDay; offsetIndex++ ){
-            dateInfoModel.append( { 'dateIndex': 0, 'hours': 0, 'today': false, 'timeCnt': 0 } )
-        }
-
-        for( let daysIndex = 1; daysIndex <= days; daysIndex++ ){
-            dateInfoModel.append( { 'dateIndex': daysIndex, 'hours': dayInfos[ daysIndex - 1 ].hours, 'today': false, 'timeCnt': dayInfos[ daysIndex - 1 ].timeCnt } )
-        }
-
-        while( dateInfoModel.count < 42 ){
-            dateInfoModel.append( { 'dateIndex': 0, 'hours': 0, 'today': false, 'timeCnt': 0 } )
+        let tmpDayInfo
+        for( let index = 0; index < dayInfos.length; index++ ){
+            tmpDayInfo = dayInfos[ index ]
+            dateInfoModel.append( { 'dateIndex': tmpDayInfo.dateIndex, 'hours': tmpDayInfo.hours, 'today': false, 'timeCnt': tmpDayInfo.timeCnt } )
         }
 
     }

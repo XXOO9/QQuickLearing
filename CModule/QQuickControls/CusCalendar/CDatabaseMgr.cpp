@@ -44,10 +44,11 @@ QVariantList CDatabaseMgr::queryRangeDateInfo(const QString &startDayDate, const
     }
 
     QVariantMap tmpRetMap;
+    int dayIndex = 1;
     while( m_pSqlExecute->next() ){
         tmpRetMap.clear();
         tmpRetMap = {
-            { Keys::dayIndex, m_pSqlExecute->value( DateTime ).toInt() },
+            { Keys::dayIndex, dayIndex++ },
             { Keys::hours, m_pSqlExecute->value( Hours ).toDouble() },
             { Keys::timeCnt, m_pSqlExecute->value( TimeCnt ).toDouble() }
         };
@@ -57,6 +58,22 @@ QVariantList CDatabaseMgr::queryRangeDateInfo(const QString &startDayDate, const
     }
 
     return retList;
+}
+
+bool CDatabaseMgr::changeTargetDateInfo(const QString &targetDate, const int &hour, const int &timeCnt)
+{
+    const QString sqlString = "update dateInfo set hour = ?, timeCnt = ? where date = ?";
+    m_pSqlExecute->prepare( sqlString );
+    m_pSqlExecute->addBindValue( hour );
+    m_pSqlExecute->addBindValue( timeCnt );
+    m_pSqlExecute->addBindValue( targetDate );
+
+    if( !m_pSqlExecute->exec() ){
+        qDebug() << "change hour failed, error string = " << m_pSqlExecute->lastError().text();
+        return false;
+    }
+
+    return true;
 }
 
 void CDatabaseMgr::initDatabase()

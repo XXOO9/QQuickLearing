@@ -31,6 +31,8 @@ public:
 
     QVariantList queryRangeDateInfo(const QString &startDayDate, const QString &endDayDate ) const;
 
+    bool changeTargetDateInfo( const QString &targetDate, const int &hour, const int &timeCnt );
+
 private:
     void initDatabase();
 

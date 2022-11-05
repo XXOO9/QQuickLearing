@@ -24,6 +24,9 @@ public:
     QVariantMap queryResult( int year, int month ) const;
 
 private:
+    //查询出来的每个月的条目数量肯定 <= 31, 直接在这个函数里面凑满42条数据
+    void checkDailyInfo(QVariantList &srcList, int weekDayOffset , int monthDays) const;
+    QVariantList generateCountEmptyDateInfo(int count ) const;
     void testInsertTestData();
 
 private:

@@ -32,14 +32,46 @@ QVariantMap CTestDate::queryResult(int year, int month) const
 
     QVariantList eachDayDetailInfo = m_databaseMgr.queryRangeDateInfo( startDay, endDay );
 
+    checkDailyInfo( eachDayDetailInfo, targetDate.dayOfWeek(), totalDays );
+
     retMap =
     {
-        { Keys::daysInMonth, totalDays },
+        { Keys::daysInMonth,  totalDays },
         { Keys::startWeekDay, targetDate.dayOfWeek() },
         { Keys::eachDayDetaileInfo, eachDayDetailInfo },
     };
 
     return retMap;
+}
+
+void CTestDate::checkDailyInfo(QVariantList &srcList, int weekDayOffset, int monthDays ) const
+{
+    QVariantList tmpTotalList;
+    QVariantMap emptyDayInfoMap = generateCountEmptyDateInfo( 1 );
+
+    for( int index = 1; index < monthDays; index++ ){
+        if( index < weekDayOffset ){
+            tmpTotalList << generateCountEmptyDateInfo( 1 );
+        }
+    }
+}
+
+QVariantList CTestDate::generateCountEmptyDateInfo(int count) const
+{
+    QVariantMap tmpRetMap;
+    QVariantList retList;
+
+    tmpRetMap = {
+        { "dateIndex", 0 },
+        { "hours", 0 },
+        { "timeCnt", 0 }
+    };
+
+    while (count--) {
+        retList << tmpRetMap;
+    }
+
+    return retList;
 }
 
 void CTestDate::testInsertTestData()
