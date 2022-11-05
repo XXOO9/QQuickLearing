@@ -1,4 +1,4 @@
-#include "CTestDate.h"
+﻿#include "CTestDate.h"
 
 CTestDate::CTestDate()
 {
@@ -18,9 +18,6 @@ void CTestDate::testQueryDays()
 QVariantMap CTestDate::queryResult(int year, int month) const
 {
     QVariantMap retMap;
-    QString strYear  = QString::number( year );
-    QString strMonth = QString::number( month );
-    QString strDate = strYear + strMonth + "01";
 
     QDate targetDate;
     targetDate.setDate( year, month, 1 );

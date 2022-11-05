@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
 import "./JavaScript/CommonDefine.js" as Common
 import "./Components/"
@@ -16,11 +16,28 @@ Item {
     signal sigQueryDetailDateInfo( var dateIndex, var hour, var timeCnt )
 
     Component.onCompleted: {
+        console.log( "construct calendar..." )
         queryDays( 2022, 11 )
+    }
+
+    Component.onDestruction: {
+        console.log( 'calendar page destruct...' )
     }
 
     ListModel{  // dateIndex -> 日期 ,   hours  ->  加班时长 , timeCnt -> 倍率 , today -> 今天的日期
         id: dateInfoModel
+
+        function findDayIndex( tarDayIndex ){
+            const size = dateInfoModel.count
+
+            for( let index = 0; index < size; index++ ){
+                if( dateInfoModel.get( index ).dateIndex === tarDayIndex ){
+                    return index
+                }
+            }
+
+            return -1
+        }
 
         function findDay( tarDayIndex ){
             const size = dateInfoModel.count
@@ -43,10 +60,35 @@ Item {
 
             ret.today = rue
         }
+
+        function setTargetDayInfo( newDayInfo ){
+
+            dateInfoModel.setProperty( newDayInfo.modelIndex, 'hours', newDayInfo.hour )
+            dateInfoModel.setProperty( newDayInfo.modelIndex, 'timeCnt', newDayInfo.timeCnt )
+            console.log( 'set new day info finished...' )
+        }
+
+        function calculateTotalHours(){
+            const size = dateInfoModel.count
+            let hours = 0
+            let afterCalculate = 0
+            let tmpDateInfo
+
+            for( let i = 0; i < size; i++ ){
+                tmpDateInfo = dateInfoModel.get( i )
+                hours += tmpDateInfo.hours
+                afterCalculate += ( tmpDateInfo.hours * tmpDateInfo.timeCnt )
+            }
+
+            let ret = [ hours, afterCalculate ]
+
+            return ret
+        }
     }
 
     Rectangle{
         anchors.fill: parent
+        color: 'cornflowerblue'
         border{ width: 1.5; color: 'black'}
     }
 
@@ -65,14 +107,21 @@ Item {
             anchors.centerIn: parent
             NumberAdjustSpin{
                 id: yearAdjust
-                width: dateAdjustArea.width / 2
+                width: dateAdjustArea.width / 3
                 height: dateAdjustArea.height
                 onAdjustNumberChanged: queryDays( yearAdjust.adjustNumber, monthAdjust.adjustNumber )
             }
 
+            CusTotalHoursOverview{
+                id: hoursOverview
+                width: dateAdjustArea.width / 3
+                height: dateAdjustArea.height
+                hours: 12
+            }
+
             NumberAdjustSpin{
                 id: monthAdjust
-                width: dateAdjustArea.width / 2
+                width: dateAdjustArea.width / 3
                 height: dateAdjustArea.height
                 adjustNumber: 11
                 adjustUnit: '月'
@@ -92,7 +141,7 @@ Item {
 
         Rectangle{
             anchors.fill: parent
-            color: 'black'
+            color: Qt.lighter( 'cornflowerblue', 0.7 )
         }
 
         Row{
@@ -119,13 +168,12 @@ Item {
     function generateListModelData( days, startWeekDay ){
         dateInfoModel.clear()
 
-
         for( let offsetIndex = 1; offsetIndex < startWeekDay; offsetIndex++ ){
             dateInfoModel.append( { 'dateIndex': 0, 'hours': 0, 'today': false, 'timeCnt': 0 } )
         }
 
         for( let daysIndex = 1; daysIndex <= days; daysIndex++ ){
-            dateInfoModel.append( { 'dateIndex': daysIndex, 'hours': 0, 'today': false, 'timeCnt': 1 } )
+            dateInfoModel.append( { 'dateIndex': daysIndex, 'hours': daysIndex, 'today': false, 'timeCnt': 1 } )
         }
 
         while( dateInfoModel.count < 42 ){
@@ -134,16 +182,29 @@ Item {
 
     }
 
+    //调用后台函数查询月份信息
     function queryDays( year, month ){
         let ret = InterAction.queryTargetDateMonthInfo( year, month )
         generateListModelData( ret.daysInMonth, ret.startWeekDay )
+        let retArray = dateInfoModel.calculateTotalHours()
+        hoursOverview.hours = retArray[ 0 ]
+        hoursOverview.calculateHours = retArray[ 1 ]
     }
 
     function setTargetDateIndexInfo( targetDateIndex, hour, timeCnt ){
-        let ret = dateInfoModel.findDay( targetDateIndex )
+        let retIndex = dateInfoModel.findDayIndex( targetDateIndex )
 
-        ret.hours = hour
-        ret.timeCnt = timeCnt
+        let tmpNewDayInfo = {
+            'modelIndex': Number( retIndex ),
+            'hour': Number( hour ),
+            'timeCnt': Number( timeCnt )
+        }
+
+        dateInfoModel.setTargetDayInfo( tmpNewDayInfo )
+    }
+
+    function getTargetDayInfo( tarDateIndex ){
+        return dateInfoModel.findDay( tarDateIndex )
     }
 
     Component{
@@ -162,40 +223,69 @@ Item {
         }
     }
 
+
     Component{
         id: perRectCmp
         Rectangle{
             id: rect
             visible: dateIndex !== 0
+            property bool mousHoverd: false
             width: perColumnWidth
             height: perRowHeight
-            color: 'gray'
+            color: perRectColorProvider( hours )
 
             Text {
                 text: dateIndex
                 font{ family: "Microsoft YaHei"; pixelSize: 20 * localFactor; bold: true }
                 anchors.centerIn: parent
             }
+
             MouseArea{
                 id: rectMouse
                 hoverEnabled: true
                 anchors.fill: parent
-                onEntered: {
-                    rect.border.width = 2 * localFactor
-                    rect.border.color = 'blue'
-                    rect.color = 'green'
-                }
-
-                onExited: {
-                    rect.border.width = 0 * localFactor
-                    rect.color = 'gray'
-                }
+                onEntered: rect.mousHoverd = true
+                onExited: rect.mousHoverd = false
 
                 onDoubleClicked: {
                     Common.curYear = yearAdjust.adjustNumber
                     Common.curMonth = monthAdjust.adjustNumber
                     Common.curDateIndex = dateIndex
+                    let targetDay = dateInfoModel.findDay( dateIndex )
+                    console.log( "target date info: dateIndex = " + targetDay.dateIndex + ' hour = ' + targetDay.hours + ' timeCnt = ' + targetDay.timeCnt )
                     sigQueryDetailDateInfo( dateIndex, hours, timeCnt )
+                }
+            }
+
+            states: [
+                State{
+                    when: rect.mousHoverd
+                    PropertyChanges{ target: rect; opacity: 0.8; border.color: 'black' }
+                },
+
+                State{
+                    when: !rect.mousHoverd
+                    PropertyChanges{ target: rect; opacity: 1; border.width: 0 }
+                }
+
+            ]
+
+            function perRectColorProvider( hour ){
+
+                if( hour <= 0 ){
+                    return 'gray'
+                }
+
+                if( hour >=0 && hour <= 2.5 ){
+                    return 'khaki'
+                }
+
+                if( hour > 2.5 && hour <= 5 ){
+                    return 'salmon'
+                }
+
+                if( hour >= 6 ){
+                    return 'red'
                 }
             }
         }

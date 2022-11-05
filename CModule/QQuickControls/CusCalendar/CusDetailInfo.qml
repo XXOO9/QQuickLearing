@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
 import "./"
 import "./Components/"
@@ -13,6 +13,15 @@ Item {
 
     property alias hourText: hourTextInput.text
     property alias timeCntText: timeCntTextInput.text
+
+    Component.onCompleted: {
+        hourTextInput.text = Common.tmpCurHour
+        timeCntTextInput.text = Common.tmpCurTimeCnt
+    }
+
+    Component.onDestruction: {
+        console.log( 'date detail page destruct...' )
+    }
 
     Rectangle{
         id: bkg
@@ -40,7 +49,7 @@ Item {
         TextField{
             id: hourTextInput
             width: root.width * 0.3
-            placeholderText: '实际加班时长'
+            placeholderText: '实际时长'
             height: Common.perRowHeight * 0.3
             background: Rectangle{
                 border.color: 'red'
@@ -93,13 +102,13 @@ Item {
         radius: 20 * factor
         z: 20
         anchors{ horizontalCenter: parent.horizontalCenter; bottom: parent.bottom; bottomMargin: 20 * factor }
+        onSigClicked: sigRefreshHourInfo( hourTextInput.text, timeCntTextInput.text )
     }
 
 
     function calculate( hours, timeCnt ){
 
         retText.text = ( hours * timeCnt ).toFixed( 5 )
-        sigRefreshHourInfo( hours, timeCnt )
     }
 
 }

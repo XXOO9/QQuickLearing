@@ -7,5 +7,6 @@
         <file>JavaScript/CommonDefine.js</file>
         <file>CusDetailInfo.qml</file>
         <file>Components/CusClickBtn.qml</file>
+        <file>Components/CusTotalHoursOverview.qml</file>
     </qresource>
 </RCC>
