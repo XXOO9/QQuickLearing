@@ -1,10 +1,11 @@
-#ifndef CINTERACTION_H
+﻿#ifndef CINTERACTION_H
 #define CINTERACTION_H
 
 #include <QObject>
 #include <QDebug>
 #include "CTestDate.h"
 #include "./CusDateModel.h"
+#include <QRandomGenerator>
 
 class CInterAction : public QObject
 {

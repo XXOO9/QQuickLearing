@@ -1,14 +1,15 @@
-QT += quick
+QT += quick sql core
 CONFIG += c++11
 
 CONFIG( debug, debug | release ){
-        DESTDIR     = $$PWD/debug
+        DESTDIR     = $$PWD/bin/debug
 }else
 {
-        DESTDIR     = $$PWD/release
+        DESTDIR     = $$PWD/bin/release
 }
 
-include( $$PWD/DateDataModel.pri )
+include( $$PWD/DateDataModel.pri )Database.pri
+include( $$PWD/Database.pri )
 
 
 DEFINES += QT_DEPRECATED_WARNINGS

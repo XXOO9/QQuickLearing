@@ -10,11 +10,10 @@ TEMPLATE = subdirs
 
 
 SUBDIRS += \
-     QQuickControls         #####    qml 自定义控件demo
+    QQuickControls         #####    qml 自定义控件demo
 #    CHttpModule \               ##Qt自带的Http网络模块
-#     ProcessMonit      ### 进程控制
-
-
+#    ProcessMonit      ### 进程控制
+#    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
 #    unitTest     \              ## 单元测试
 #    EnumWithQuick \
 #    RightMouseClicked
@@ -70,7 +69,7 @@ SUBDIRS += \
 #    FileAutoBackup
 #    CusWidgetControl
 #    JavaScriptDemos            ##### 一些关于JS的Demo 例如  字符串函数
-#    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
+
 #    ffmpeg            #### ffmpeg 学习例子
 #    QSqlTableModelDemo
 #    opencvDemo     ############   opencv 例子

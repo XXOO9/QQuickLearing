@@ -24,5 +24,5 @@ SUBDIRS += \
 #    KeyEventDemo                    ###  键盘按键测试
 #    CusMenu                         ##  自定义菜单（未实现）
 #     DemoStackVeiwAndStackLayout      ###  自定义堆栈视图和堆栈布局
- \#    DemoButtonGroup
+#    DemoButtonGroup
     CusCalendar

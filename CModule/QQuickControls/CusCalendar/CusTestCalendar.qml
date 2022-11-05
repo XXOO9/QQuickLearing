@@ -165,15 +165,15 @@ Item {
         }
     }
 
-    function generateListModelData( days, startWeekDay ){
+    function generateListModelData( days, startWeekDay, dayInfos ){
         dateInfoModel.clear()
 
-        for( let offsetIndex = 1; offsetIndex < startWeekDay; offsetIndex++ ){
+        for( let offsetIndex = 1; offsetIndex <= startWeekDay; offsetIndex++ ){
             dateInfoModel.append( { 'dateIndex': 0, 'hours': 0, 'today': false, 'timeCnt': 0 } )
         }
 
         for( let daysIndex = 1; daysIndex <= days; daysIndex++ ){
-            dateInfoModel.append( { 'dateIndex': daysIndex, 'hours': daysIndex, 'today': false, 'timeCnt': 1 } )
+            dateInfoModel.append( { 'dateIndex': daysIndex, 'hours': dayInfos[ daysIndex - 1 ].hours, 'today': false, 'timeCnt': dayInfos[ daysIndex - 1 ].timeCnt } )
         }
 
         while( dateInfoModel.count < 42 ){
@@ -185,10 +185,8 @@ Item {
     //调用后台函数查询月份信息
     function queryDays( year, month ){
         let ret = InterAction.queryTargetDateMonthInfo( year, month )
-        generateListModelData( ret.daysInMonth, ret.startWeekDay )
-        let retArray = dateInfoModel.calculateTotalHours()
-        hoursOverview.hours = retArray[ 0 ]
-        hoursOverview.calculateHours = retArray[ 1 ]
+        generateListModelData( ret.daysInMonth, ret.startWeekDay, ret.dayDetailInfo )
+        refreshTotalOverview()
     }
 
     function setTargetDateIndexInfo( targetDateIndex, hour, timeCnt ){
@@ -201,6 +199,13 @@ Item {
         }
 
         dateInfoModel.setTargetDayInfo( tmpNewDayInfo )
+        refreshTotalOverview()
+    }
+
+    function refreshTotalOverview(){
+        let retArray = dateInfoModel.calculateTotalHours()
+        hoursOverview.hours = retArray[ 0 ]
+        hoursOverview.calculateHours = retArray[ 1 ]
     }
 
     function getTargetDayInfo( tarDateIndex ){
