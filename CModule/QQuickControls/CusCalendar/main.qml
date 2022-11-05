@@ -18,7 +18,7 @@ ApplicationWindow {
     StackView{
         id: mainStackView
         width: Common.perColumnWidth * 7 * factor
-        height: Common.perRowHeight * 7 * factor
+        height: Common.perRowHeight * 8 * factor
         anchors.centerIn: parent
         padding: 0
         clip: true
@@ -45,8 +45,14 @@ ApplicationWindow {
             onSigRefreshHourInfo: {
                 Common.tmpCurHour = hour
                 Common.tmpCurTimeCnt = timeCnt
+                console.log( 'year = ' + Common.curYear + ' month = ' + Common.curMonth )
+
+                let targetDate = Common.curYear +
+                    String( Common.curMonth ).padStart( 2, '0' ) +
+                    String( Common.curDateIndex ).padStart( 2, '0' )
 
                 mainStackView.get( 0 ).setTargetDateIndexInfo( Common.curDateIndex, hour, timeCnt )
+                let ok = InterAction.setTargetDateHourInfo( targetDate, hour, timeCnt )
                 mainStackView.pop()
             }
         }

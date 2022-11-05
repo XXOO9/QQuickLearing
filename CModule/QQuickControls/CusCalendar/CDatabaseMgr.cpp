@@ -1,5 +1,7 @@
 ﻿#include "CDatabaseMgr.h"
 
+#include <QDate>
+
 CDatabaseMgr::CDatabaseMgr()
 {
     initDatabase();
@@ -7,12 +9,19 @@ CDatabaseMgr::CDatabaseMgr()
 
 CDatabaseMgr::~CDatabaseMgr()
 {
+    resetSqlExecute();
+
     if( m_database.isOpen() ){
         m_database.close();
     }
 }
 
-bool CDatabaseMgr::insertNewDateInfo(const QString &date, const double &hour, const double &timeCnt)
+bool CDatabaseMgr::insertNewDateInfo(const QString &date, const double &hour, const double &timeCnt) const
+{
+    return insertNewDateInfo( date.toInt(), hour, timeCnt );
+}
+
+bool CDatabaseMgr::insertNewDateInfo(const int &date, const double &hour, const double &timeCnt) const
 {
     QString sqlString = QString( "insert into dateInfo values(?, ?, ?)" );
 
@@ -44,11 +53,10 @@ QVariantList CDatabaseMgr::queryRangeDateInfo(const QString &startDayDate, const
     }
 
     QVariantMap tmpRetMap;
-    int dayIndex = 1;
     while( m_pSqlExecute->next() ){
         tmpRetMap.clear();
         tmpRetMap = {
-            { Keys::dayIndex, dayIndex++ },
+            { Keys::dayIndex, getDayIndex( m_pSqlExecute->value( DateTime ).toInt() ) },
             { Keys::hours, m_pSqlExecute->value( Hours ).toDouble() },
             { Keys::timeCnt, m_pSqlExecute->value( TimeCnt ).toDouble() }
         };
@@ -60,10 +68,17 @@ QVariantList CDatabaseMgr::queryRangeDateInfo(const QString &startDayDate, const
     return retList;
 }
 
-bool CDatabaseMgr::changeTargetDateInfo(const QString &targetDate, const int &hour, const int &timeCnt)
+bool CDatabaseMgr::changeTargetDateInfo(const int &targetDate, const int &hour, const int &timeCnt) const
 {
-    const QString sqlString = "update dateInfo set hour = ?, timeCnt = ? where date = ?";
+    if( !isTargetDateRecordExisted( targetDate ) ){
+        qDebug() << "no target date info in database...";
+        return insertNewDateInfo( targetDate, hour, timeCnt );
+    }
+
+    const QString sqlString = "update dateInfo set hours = ?, timeCnt = ? where date = ?";
+
     m_pSqlExecute->prepare( sqlString );
+
     m_pSqlExecute->addBindValue( hour );
     m_pSqlExecute->addBindValue( timeCnt );
     m_pSqlExecute->addBindValue( targetDate );
@@ -99,7 +114,7 @@ void CDatabaseMgr::initTables()
 {
     const QString createDateInfoTable = "create table dateInfo( date integer primary key, hours real, timeCnt real )";
     QSqlQuery sqlCmd( m_database );
-    //    sqlCmd.prepare()
+
     if( !sqlCmd.exec( createDateInfoTable ) ){
         qDebug() << "create table failed, error str = " << sqlCmd.lastError().text();
         return;
@@ -132,7 +147,7 @@ bool CDatabaseMgr::isTargetTableExisted( const QString &tableName )
     QSqlQuery sql( m_database );
 
     if( !sql.exec( sqlString ) ){
-        qDebug() << "query target table existed failed, err str = " << sql.lastError().text();
+        qDebug() << "query target table existed failed, error string = " << sql.lastError().text();
         return false;
     }
 
@@ -146,4 +161,31 @@ bool CDatabaseMgr::isTargetTableExisted( const QString &tableName )
         return false;
     }
 
+}
+
+bool CDatabaseMgr::isTargetDateRecordExisted(const int &targetDate) const
+{
+    QString sqlString = "select count( * ) from dateInfo where date = ?";
+    m_pSqlExecute->prepare( sqlString );
+    m_pSqlExecute->addBindValue( targetDate );
+
+    if( !m_pSqlExecute->exec() ){
+        qDebug() << "query target date info failed, erorr string = " << m_pSqlExecute->lastError().text();
+        return false;
+    }
+
+    while ( m_pSqlExecute->next() ) {
+        if( m_pSqlExecute->value( 0 ).toInt() <= 0 ){
+            qDebug() << "there is no target date info...";
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int CDatabaseMgr::getDayIndex(const int &date) const
+{
+    QDate tmpDate = QDate::fromString( QString::number( date ), "yyyyMMdd" );
+    return tmpDate.day();
 }

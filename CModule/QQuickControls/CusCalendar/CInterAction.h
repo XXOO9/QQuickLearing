@@ -16,6 +16,9 @@ public:
     //查询当月的信息
     Q_INVOKABLE QVariantMap queryTargetDateMonthInfo( int year, int month );
 
+    //更新指定日期的加时长信息
+    Q_INVOKABLE bool setTargetDateHourInfo( int date, int hour, int timeCnt );
+
     CusDateModel *dateMdoel();
 
 private:

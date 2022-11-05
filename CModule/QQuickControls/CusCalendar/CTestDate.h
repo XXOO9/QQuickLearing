@@ -23,10 +23,14 @@ public:
 
     QVariantMap queryResult( int year, int month ) const;
 
+    const CDatabaseMgr &databaseMgr() const;
+
 private:
-    //查询出来的每个月的条目数量肯定 <= 31, 直接在这个函数里面凑满42条数据
+
     void checkDailyInfo(QVariantList &srcList, int weekDayOffset , int monthDays) const;
-    QVariantList generateCountEmptyDateInfo(int count ) const;
+
+    QVariantList generateCountEmptyDateInfo(int weekdayOffset , int monthDays) const;
+
     void testInsertTestData();
 
 private:

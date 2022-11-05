@@ -27,11 +27,13 @@ public:
     CDatabaseMgr();
     ~CDatabaseMgr();
 
-    bool insertNewDateInfo(const QString &date, const double &hour, const double &timeCnt );
+    bool insertNewDateInfo(const QString &date, const double &hour, const double &timeCnt ) const;
+
+    bool insertNewDateInfo(const int &date, const double &hour, const double &timeCnt ) const;
 
     QVariantList queryRangeDateInfo(const QString &startDayDate, const QString &endDayDate ) const;
 
-    bool changeTargetDateInfo( const QString &targetDate, const int &hour, const int &timeCnt );
+    bool changeTargetDateInfo( const int &targetDate, const int &hour, const int &timeCnt ) const;
 
 private:
     void initDatabase();
@@ -43,6 +45,10 @@ private:
     void checkTablesExisted();
 
     bool isTargetTableExisted(const QString &tableName);
+
+    bool isTargetDateRecordExisted( const int &targetDate ) const;
+
+    int getDayIndex( const int &date ) const;
 private:
     QSqlDatabase    m_database;
     QSqlQuery      *m_pSqlExecute = nullptr;

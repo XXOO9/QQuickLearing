@@ -27,8 +27,8 @@ QVariantMap CTestDate::queryResult(int year, int month) const
 
     int totalDays = targetDate.daysInMonth();
 
-    QString startDay = QString::number( year ) + QString::number( month ) + "01";
-    QString endDay = QString::number( year ) + QString::number( month ) + QString::number( totalDays );
+    QString startDay = QString::number( year ) + QString::number( month ).rightJustified( 2, '0' ) + "01";
+    QString endDay = QString::number( year ) + QString::number( month ).rightJustified( 2, '0' ) + QString::number( totalDays );
 
     QVariantList eachDayDetailInfo = m_databaseMgr.queryRangeDateInfo( startDay, endDay );
 
@@ -46,17 +46,19 @@ QVariantMap CTestDate::queryResult(int year, int month) const
 
 void CTestDate::checkDailyInfo(QVariantList &srcList, int weekDayOffset, int monthDays ) const
 {
-    QVariantList tmpTotalList;
-    QVariantMap emptyDayInfoMap = generateCountEmptyDateInfo( 1 );
+    QVariantList tmpTotalList = generateCountEmptyDateInfo( weekDayOffset, monthDays );
+    QVariantMap tmpDayInfoMap;
 
-    for( int index = 1; index < monthDays; index++ ){
-        if( index < weekDayOffset ){
-            tmpTotalList << generateCountEmptyDateInfo( 1 );
-        }
+    while( srcList.size() > 0 ){
+        qDebug() << "size = " << srcList.size();
+        tmpDayInfoMap = srcList.takeFirst().toMap();
+        tmpTotalList.replace( tmpDayInfoMap.value( "dateIndex" ).toInt() + weekDayOffset - 2, tmpDayInfoMap );
     }
+
+    srcList = tmpTotalList;
 }
 
-QVariantList CTestDate::generateCountEmptyDateInfo(int count) const
+QVariantList CTestDate::generateCountEmptyDateInfo( int weekdayOffset, int monthDays ) const
 {
     QVariantMap tmpRetMap;
     QVariantList retList;
@@ -67,7 +69,17 @@ QVariantList CTestDate::generateCountEmptyDateInfo(int count) const
         { "timeCnt", 0 }
     };
 
-    while (count--) {
+    while( --weekdayOffset ){
+        retList << tmpRetMap;
+    }
+
+    for( int dayIndex = 1; dayIndex <= monthDays; dayIndex++ ){
+        tmpRetMap[ "dateIndex" ] = dayIndex;
+        retList << tmpRetMap;
+    }
+
+    tmpRetMap[ "dateIndex" ] = 0;
+    while( retList.size() < 42 ){
         retList << tmpRetMap;
     }
 
@@ -88,4 +100,9 @@ void CTestDate::testInsertTestData()
         m_databaseMgr.insertNewDateInfo( tmpDay.toString( "yyyyMMdd" ), hour, timeCnt );
         tmpDay = tmpDay.addDays( 1 );
     }
+}
+
+const CDatabaseMgr &CTestDate::databaseMgr() const
+{
+    return m_databaseMgr;
 }

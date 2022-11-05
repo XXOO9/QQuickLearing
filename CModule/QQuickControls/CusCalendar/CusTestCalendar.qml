@@ -127,7 +127,10 @@ Item {
                 adjustUnit: '月'
                 max: 12
                 min: 1
-                onAdjustNumberChanged: queryDays( yearAdjust.adjustNumber, monthAdjust.adjustNumber )
+                onAdjustNumberChanged: {
+                    display = String( monthAdjust.adjustNumber ).padStart( 2, '0' )
+                    queryDays( yearAdjust.adjustNumber , monthAdjust.adjustNumber )
+                }
             }
         }
 

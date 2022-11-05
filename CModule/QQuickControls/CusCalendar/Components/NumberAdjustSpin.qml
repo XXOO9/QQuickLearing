@@ -7,6 +7,7 @@ Item{
     width: 200
     height: 150
 
+    property alias display: displayText.text
     property real adjustNumber: 2022
     property string adjustUnit: '年'
 
@@ -37,6 +38,7 @@ Item{
         }
 
         Text {
+            id: displayText
             text: adjustNumber + adjustUnit
             font{ family: "Microsoft YaHei"; pixelSize: 20 * localFactor }
             horizontalAlignment: Text.AlignHCenter
