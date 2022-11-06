@@ -16,12 +16,7 @@ Item {
     signal sigQueryDetailDateInfo( var dateIndex, var hour, var timeCnt )
 
     Component.onCompleted: {
-        console.log( "construct calendar..." )
         queryDays( 2022, 11 )
-    }
-
-    Component.onDestruction: {
-        console.log( 'calendar page destruct...' )
     }
 
     ListModel{  // dateIndex -> 日期 ,   hours  ->  加班时长 , timeCnt -> 倍率 , today -> 今天的日期
@@ -105,6 +100,7 @@ Item {
         Row{
             spacing: 0
             anchors.centerIn: parent
+            z: 50
             NumberAdjustSpin{
                 id: yearAdjust
                 width: dateAdjustArea.width / 3
@@ -134,6 +130,28 @@ Item {
             }
         }
 
+        MouseArea{
+            id: mousArea
+            anchors.fill: parent
+            enabled: true
+            property var startPos
+
+            onDoubleClicked: Qt.quit()
+
+            onPressed: startPos = { 'x': mouseX, 'y': mouseY }
+
+            onPositionChanged: {
+                if( !mousArea.pressed ){
+                    return
+                }
+
+                let xOffset = mousArea.mouseX - startPos.x
+                let yOffset = mousArea.mouseY - startPos.y
+
+                moveWindow( xOffset, yOffset )
+
+            }
+        }
     }
 
     Item{

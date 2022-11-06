@@ -21,6 +21,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         CInterAction.cpp \
+        CLocalConfig.cpp \
         CTestDate.cpp \
         main.cpp
 
@@ -39,4 +40,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     CInterAction.h \
+    CLocalConfig.h \
     CTestDate.h

@@ -50,7 +50,7 @@ void CTestDate::checkDailyInfo(QVariantList &srcList, int weekDayOffset, int mon
     QVariantMap tmpDayInfoMap;
 
     while( srcList.size() > 0 ){
-        qDebug() << "size = " << srcList.size();
+//        qDebug() << "size = " << srcList.size();
         tmpDayInfoMap = srcList.takeFirst().toMap();
         tmpTotalList.replace( tmpDayInfoMap.value( "dateIndex" ).toInt() + weekDayOffset - 2, tmpDayInfoMap );
     }

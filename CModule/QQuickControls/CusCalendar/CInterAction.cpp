@@ -18,6 +18,21 @@ bool CInterAction::setTargetDateHourInfo(int date, int hour, int timeCnt)
     return ok;
 }
 
+bool CInterAction::isNewUser()
+{
+    QVariantMap retMap =  m_localConfig.getConfigs();
+    if( retMap.value( LocalConfigKeys::userName ).toString() == "CXK" ){
+        return true;
+    }
+
+    return false;
+}
+
+void CInterAction::setUserName(QString userName)
+{
+    m_localConfig.setTargetKeyValue( "userName", userName );
+}
+
 CusDateModel *CInterAction::dateMdoel()
 {
     return &m_dateMdoel;

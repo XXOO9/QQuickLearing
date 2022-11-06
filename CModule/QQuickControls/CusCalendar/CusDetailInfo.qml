@@ -50,9 +50,17 @@ Item {
             id: hourTextInput
             width: root.width * 0.3
             placeholderText: '实际时长'
-            height: Common.perRowHeight * 0.3
+            color: 'white'
+            height: Common.perRowHeight * 0.4
+
+            font{ family: "Microsoft YaHei"; pixelSize: 20 * factor }
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+
             background: Rectangle{
-                border.color: 'red'
+                radius: 20 * factor
+                color: 'dimgrey'
+                border{ color: 'white'; width: 3 * factor }
             }
             onTextChanged: calculate( hourTextInput.text, timeCntTextInput.text )
         }
@@ -69,9 +77,15 @@ Item {
             id: timeCntTextInput
             width: root.width * 0.2
             placeholderText: '倍率'
-            height: Common.perRowHeight * 0.3
+            color: 'white'
+            height: hourTextInput.height
+            font{ family: "Microsoft YaHei"; pixelSize: 20 * factor }
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
             background: Rectangle{
-                border.color: 'red'
+                radius: 20 * factor
+                color: 'dimgrey'
+                border{ color: 'white'; width: 3 * factor }
             }
             onTextChanged: calculate( hourTextInput.text, timeCntTextInput.text )
         }
@@ -92,7 +106,6 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
-
     }
 
     CusClickBtn{
@@ -107,7 +120,6 @@ Item {
 
 
     function calculate( hours, timeCnt ){
-
         retText.text = ( hours * timeCnt ).toFixed( 5 )
     }
 

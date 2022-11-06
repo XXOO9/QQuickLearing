@@ -8,5 +8,7 @@
         <file>CusDetailInfo.qml</file>
         <file>Components/CusClickBtn.qml</file>
         <file>Components/CusTotalHoursOverview.qml</file>
+        <file>Components/PopTipsTemplate.qml</file>
+        <file>Components/CusTextInput.qml</file>
     </qresource>
 </RCC>

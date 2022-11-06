@@ -1,6 +1,7 @@
 ﻿import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
+import "./Components/"
 import "./JavaScript/CommonDefine.js" as Common
 
 ApplicationWindow {
@@ -13,7 +14,13 @@ ApplicationWindow {
     property real factor: 1
     property QtObject calendarCmpObj: null
     property QtObject detailCmpObj: null
-    //    flags: Qt.FramelessWindowHint | Qt.Window
+    flags: Qt.FramelessWindowHint | Qt.Window
+
+    Component.onCompleted: {
+        if( InterAction.isNewUser() ){
+            newUserNameInputPop.open()
+        }
+    }
 
     StackView{
         id: mainStackView
@@ -24,6 +31,43 @@ ApplicationWindow {
         clip: true
         initialItem: calendarCmp
     }
+
+    PopTipsTemplate{
+        id: newUserNameInputPop
+        closePolicy: Popup.NoAutoClose
+        anchors.centerIn: parent
+        Column{
+            spacing: 10 * factor
+            anchors.centerIn: parent
+            Text {
+                text: '给自己起个帅气的名字吧!'
+                color: 'white'
+                font{ family: "Microsoft YaHei"; pixelSize: 15 * factor }
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            CusTextInput{
+                id: newNmaeInput
+                width: parent.width * 0.7
+                height: parent.height * 0.3
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            CusClickBtn{
+                width: parent.width * 0.4
+                height: parent.height * 0.3
+                radius: 15 * factor
+                anchors.horizontalCenter: parent.horizontalCenter
+                onSigClicked: {
+                    InterAction.setUserName( newNmaeInput.text )
+                    newUserNameInputPop.close()
+                }
+            }
+        }
+    }
+
 
     Component{
         id: calendarCmp
@@ -56,6 +100,11 @@ ApplicationWindow {
                 mainStackView.pop()
             }
         }
+    }
+
+    function moveWindow( tarX, tarY ){
+        root.x += tarX
+        root.y += tarY
     }
 
 }
