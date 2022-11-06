@@ -97,10 +97,39 @@ Item {
             color: 'cadetblue'
         }
 
+        Rectangle{
+            id: menuBtn
+            width: 30 * factor
+            height: width
+            color: 'transparent'
+            anchors{ verticalCenter: parent.verticalCenter; left: parent.left; leftMargin: 15 * factor }
+            z: 20
+            Image{
+                anchors.fill: parent
+                source: 'qrc:/resource/menu.png'
+                fillMode: Image.PreserveAspectFit
+
+                MouseArea{
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onPressed: menuBtn.opacity = 0.7
+                    onClicked: menuPop.open()
+
+                    onEntered: {
+                        menuBtn.border.width = 2 * factor
+                    }
+
+                    onExited: menuBtn.border.width = 0
+                }
+            }
+        }
+
+
+
         Row{
             spacing: 0
             anchors.centerIn: parent
-            z: 50
+            z: 10
             NumberAdjustSpin{
                 id: yearAdjust
                 width: dateAdjustArea.width / 3

@@ -8,6 +8,7 @@ Popup{
     modal: true
 
     property alias bkgColor: bkgRect.color
+
     background: Rectangle{
         id: bkgRect
         color: 'gray'

@@ -20,6 +20,8 @@ ApplicationWindow {
         if( InterAction.isNewUser() ){
             newUserNameInputPop.open()
         }
+
+        menuPop.open()
     }
 
     StackView{
@@ -30,6 +32,14 @@ ApplicationWindow {
         padding: 0
         clip: true
         initialItem: calendarCmp
+    }
+
+    PopMenu{
+        id: menuPop
+        clip: true
+        width: parent.width * 0.99
+        height: parent.height * 0.99
+        anchors.centerIn: parent
     }
 
     PopTipsTemplate{
@@ -105,6 +115,10 @@ ApplicationWindow {
     function moveWindow( tarX, tarY ){
         root.x += tarX
         root.y += tarY
+    }
+
+    function openMenuPop(){
+        menuPop.open()
     }
 
 }

@@ -10,5 +10,8 @@
         <file>Components/CusTotalHoursOverview.qml</file>
         <file>Components/PopTipsTemplate.qml</file>
         <file>Components/CusTextInput.qml</file>
+        <file>resource/menu.png</file>
+        <file>Components/PopMenu.qml</file>
+        <file>resource/close.png</file>
     </qresource>
 </RCC>
