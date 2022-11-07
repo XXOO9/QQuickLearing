@@ -13,6 +13,7 @@ namespace Keys {
     const QString dayIndex = "dateIndex";
     const QString hours = "hours";
     const QString timeCnt = "timeCnt";
+    const QString cost = "cost";
 }
 
 class CDatabaseMgr
@@ -22,18 +23,19 @@ public:
         DateTime = 0,
         Hours,
         TimeCnt,
+        Cost,
     };
 
     CDatabaseMgr();
     ~CDatabaseMgr();
 
-    bool insertNewDateInfo(const QString &date, const double &hour, const double &timeCnt ) const;
+    bool insertNewDateInfo(const QString &date, const double &hour, const double &timeCnt, const double &cost ) const;
 
-    bool insertNewDateInfo(const int &date, const double &hour, const double &timeCnt ) const;
+    bool insertNewDateInfo(const int &date, const double &hour, const double &timeCnt, const double &cost ) const;
 
     QVariantList queryRangeDateInfo(const QString &startDayDate, const QString &endDayDate ) const;
 
-    bool changeTargetDateInfo( const int &targetDate, const int &hour, const int &timeCnt ) const;
+    bool changeTargetDateInfo( const int &targetDate, const double &hour, const double &timeCnt, const double &cost ) const;
 
 private:
     void initDatabase();

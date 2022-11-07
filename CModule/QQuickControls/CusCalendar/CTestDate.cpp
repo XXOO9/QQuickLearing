@@ -4,7 +4,8 @@
 
 CTestDate::CTestDate()
 {
-    testQueryDays();
+//    testQueryDays();
+//    testInsertTestData();
 }
 
 void CTestDate::testQueryDays()
@@ -66,7 +67,8 @@ QVariantList CTestDate::generateCountEmptyDateInfo( int weekdayOffset, int month
     tmpRetMap = {
         { "dateIndex", 0 },
         { "hours", 0 },
-        { "timeCnt", 0 }
+        { "timeCnt", 0 },
+        { "cost", 0 }
     };
 
     while( --weekdayOffset ){
@@ -97,7 +99,8 @@ void CTestDate::testInsertTestData()
         qDebug() << tmpDay.toString( "yyyyMMdd" );
         int hour = tmpRandom.bounded(0, 10);
         int timeCnt = tmpRandom.bounded( 0, 5 );
-        m_databaseMgr.insertNewDateInfo( tmpDay.toString( "yyyyMMdd" ), hour, timeCnt );
+        double cost = tmpRandom.bounded( 0, 8 );
+        m_databaseMgr.insertNewDateInfo( tmpDay.toString( "yyyyMMdd" ), hour, timeCnt, cost );
         tmpDay = tmpDay.addDays( 1 );
     }
 }

@@ -11,9 +11,9 @@ QVariantMap CInterAction::queryTargetDateMonthInfo(int year, int month)
     return retMap;
 }
 
-bool CInterAction::setTargetDateHourInfo(int date, int hour, int timeCnt)
+bool CInterAction::setTargetDateHourInfo( double date, double hour, double timeCnt, double cost )
 {
-    bool ok = m_dateMgr.databaseMgr().changeTargetDateInfo( date, hour, timeCnt );
+    bool ok = m_dateMgr.databaseMgr().changeTargetDateInfo( date, hour, timeCnt, cost );
     qDebug() << "change date " << date << "'s  hour: " << hour << " timeCnt: " << timeCnt << "'s ret = " << ok;
     return ok;
 }
@@ -31,6 +31,11 @@ bool CInterAction::isNewUser()
 void CInterAction::setUserName(QString userName)
 {
     m_localConfig.setTargetKeyValue( "userName", userName );
+}
+
+QString CInterAction::getUserName()
+{
+    return m_localConfig.getConfigs().value( "userName" ).toString();
 }
 
 CusDateModel *CInterAction::dateMdoel()

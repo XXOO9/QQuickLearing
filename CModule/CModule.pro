@@ -13,6 +13,7 @@ SUBDIRS += \
     QQuickControls         #####    qml 自定义控件demo
 #    CHttpModule \               ##Qt自带的Http网络模块
 #    ProcessMonit      ### 进程控制
+#    CreateDmpFile      ## 创建Dump文件
 #    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
 #    unitTest     \              ## 单元测试
 #    EnumWithQuick \
@@ -50,7 +51,7 @@ SUBDIRS += \
 #    gmy
 #    DemoRadioBtn
 #    QThreadControl
-#    CreateDmpFile
+
 #    DemoQMLUI
 #    Demo
 #    DemoJsModelTableView

@@ -18,11 +18,13 @@ public:
     Q_INVOKABLE QVariantMap queryTargetDateMonthInfo( int year, int month );
 
     //更新指定日期的加时长信息
-    Q_INVOKABLE bool setTargetDateHourInfo( int date, int hour, int timeCnt );
+    Q_INVOKABLE bool setTargetDateHourInfo( double date, double hour, double timeCnt, double cost );
 
     Q_INVOKABLE bool isNewUser();
 
     Q_INVOKABLE void setUserName( QString userName );
+
+    Q_INVOKABLE QString getUserName();
 
     CusDateModel *dateMdoel();
 

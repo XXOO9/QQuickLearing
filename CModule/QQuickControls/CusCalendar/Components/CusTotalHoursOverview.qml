@@ -6,6 +6,7 @@ Item {
     readonly property string unit: 'h'
     property real hours: 12
     property real calculateHours: 12
+    property real costHours: -1
 
     Column{
         anchors.centerIn: parent
@@ -39,6 +40,23 @@ Item {
             Text {
                 id: calculateHourText
                 text: calculateHours + unit
+                font{ family: "Microsoft YaHei"; pixelSize: 15 * factor }
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+        }
+
+        Row{
+            Text {
+                text: '请假时长:'
+                font{ family: "Microsoft YaHei"; pixelSize: 15 * factor }
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            Text {
+                id: costHousrs
+                text: costHours + unit
                 font{ family: "Microsoft YaHei"; pixelSize: 15 * factor }
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter

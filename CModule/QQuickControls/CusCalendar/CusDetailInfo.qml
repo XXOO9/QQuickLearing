@@ -9,7 +9,7 @@ Item {
     width: Common.perColumnWidth * 7 * factor
     height: Common.perRowHeight * 7 * factor
 
-    signal sigRefreshHourInfo( var hour, var timeCnt )
+    signal sigRefreshHourInfo( var hour, var timeCnt, var cost )
 
     property alias hourText: hourTextInput.text
     property alias timeCntText: timeCntTextInput.text
@@ -17,6 +17,7 @@ Item {
     Component.onCompleted: {
         hourTextInput.text = Common.tmpCurHour
         timeCntTextInput.text = Common.tmpCurTimeCnt
+        costHourInput.text = Common.tmpCurCost
     }
 
     Component.onDestruction: {
@@ -44,6 +45,7 @@ Item {
     }
 
     Row{
+        id: adjustRow
         spacing: 20 * factor
         anchors{ top: parent.top; topMargin: 50 * factor; left: parent.left; leftMargin: 20 * factor }
         TextField{
@@ -107,6 +109,38 @@ Item {
             verticalAlignment: Text.AlignVCenter
         }
     }
+    Column{
+        spacing: 5 * factor
+        anchors{ left: adjustRow.left; top: adjustRow.bottom; topMargin: 50 * factor }
+        Text {
+            text: '请假时长:'
+            color: 'white'
+            font{ family: "Microsoft YaHei"; pixelSize: 20 * factor }
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        TextField{
+            id: costHourInput
+            width: root.width * 0.2
+            placeholderText: '请假时长'
+            color: 'white'
+            height: hourTextInput.height
+            font{ family: "Microsoft YaHei"; pixelSize: 20 * factor }
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+
+            background: Rectangle{
+                radius: 20 * factor
+                color: 'dimgrey'
+                border{ color: 'white'; width: 3 * factor }
+            }
+        }
+    }
+
+
+
+
 
     CusClickBtn{
         id: saveBtn
@@ -115,7 +149,7 @@ Item {
         radius: 20 * factor
         z: 20
         anchors{ horizontalCenter: parent.horizontalCenter; bottom: parent.bottom; bottomMargin: 20 * factor }
-        onSigClicked: sigRefreshHourInfo( hourTextInput.text, timeCntTextInput.text )
+        onSigClicked: sigRefreshHourInfo( hourTextInput.text, timeCntTextInput.text, costHourInput.text )
     }
 
 

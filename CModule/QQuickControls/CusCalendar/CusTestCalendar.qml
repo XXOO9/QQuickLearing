@@ -13,13 +13,14 @@ Item {
     readonly property real perColumnWidth: 100 * localFactor
     readonly property real perRowHeight: 100 * localFactor
 
-    signal sigQueryDetailDateInfo( var dateIndex, var hour, var timeCnt )
+    signal sigQueryDetailDateInfo( var dateIndex, var hour, var timeCnt, var cost )
 
     Component.onCompleted: {
-        queryDays( 2022, 11 )
+        let today = Qt.formatDate( new Date(), 'yyyy-MM' ).split( '-' )
+        queryDays( today[ 0 ], today[ 1 ] )
     }
 
-    ListModel{  // dateIndex -> 日期 ,   hours  ->  加班时长 , timeCnt -> 倍率 , today -> 今天的日期
+    ListModel{  // dateIndex -> 日期 ,   hours  ->  加班时长 , timeCnt -> 倍率 , today -> 今天的日期,  cost -> 消耗的时长
         id: dateInfoModel
 
         function findDayIndex( tarDayIndex ){
@@ -66,16 +67,19 @@ Item {
         function calculateTotalHours(){
             const size = dateInfoModel.count
             let hours = 0
-            let afterCalculate = 0
+            let afterCalculateHours = 0
+            let costHours = 0
+
             let tmpDateInfo
 
             for( let i = 0; i < size; i++ ){
                 tmpDateInfo = dateInfoModel.get( i )
                 hours += tmpDateInfo.hours
-                afterCalculate += ( tmpDateInfo.hours * tmpDateInfo.timeCnt )
+                afterCalculateHours += ( tmpDateInfo.hours * tmpDateInfo.timeCnt )
+                costHours += tmpDateInfo.cost
             }
 
-            let ret = [ hours, afterCalculate ]
+            let ret = [ hours, afterCalculateHours, costHours ]
 
             return ret
         }
@@ -95,6 +99,20 @@ Item {
         Rectangle{
             anchors.fill: parent
             color: 'cadetblue'
+        }
+
+        CusLabel{
+            id: todayDateLabel
+            preFix: '今天是: '
+            suffFix: Qt.formatDate( new Date(), 'yyyy-MM-dd' )
+            anchors{ top: parent.top; left: parent.left; topMargin: 5 * factor; leftMargin: 10 * factor }
+        }
+
+        CusLabel{
+            id: userName
+            preFix: '打工人: '
+            suffFix: InterAction.getUserName()
+            anchors{ bottom: parent.bottom; left: parent.left; bottomMargin: 5 * factor; leftMargin: 10 * factor }
         }
 
         Rectangle{
@@ -215,12 +233,17 @@ Item {
         }
     }
 
-    function generateListModelData( days, startWeekDay, dayInfos ){
+    function generateListModelData( days, startWeekDay, dayInfos, cost ){
         dateInfoModel.clear()
         let tmpDayInfo
         for( let index = 0; index < dayInfos.length; index++ ){
             tmpDayInfo = dayInfos[ index ]
-            dateInfoModel.append( { 'dateIndex': tmpDayInfo.dateIndex, 'hours': tmpDayInfo.hours, 'today': false, 'timeCnt': tmpDayInfo.timeCnt } )
+            dateInfoModel.append( { 'dateIndex': tmpDayInfo.dateIndex,
+                                     'hours': tmpDayInfo.hours,
+                                     'today': false,
+                                     'timeCnt': tmpDayInfo.timeCnt,
+                                     'cost': tmpDayInfo.cost
+                                 } )
         }
 
     }
@@ -249,6 +272,7 @@ Item {
         let retArray = dateInfoModel.calculateTotalHours()
         hoursOverview.hours = retArray[ 0 ]
         hoursOverview.calculateHours = retArray[ 1 ]
+        hoursOverview.costHours = retArray[ 2 ]
     }
 
     function getTargetDayInfo( tarDateIndex ){
@@ -301,7 +325,7 @@ Item {
                     Common.curDateIndex = dateIndex
                     let targetDay = dateInfoModel.findDay( dateIndex )
                     console.log( "target date info: dateIndex = " + targetDay.dateIndex + ' hour = ' + targetDay.hours + ' timeCnt = ' + targetDay.timeCnt )
-                    sigQueryDetailDateInfo( dateIndex, hours, timeCnt )
+                    sigQueryDetailDateInfo( dateIndex, hours, timeCnt, cost )
                 }
             }
 

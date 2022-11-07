@@ -16,19 +16,20 @@ CDatabaseMgr::~CDatabaseMgr()
     }
 }
 
-bool CDatabaseMgr::insertNewDateInfo(const QString &date, const double &hour, const double &timeCnt) const
+bool CDatabaseMgr::insertNewDateInfo(const QString &date, const double &hour, const double &timeCnt, const double &cost) const
 {
-    return insertNewDateInfo( date.toInt(), hour, timeCnt );
+    return insertNewDateInfo( date.toInt(), hour, timeCnt, cost );
 }
 
-bool CDatabaseMgr::insertNewDateInfo(const int &date, const double &hour, const double &timeCnt) const
+bool CDatabaseMgr::insertNewDateInfo(const int &date, const double &hour, const double &timeCnt, const double &cost) const
 {
-    QString sqlString = QString( "insert into dateInfo values(?, ?, ?)" );
+    QString sqlString = QString( "insert into dateInfo values(?, ?, ?, ?)" );
 
     m_pSqlExecute->prepare( sqlString );
     m_pSqlExecute->addBindValue( date );
     m_pSqlExecute->addBindValue( hour );
     m_pSqlExecute->addBindValue( timeCnt );
+    m_pSqlExecute->addBindValue( cost );
 
     if( !m_pSqlExecute->exec() ){
         qDebug() << "insert new dateInfo failed, err str = " << m_pSqlExecute->lastError().text();
@@ -58,7 +59,8 @@ QVariantList CDatabaseMgr::queryRangeDateInfo(const QString &startDayDate, const
         tmpRetMap = {
             { Keys::dayIndex, getDayIndex( m_pSqlExecute->value( DateTime ).toInt() ) },
             { Keys::hours, m_pSqlExecute->value( Hours ).toDouble() },
-            { Keys::timeCnt, m_pSqlExecute->value( TimeCnt ).toDouble() }
+            { Keys::timeCnt, m_pSqlExecute->value( TimeCnt ).toDouble() },
+            { Keys::cost, m_pSqlExecute->value( Cost ).toDouble() }
         };
 
         retList << tmpRetMap;
@@ -68,11 +70,11 @@ QVariantList CDatabaseMgr::queryRangeDateInfo(const QString &startDayDate, const
     return retList;
 }
 
-bool CDatabaseMgr::changeTargetDateInfo(const int &targetDate, const int &hour, const int &timeCnt) const
+bool CDatabaseMgr::changeTargetDateInfo(const int &targetDate, const double &hour, const double &timeCnt, const double &cost) const
 {
     if( !isTargetDateRecordExisted( targetDate ) ){
         qDebug() << "no target date info in database...";
-        return insertNewDateInfo( targetDate, hour, timeCnt );
+        return insertNewDateInfo( targetDate, hour, timeCnt, cost );
     }
 
     const QString sqlString = "update dateInfo set hours = ?, timeCnt = ? where date = ?";
@@ -112,7 +114,7 @@ void CDatabaseMgr::initDatabase()
 
 void CDatabaseMgr::initTables()
 {
-    const QString createDateInfoTable = "create table dateInfo( date integer primary key, hours real, timeCnt real )";
+    const QString createDateInfoTable = "create table dateInfo( date integer primary key, hours real, timeCnt real, cost real )";
     QSqlQuery sqlCmd( m_database );
 
     if( !sqlCmd.exec( createDateInfoTable ) ){

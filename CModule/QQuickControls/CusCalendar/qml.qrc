@@ -13,5 +13,13 @@
         <file>resource/menu.png</file>
         <file>Components/PopMenu.qml</file>
         <file>resource/close.png</file>
+        <file>resource/question.png</file>
+        <file>SubPages/PageLegend.qml</file>
+        <file>resource/info.png</file>
+        <file>resource/bug.png</file>
+        <file>SubPages/PageBugReport.qml</file>
+        <file>SubPages/PageAboutThis.qml</file>
+        <file>resource/sendEmail.gif</file>
+        <file>Components/CusLabel.qml</file>
     </qresource>
 </RCC>

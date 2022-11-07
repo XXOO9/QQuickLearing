@@ -9,3 +9,4 @@ var curDateIndex = 4
 
 var tmpCurHour = 0
 var tmpCurTimeCnt = 0
+var tmpCurCost = 0

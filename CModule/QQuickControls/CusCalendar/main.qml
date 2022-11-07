@@ -20,8 +20,6 @@ ApplicationWindow {
         if( InterAction.isNewUser() ){
             newUserNameInputPop.open()
         }
-
-        menuPop.open()
     }
 
     StackView{
@@ -86,6 +84,7 @@ ApplicationWindow {
             onSigQueryDetailDateInfo: {
                 Common.tmpCurHour = hour
                 Common.tmpCurTimeCnt = timeCnt
+                Common.tmpCurCost = cost
                 mainStackView.push( detailInfoPageCmp )
             }
         }
@@ -99,6 +98,7 @@ ApplicationWindow {
             onSigRefreshHourInfo: {
                 Common.tmpCurHour = hour
                 Common.tmpCurTimeCnt = timeCnt
+                Common.tmpCurCost = cost
                 console.log( 'year = ' + Common.curYear + ' month = ' + Common.curMonth )
 
                 let targetDate = Common.curYear +
@@ -106,7 +106,7 @@ ApplicationWindow {
                     String( Common.curDateIndex ).padStart( 2, '0' )
 
                 mainStackView.get( 0 ).setTargetDateIndexInfo( Common.curDateIndex, hour, timeCnt )
-                let ok = InterAction.setTargetDateHourInfo( targetDate, hour, timeCnt )
+                let ok = InterAction.setTargetDateHourInfo( targetDate, hour, timeCnt, Number( cost ) )
                 mainStackView.pop()
             }
         }
