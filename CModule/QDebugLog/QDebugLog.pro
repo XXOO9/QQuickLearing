@@ -1,7 +1,5 @@
-QT += quick sql core
+QT += quick core
 CONFIG += c++11
-
-QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
 
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/bin/debug
@@ -9,9 +7,6 @@ CONFIG( debug, debug | release ){
 {
         DESTDIR     = $$PWD/bin/release
 }
-
-include( $$PWD/DateDataModel.pri )Database.pri
-include( $$PWD/Database.pri )
 
 
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -22,9 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        CInterAction.cpp \
-        CLocalConfig.cpp \
-        CTestDate.cpp \
+        QLog.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -41,6 +34,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    CInterAction.h \
-    CLocalConfig.h \
-    CTestDate.h
+    QLog.h

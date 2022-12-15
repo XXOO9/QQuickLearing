@@ -31,6 +31,10 @@ Window {
             text: 'run'
             onClicked: CInterAction.runTargetProcess()
         }
+
+        Button{
+            text: 'isTargetProcessRunning'
+        }
     }
 
     Popup{
@@ -39,7 +43,7 @@ Window {
         height: width
         modal: true
         padding: 0
-        closePolicy: Popup.NoAutoClose
+//        closePolicy: Popup.NoAutoClose
         Rectangle{
             anchors.fill: parent
             color: 'blue'
@@ -58,6 +62,10 @@ Window {
     function runupdate(){
         console.log( 'func update...' )
         CInterAction.copyNewExecuteToTargetDir( "./" )
+    }
+
+    function isTargetProcessRunning(){
+
     }
 
 }

@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    AutoupdateProcess \
-    MainProcess
+    AutoupdateProcess \     ###自动升级进程
+    MainProcess             ### 主进程

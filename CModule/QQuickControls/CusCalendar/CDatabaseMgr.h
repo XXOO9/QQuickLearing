@@ -2,6 +2,7 @@
 #define CDATABASEMGR_H
 
 #include <QObject>
+#include <QDir>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -51,6 +52,8 @@ private:
     bool isTargetDateRecordExisted( const int &targetDate ) const;
 
     int getDayIndex( const int &date ) const;
+
+    void testCDir();
 private:
     QSqlDatabase    m_database;
     QSqlQuery      *m_pSqlExecute = nullptr;

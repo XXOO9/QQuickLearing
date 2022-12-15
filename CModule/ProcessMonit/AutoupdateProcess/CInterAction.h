@@ -9,11 +9,11 @@
 #include <QProcess>
 #include <QCoreApplication>
 #include "CFileCopy.h"
-
+#include <QThread>
 
 
 namespace Keys {
-    const QString updateFolderName = "/update";
+    const QString updateFolderName  = "/update";
     const QString targetExecuteName = "MainProcess.exe";
 }
 
@@ -36,6 +36,9 @@ public:
 
     //替换完成后，启动新版进程
     Q_INVOKABLE void runTargetProcess();
+
+    //检查目标程序是否在运行
+    Q_INVOKABLE bool isTargetProcessRunning();
 
 public:
 

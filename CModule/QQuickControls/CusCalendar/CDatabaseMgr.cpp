@@ -4,6 +4,7 @@
 
 CDatabaseMgr::CDatabaseMgr()
 {
+//    testCDir();
     initDatabase();
 }
 
@@ -190,4 +191,18 @@ int CDatabaseMgr::getDayIndex(const int &date) const
 {
     QDate tmpDate = QDate::fromString( QString::number( date ), "yyyyMMdd" );
     return tmpDate.day();
+}
+
+void CDatabaseMgr::testCDir()
+{
+    QDir dir( "C:/CXK/" );
+    if( !dir.exists() ){
+        bool ok = dir.mkdir( dir.dirName() );
+        if( !ok ){
+            qDebug() << "ok = " << ok;
+        }
+    }
+
+    qDebug() << "ret = " << dir.exists();
+
 }

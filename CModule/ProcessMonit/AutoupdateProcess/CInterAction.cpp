@@ -5,6 +5,8 @@
 CInterAction::CInterAction(QObject *parent) : QObject(parent)
 {
     init();
+    qInfo( "qinfo" );
+    qWarning( "qwaring" );
 }
 
 void CInterAction::init()
@@ -50,6 +52,8 @@ void CInterAction::copyNewExecuteToTargetDir(const QString targetDir, bool delAf
 
     closeTargetProcess( Keys::targetExecuteName );
 
+    QThread::msleep( 1000 );
+
     QDir updateFileDir( m_newFileDir );
     qDebug() << "whole dir = " << updateFileDir.absolutePath();
     QFileInfoList infoList = updateFileDir.entryInfoList( QStringList() << "*.exe" << "*.dll" );
@@ -63,7 +67,6 @@ void CInterAction::copyNewExecuteToTargetDir(const QString targetDir, bool delAf
         bool ok1 = QFile::copy( ele.filePath(), targetDir + ele.fileName() );
         qDebug() << "copy ret = " << ok1;
     }
-
 }
 
 bool CInterAction::isTargetProcessRunning(const QString &executeName)
@@ -85,12 +88,14 @@ void CInterAction::waitDeleteFinished(const QString &targetDelFilePath)
 
     connect( &tmpQueryTimer, &QTimer::timeout, [ = ](){
         if( !QFileInfo::exists( targetDelFilePath ) ){
-            qDebug() << "不在了...";
+            qDebug() << QString::fromLocal8Bit( "不在了..." );
+            cout << "cout -> 不在了..." << endl;
             loop->quit();
             return;
         }
 
-        qDebug() << "还在...";
+        qDebug() << QString::fromLocal8Bit( "还在" );
+        cout << "cout -> 还在..." << endl;
     });
 
     bool ok = QFile::remove( targetDelFilePath );
@@ -104,15 +109,19 @@ void CInterAction::waitDeleteFinished(const QString &targetDelFilePath)
 
     //如果删除成功, 文件可能比较大, 删除需要一定的时间， 开启事件循环，直到完成删除操作
     loop->exec();
-    delete loop;
+    loop->deleteLater();
     loop = nullptr;
     qDebug() << "del finished...";
-
 }
 
 void CInterAction::runTargetProcess()
 {
     bool ok = QProcess::startDetached( m_targetExeFilePath );
+}
+
+bool CInterAction::isTargetProcessRunning()
+{
+    return true;
 }
 
 void CInterAction::checkUpdateDirExisted(const QString &dirPath)

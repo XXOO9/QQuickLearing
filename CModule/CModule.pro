@@ -2,17 +2,17 @@ TEMPLATE = subdirs
 
 
 #CONFIG( debug, debug | release ){
-#        DESTDIR     = $$PWD/debug
+#        DESTDIR     = $$PWD/bin/debug
 #}else
 #{
-#        DESTDIR     = $$PWD/release
+#        DESTDIR     = $$PWD/bin/release
 #}
 
 
 SUBDIRS += \
-    QQuickControls         #####    qml 自定义控件demo
+#    QQuickControls         #####    qml 自定义控件demo
 #    CHttpModule \               ##Qt自带的Http网络模块
-#    ProcessMonit      ### 进程控制
+#    ProcessMonit      ### 进程控制( 程序升级Demo )
 #    CreateDmpFile      ## 创建Dump文件
 #    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
 #    unitTest     \              ## 单元测试
@@ -51,6 +51,10 @@ SUBDIRS += \
 #    gmy
 #    DemoRadioBtn
 #    QThreadControl
+#    HTTPModel
+#    NetWorkModel   ###网络 模块
+ \#    QDebugLog  ### qDebug 重定向到日志文件中
+    QmlFunctionCallback
 
 #    DemoQMLUI
 #    Demo
