@@ -31,6 +31,7 @@ CONFIG( debug, debug | release ){
 
 SOURCES += \
         CFFmpegLevel1.cpp \
+        CFileOperator.cpp \
         main.cpp
 
 # Default rules for deployment.
@@ -39,4 +40,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    CFFmpegLevel1.h
+    CFFmpegLevel1.h \
+    CFileOperator.h

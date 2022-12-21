@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QThread>
+#include <QVideoFrame>
+#include <QVideoSurfaceFormat>
+
 
 extern "C"{
 #include "libavcodec/avcodec.h"
@@ -22,8 +26,11 @@ class CFFmpegLevel1 : public QObject
 public:
     explicit CFFmpegLevel1(QObject *parent = nullptr);
 
+signals:
+    void sigNewFrameAvailable( const QVideoFrame &frame );
 
-private:
+
+public:
     //测试输出ffmpeg的版本号
     void displayFFmpegVersion();
 
@@ -40,8 +47,12 @@ private:
 
     void savePerFrameAsYUV420();
 
+    static QVideoFrame::PixelFormat convertFFmpegFor2QtVideoFormat( const AVPixelFormat &ffmpegFmt );
+
+
 private:
     void saveFrame( AVFrame *pFrame, int width, int height, int frame );
+    void sss( const AVFrame *frame, int pixFmt );
 
 
     const char *m_fileName = "D:/videos/CFD.mp4";

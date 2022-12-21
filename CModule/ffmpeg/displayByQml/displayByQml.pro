@@ -1,4 +1,4 @@
-QT += quick core gui
+QT += quick core gui multimedia
 CONFIG += c++17
 
 INCLUDEPATH += $$PWD/../thirdPart/ffmpeg/include/
@@ -28,6 +28,10 @@ CONFIG( debug, debug | release ){
 }
 
 SOURCES += \
+        CFFmpegAudioDecoder.cpp \
+        CFFmpegLevel1.cpp \
+        CFFmpegVideoDecoder.cpp \
+        CVideoFrameProvider.cpp \
         main.cpp \
         videoDecoder.cpp
 
@@ -45,4 +49,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    CFFmpegAudioDecoder.h \
+    CFFmpegLevel1.h \
+    CFFmpegVideoDecoder.h \
+    CVideoFrameProvider.h \
     videoDecoder.h

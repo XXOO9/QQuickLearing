@@ -29,7 +29,6 @@ public:
     static void cvMat2QImage( const cv::Mat &srcMat, QImage &targetImage );
 
 
-
 signals:
     void insideSigOpenCamera();
     void sigNewFrameAvailable( const QImage &img );

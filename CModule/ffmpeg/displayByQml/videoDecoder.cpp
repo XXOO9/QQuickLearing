@@ -1,8 +1,8 @@
-#include "videoDecoder.h"
+﻿#include "videoDecoder.h"
 
 videoDecoder::videoDecoder()
 {
-
+    init();
 }
 
 videoDecoder::~videoDecoder()
@@ -55,10 +55,4 @@ void videoDecoder::run()
         qDebug() << "find video stream failed...";
         return;
     }
-
-
-
-
-
-
 }

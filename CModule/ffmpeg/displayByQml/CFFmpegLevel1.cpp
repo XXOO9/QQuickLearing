@@ -6,7 +6,7 @@ CFFmpegLevel1::CFFmpegLevel1(QObject *parent)
 //    displayFFmpegVersion();
 
 //    saveEachFrame();
-    savePerFrameAsYUV420();
+//    savePerFrameAsYUV420();
 }
 
 void CFFmpegLevel1::displayFFmpegVersion()
@@ -300,20 +300,40 @@ void CFFmpegLevel1::savePerFrameAsYUV420()
     pkt = av_packet_alloc();
     ret = av_new_packet( pkt, width * height );
 
+    int cnt = 0;
 
     while( av_read_frame( fmtCtx, pkt ) >= 0 ){
         if( pkt->stream_index == videoStreamIndex ){
             if( avcodec_send_packet( avCodecCtx, pkt ) == 0 ){
                 while( avcodec_receive_frame( avCodecCtx, yuvFrame ) == 0 ){
-                    fwrite( yuvFrame->data[ 0 ], 1, width * height, fp );// y
-                    fwrite( yuvFrame->data[ 1 ], 1, width * height / 4, fp );// u
-                    fwrite( yuvFrame->data[ 2 ], 1, width * height / 4, fp );// v
+                    cnt++;
+//                    fwrite( yuvFrame->data[ 0 ], 1, width * height, fp );// y
+//                    fwrite( yuvFrame->data[ 1 ], 1, width * height / 4, fp );// u
+//                    fwrite( yuvFrame->data[ 2 ], 1, width * height / 4, fp );// v
+
+                    int imgSize = av_image_get_buffer_size( static_cast<AVPixelFormat>( yuvFrame->format ), yuvFrame->width, yuvFrame->height, 1 );
+                    QSize   frameSize = QSize( yuvFrame->width, yuvFrame->height );
+                    QVideoFrame::PixelFormat fmt = QVideoFrame::Format_YUV420P;
+
+                    QVideoFrame frame( imgSize, frameSize, yuvFrame->width, fmt );
+
+                    if(frame.map( QAbstractVideoBuffer::WriteOnly ) ){
+                        int ret = av_image_copy_to_buffer( frame.bits(), imgSize, yuvFrame->data,
+                                                           yuvFrame->linesize, (AVPixelFormat)yuvFrame->format, yuvFrame->width, yuvFrame->height, 1 );
+
+                        frame.unmap();
+                        frame.setStartTime( 0 );
+
+                        emit sigNewFrameAvailable( frame );
+//                        QThread::msleep( 200 );
+                    }
                 }
             }
         }
 
         av_packet_unref( pkt );
     }
+    qDebug() << cnt << " frames";
 
     av_packet_free( &pkt );
     avcodec_close( avCodecCtx );
@@ -322,6 +342,21 @@ void CFFmpegLevel1::savePerFrameAsYUV420()
 
     printf( "done...\n" );
 
+}
+
+QVideoFrame::PixelFormat CFFmpegLevel1::convertFFmpegFor2QtVideoFormat(const AVPixelFormat &ffmpegFmt)
+{
+    switch( ffmpegFmt ){
+    case AVPixelFormat::AV_PIX_FMT_YUV420P:
+    case AVPixelFormat::AV_PIX_FMT_YUVJ420P:
+        return QVideoFrame::Format_YUV420P;
+
+    case AVPixelFormat::AV_PIX_FMT_NV12:
+        return QVideoFrame::Format_NV12;
+
+    default:
+        return QVideoFrame::Format_Invalid;
+    }
 }
 
 void CFFmpegLevel1::saveFrame(AVFrame *pFrame, int width, int height, int frame)
@@ -348,6 +383,11 @@ void CFFmpegLevel1::saveFrame(AVFrame *pFrame, int width, int height, int frame)
     }
 
     fclose( pFile );
+}
+
+void CFFmpegLevel1::sss(const AVFrame *frame, int pixFmt)
+{
+
 }
 
 

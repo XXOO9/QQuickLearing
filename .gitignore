@@ -40,3 +40,8 @@ moc*
 CModule/.qtc_clangd/compile_commands.json
 CModule/.qtc_clangd/.cache/clangd/index/qconfig.h.E1786CD4ECFA270D.idx.tmp.8bc01f20
 CModule/.qtc_clangd/.cache/clangd/index/qstringview.h.535A6699F03D2146.idx.tmp.b58b79c2
+*.yuv
+*.mp3
+*.pcm
+*.ppm
+*.ppm

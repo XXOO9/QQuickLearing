@@ -1,6 +1,9 @@
-#include <QGuiApplication>
+﻿#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "videoDecoder.h"
+#include "CVideoFrameProvider.h"
+#include "CFFmpegLevel1.h"
+#include "CFFmpegAudioDecoder.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,8 +13,9 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+    CFFmpegAudioDecoder a;
 
-    qmlRegisterType<videoDecoder>( "VideoDecoder", 1, 0, "VideoDecoder" );
+    qmlRegisterType<CVideoFrameProvider>( "CVideoFrameProvider", 1, 0, "CVideoFrameProvider" );
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

@@ -1,7 +1,8 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Window 2.12
-import VideoDecoder 1.0
+import CVideoFrameProvider 1.0
 import QtQuick.Controls 2.12
+import QtMultimedia 5.12
 
 Window {
     width: 640
@@ -9,12 +10,19 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
+    CVideoFrameProvider{
+        id: src
+    }
 
-    VideoDecoder{
-        id: videoDecoder
+
+    VideoOutput{
+        width: 650
+        height: width
+        anchors.centerIn: parent
+        source: src
     }
 
     Button{
-        onClicked: videoDecoder.start()
+        onClicked: src.start()
     }
 }
