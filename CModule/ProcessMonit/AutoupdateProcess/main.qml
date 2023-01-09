@@ -35,6 +35,13 @@ Window {
         Button{
             text: 'isTargetProcessRunning'
         }
+        Button{
+            text: 'biubiubiu~'
+            onClicked: {
+                runupdate()
+                CInterAction.runTargetProcess()
+            }
+        }
     }
 
     Popup{

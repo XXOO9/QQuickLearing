@@ -11,7 +11,7 @@ CSqlLite::CSqlLite(QObject *parent) : QObject(parent)
     //    queryTables();
 
 //    testFunc();
-    insertIntoCppDepartment();
+//    insertIntoCppDepartment();
 
 
 

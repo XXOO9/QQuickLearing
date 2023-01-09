@@ -3,7 +3,7 @@
 CFFmpegLevel1::CFFmpegLevel1(QObject *parent)
     : QObject{parent}
 {
-//    displayFFmpegVersion();
+    displayFFmpegVersion();
 
 //    saveEachFrame();
 //    savePerFrameAsYUV420();

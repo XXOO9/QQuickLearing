@@ -14,11 +14,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #        2. QxORM 主页: https://www.qxorm.com/qxorm_en/home.html
 #        3. QxORM的一个教程: https://www.ljjyy.com/archives/2021/03/100647.html
 
+
+include( $$PWD/liteSql/liteSql.pri )
+## 网上下载的只有debug下的库， 没有release的库，有时间研究编译源码编出来
+
 CONFIG( debug, debug | release ){
-        DESTDIR     = $$PWD/debug
+        DESTDIR     =   $$PWD/bin/debug
+        LIBS       += -L$$PWD/thirdParty/liteSql/lib/x64/ -llitesqld
 }else
 {
-        DESTDIR     = $$PWD/release
+        DESTDIR     = $$PWD/bin/release
 }
 
 

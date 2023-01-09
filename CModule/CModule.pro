@@ -30,7 +30,7 @@ SUBDIRS += \
 #    GoogleTest
 #     CustComboBox       ##### 自定义的下拉框( 可移植 )
 #    MultiThreadDemo \
-#    SqlDemo     #####   数据库sql操作( 批量插入GECG的假数据 )
+    SqlDemo     #####   数据库sql操作( 批量插入GECG的假数据 )
 #    CMultiThreadDemo
 #    CustControls
 #    ProcessChat
@@ -72,7 +72,7 @@ SUBDIRS += \
 #    FileAutoBackup
 #    CusWidgetControl
 #    JavaScriptDemos            ##### 一些关于JS的Demo 例如  字符串函数
-    ffmpeg            #### ffmpeg 学习例子
+#    ffmpeg            #### ffmpeg 学习例子
 #    QSqlTableModelDemo
 #    opencvDemo     ############   opencv 例子
 #    callQmlFuncsInCpp

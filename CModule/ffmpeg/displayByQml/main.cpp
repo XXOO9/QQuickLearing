@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    CFFmpegAudioDecoder a;
+    CFFmpegLevel1 a;
 
     qmlRegisterType<CVideoFrameProvider>( "CVideoFrameProvider", 1, 0, "CVideoFrameProvider" );
     const QUrl url(QStringLiteral("qrc:/main.qml"));
