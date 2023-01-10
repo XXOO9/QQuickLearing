@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE database SYSTEM "litesql.dtd">
+<database name="WDNMD" namespace="example">
+
+<object name = "userInfo" >
+	<field name = "userName" type = "string" />
+	<field name = "age" type = "integer" />
+</object>
+
+</database>
