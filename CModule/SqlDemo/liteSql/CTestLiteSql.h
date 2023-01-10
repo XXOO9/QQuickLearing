@@ -4,9 +4,10 @@
 #include <QObject>
 #include "litesql.hpp"
 #include "wdnmd.hpp"
-#include "eps100database.hpp"
 #include <QDebug>
 #include <QFile>
+
+
 using namespace litesql;
 using namespace example;
 using namespace std;

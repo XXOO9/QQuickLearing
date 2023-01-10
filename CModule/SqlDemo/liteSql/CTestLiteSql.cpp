@@ -17,7 +17,7 @@ CTestLiteSql::CTestLiteSql()
 //    u.age = 99;
 //    u.update();
 
-    queryTargetRecords();
+//    queryTargetRecords();
     test();
 }
 
@@ -29,6 +29,12 @@ void CTestLiteSql::insert_50_records_into_WDNMD( const WDNMD *pDB )
         userInfo tmpUser( *pDB );
         tmpUser.userName = QString( "userName_" + QString::number( i ) ).toStdString();
         tmpUser.age = i;
+        if( i % 2 == 0 ){
+            tmpUser.sex = userInfo::SexType::Male;
+        }else{
+            tmpUser.sex = userInfo::SexType::Female;
+        }
+
         tmpUser.update();
     }
 
@@ -52,9 +58,27 @@ void CTestLiteSql::queryTargetRecords()
 
 void CTestLiteSql::test()
 {
-    Records recs = m_pDataBase->query( "select count ( * ) from userInfo_" );
+//    Records recs = m_pDataBase->query( "select count ( * ) from userInfo_" );
 
-    for( auto &ele : recs ){
-        qDebug() << QString::fromStdString( ele );
+//    vector< userInfo > recs = select< userInfo >( *m_pDataBase, userInfo::Sex == userInfo::SexType::Female ).all();
+
+
+    Cursor<userInfo> usersCursor = select<userInfo>( *m_pDataBase, userInfo::Sex == userInfo::SexType::Male ).cursor();
+
+    for( ; usersCursor.rowsLeft(); usersCursor++ ){
+        cout << (*usersCursor).userName << endl;
     }
+
+    vector<userInfo> tmp =  usersCursor.dump();
 }
+
+void userInfo::introduce()
+{
+    qDebug() << " my name is " << QString::fromStdString( userName );
+}
+
+void userInfo::recvParam(string newName)
+{
+    userName = newName;
+}
+

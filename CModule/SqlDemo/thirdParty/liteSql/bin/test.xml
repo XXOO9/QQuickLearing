@@ -3,8 +3,23 @@
 <database name="WDNMD" namespace="example">
 
 <object name = "userInfo" >
+
 	<field name = "userName" type = "string" />
-	<field name = "age" type = "integer" />
+	
+	<field name = "age"      type = "integer" />
+						     
+	<field name = "sex"      type = "integer" >
+		<value name = "Male"     value = "1" />
+		<value name = "Female"   value = "0" />
+    </field>
+	
+	<method name    = "introduce" />
+	
+	<method name    = "recvParam" returntype="void" >
+		<param name = "newName"    type = "std::string" />
+	</method>
+	
+		
 </object>
 
 </database>
