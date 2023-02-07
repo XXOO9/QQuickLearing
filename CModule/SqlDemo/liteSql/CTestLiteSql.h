@@ -2,7 +2,7 @@
 #define CTESTLITESQL_H
 
 #include <QObject>
-#include "litesql.hpp"
+#include "./thirdParty/liteSql/litesql.hpp"
 #include "wdnmd.hpp"
 #include <QDebug>
 #include <QFile>

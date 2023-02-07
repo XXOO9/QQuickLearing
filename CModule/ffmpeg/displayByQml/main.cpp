@@ -4,6 +4,7 @@
 #include "CVideoFrameProvider.h"
 #include "CFFmpegLevel1.h"
 #include "CFFmpegAudioDecoder.h"
+#include "CAudioPlayer.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,7 +14,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    CFFmpegLevel1 a;
+    CFFmpegAudioDecoder a;
+    a.startPlay();
 
     qmlRegisterType<CVideoFrameProvider>( "CVideoFrameProvider", 1, 0, "CVideoFrameProvider" );
     const QUrl url(QStringLiteral("qrc:/main.qml"));

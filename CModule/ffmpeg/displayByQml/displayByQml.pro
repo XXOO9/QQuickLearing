@@ -3,6 +3,11 @@ CONFIG += c++17
 
 INCLUDEPATH += $$PWD/../thirdPart/ffmpeg/include/
 
+MOC_DIR = temp/moc
+RCC_DIR = temp/rcc
+UI_DIR = temp/ui
+OBJECTS_DIR = temp/obj
+
 CONFIG( debug, debug | release ){
         DESTDIR = $$PWD/debug
         LIBS   += -L$$PWD/../thirdPart/ffmpeg/lib/ -lavcodec
@@ -28,6 +33,7 @@ CONFIG( debug, debug | release ){
 }
 
 SOURCES += \
+        CAudioPlayer.cpp \
         CFFmpegAudioDecoder.cpp \
         CFFmpegLevel1.cpp \
         CFFmpegVideoDecoder.cpp \
@@ -49,6 +55,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    CAudioPlayer.h \
     CFFmpegAudioDecoder.h \
     CFFmpegLevel1.h \
     CFFmpegVideoDecoder.h \

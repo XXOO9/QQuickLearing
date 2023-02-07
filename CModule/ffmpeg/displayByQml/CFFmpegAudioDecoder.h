@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QQueue>
 #include <QVideoFrame>
+#include "CAudioPlayer.h"
 
 extern "C"{
 #include "libavcodec/avcodec.h"
@@ -25,21 +26,12 @@ public:
     explicit CFFmpegAudioDecoder(QObject *parent = nullptr);
     virtual ~CFFmpegAudioDecoder() override;
 
-signals:
+    void startDecodeAudio( const QString &fileName );
 
-public slots:
-    void onStartDecodeAudio();
+    void startPlay();
 
-private:
-    void initAudioDecoder();
-
-private:
-    QString             m_videoFileName = "";
-    AVFormatContext    *m_pFmtCtx       = nullptr;
-    AVCodecContext     *m_pCodeCtx      = nullptr;
-    AVCodecParameters  *m_pCodePara     = nullptr;
-    AVCodec            *m_pCodec        = nullptr;
-    AVPacket           *m_pPkt          = nullptr;
+    CAudioPlayer    *m_pAudioPlayer = nullptr;
+    QAudioOutput *out = nullptr;
 };
 
 #endif // CFFMPEGAUDIODECODER_H

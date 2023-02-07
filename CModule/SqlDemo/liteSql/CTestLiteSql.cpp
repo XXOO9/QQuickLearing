@@ -17,8 +17,8 @@ CTestLiteSql::CTestLiteSql()
 //    u.age = 99;
 //    u.update();
 
-//    queryTargetRecords();
-    test();
+    queryTargetRecords();
+//    test();
 }
 
 
@@ -49,6 +49,7 @@ void CTestLiteSql::removeRecords()
 void CTestLiteSql::queryTargetRecords()
 {
     And sql( userInfo::UserName == "userName_1", userInfo::Age == 11 );
+
 
     qDebug() << QString::fromStdString( sql.asString() );
     vector<userInfo> target = select<userInfo>( *m_pDataBase, sql ).all();

@@ -16,9 +16,7 @@ Window {
 
 
     VideoOutput{
-        width: 650
-        height: width
-        anchors.centerIn: parent
+        anchors.fill: parent
         source: src
     }
 
