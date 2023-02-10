@@ -1,5 +1,6 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    CTCPClient \
-    CTCPServer
+#    CTCPClient \
+#    CTCPServer \
+    HTTPQueue

@@ -8,12 +8,20 @@ TEMPLATE = subdirs
 #        DESTDIR     = $$PWD/bin/release
 #}
 
+#MOC_DIR = temp/moc
+#RCC_DIR = temp/rcc
+#UI_DIR = temp/ui
+#OBJECTS_DIR = temp/obj
+
 
 SUBDIRS += \
 #    QQuickControls         #####    qml 自定义控件demo
-#    CHttpModule \      ##Qt自带的Http网络模块
-#    ProcessMonit       ### 进程控制( 程序升级Demo )
-#    CreateDmpFile      ## 创建Dump文件
+#    ffmpeg               #### ffmpeg 学习例子
+#    DesignModel         ##### 设计模式
+    NetWorkModel   ###网络 模块
+#    SqlDemo             #####   数据库sql操作( 批量插入GECG的假数据 )
+#    ProcessMonit        ### 进程控制( 程序升级Demo )
+#    CreateDmpFile       ## 创建Dump文件
 #    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
 #    unitTest     \              ## 单元测试
 #    EnumWithQuick \
@@ -30,7 +38,6 @@ SUBDIRS += \
 #    GoogleTest
 #     CustComboBox       ##### 自定义的下拉框( 可移植 )
 #    MultiThreadDemo \
-#    SqlDemo     #####   数据库sql操作( 批量插入GECG的假数据 )
 #    CMultiThreadDemo
 #    CustControls
 #    ProcessChat
@@ -51,8 +58,7 @@ SUBDIRS += \
 #    gmy
 #    DemoRadioBtn
 #    QThreadControl
-#    HTTPModel
-#    NetWorkModel   ###网络 模块
+
 #    QDebugLog  ### qDebug 重定向到日志文件中
 #    QmlFunctionCallback ###  C++回调qml函数( 感觉 用处不大 )
 #    DemoQMLUI
@@ -68,11 +74,9 @@ SUBDIRS += \
 #    DemoChartjs
 #    DemoTreeView           #not yet
 #    DemoChart
-#    NetWorkGroup
 #    FileAutoBackup
 #    CusWidgetControl
 #    JavaScriptDemos            ##### 一些关于JS的Demo 例如  字符串函数
-    ffmpeg            #### ffmpeg 学习例子
 #    QSqlTableModelDemo
 #    opencvDemo     ############   opencv 例子
 #    callQmlFuncsInCpp
