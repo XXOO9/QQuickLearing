@@ -5,7 +5,7 @@ CBasesicPlot::CBasesicPlot(QQuickPaintedItem *parent) : QQuickPaintedItem(parent
 
 }
 
-void CBasesicPlot::paint()
+void CBasesicPlot::paint(QPainter *painter)
 {
 
 }

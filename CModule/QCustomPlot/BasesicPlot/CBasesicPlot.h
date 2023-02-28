@@ -13,7 +13,7 @@ class CBasesicPlot : public QQuickPaintedItem
 public:
     explicit CBasesicPlot(QQuickPaintedItem *parent = nullptr);
 
-    virtual void paint() override;
+    virtual void paint( QPainter *painter ) override;
 
 signals:
 
