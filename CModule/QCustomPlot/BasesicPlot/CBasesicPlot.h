@@ -15,9 +15,18 @@ public:
 
     virtual void paint( QPainter *painter ) override;
 
-signals:
+    void updateCustomPlotSize();
 
 public slots:
+    void onCustomReplot();
+
+private:
+    void init();
+
+    void initPlot();
+
+private:
+    QCustomPlot *m_pPlot = nullptr;
 };
 
 #endif // CBASESICPLOT_H
