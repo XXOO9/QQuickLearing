@@ -67,4 +67,10 @@ void CBasesicPlot::initPlot()
     m_pPlot->addGraph();
     m_pPlot->graph( 1 )->setPen( QPen( Qt::blue ) );
     m_pPlot->graph( 1 )->setData( lx, ly );
+
+    m_pPlot->yAxis->setLabel( "YY" );
+    m_pPlot->xAxis->setLabel( "XX" );
+
+    m_pPlot->yAxis->setRange( -2, 2 );
+    m_pPlot->xAxis->setRange( -2, 2 );
 }
