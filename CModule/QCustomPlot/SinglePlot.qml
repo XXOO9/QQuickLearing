@@ -7,7 +7,7 @@ Item{
     height: width
     CustPlotItem{
         Component.onCompleted: {
-            startTimer()
+//            startTimer()
         }
 
         anchors.fill: parent

@@ -49,18 +49,34 @@ void CBasesicPlot::startTimer()
 
 void CBasesicPlot::routeMouseEvents(QMouseEvent *event)
 {
+    if( nullptr == m_pPlot ){
+        return;
+    }
 
+    QMouseEvent *newEvent = new QMouseEvent( event->type(), event->localPos(), event->button(), event->buttons(), event->modifiers() );
+
+    QCoreApplication::postEvent( m_pPlot, newEvent );
 }
 
 void CBasesicPlot::mousePressEvent(QMouseEvent *event)
 {
-
+    routeMouseEvents( event );
 }
 
 void CBasesicPlot::wheelEvent(QWheelEvent *event)
 {
     QWheelEvent* newEvent = new QWheelEvent( event->pos(), event->delta(), event->buttons(), event->modifiers(), event->orientation() );
     QCoreApplication::postEvent( m_pPlot, newEvent );
+}
+
+void CBasesicPlot::mouseMoveEvent(QMouseEvent *event)
+{
+    routeMouseEvents( event );
+}
+
+void CBasesicPlot::mouseReleaseEvent(QMouseEvent *event)
+{
+    routeMouseEvents( event );
 }
 
 void CBasesicPlot::graphClicked(QCPAbstractPlottable *plottable)
@@ -119,7 +135,7 @@ void CBasesicPlot::init()
 
     m_pPlot->axisRect()->setRangeZoom( Qt::Horizontal | Qt::Vertical );
 
-//    m_pPlotsetOptimizationFlag(QCP::oHighQualityLegend);
+    //    m_pPlotsetOptimizationFlag(QCP::oHighQualityLegend);
 
     initTest();
 
