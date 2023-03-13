@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>ManyPlots.qml</file>
+        <file>SinglePlot.qml</file>
     </qresource>
 </RCC>

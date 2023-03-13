@@ -11,6 +11,7 @@ CONFIG( debug, debug | release ){
 }else
 {
         DESTDIR     = $$PWD/bin/release
+        LIBS       += -lopengl32 -lglu32
 }
 
 MOC_DIR = temp/moc

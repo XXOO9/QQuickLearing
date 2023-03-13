@@ -1,7 +1,9 @@
-#include "CBasesicPlot.h"
+﻿#include "CBasesicPlot.h"
+#include <QMargins>
 
 CBasesicPlot::CBasesicPlot(QQuickPaintedItem *parent) : QQuickPaintedItem(parent)
 {
+    setAcceptedMouseButtons( Qt::AllButtons );
     init();
 }
 
@@ -19,6 +21,53 @@ void CBasesicPlot::paint(QPainter *painter)
     painter->drawPixmap( QPoint(), picture );
 }
 
+void CBasesicPlot::getName()
+{
+    qDebug() << "name";
+}
+
+void CBasesicPlot::appendData()
+{
+    QCPGraph    *graph = m_pPlot->graph( 0 );
+    double lastX = graph->data()->at( graph->data()->size()  - 1 )->key;
+
+    double x = lastX + 1;
+    double y = QRandomGenerator::global()->bounded( 100 );
+
+    graph->addData( x, y );
+    //    qDebug() << "x = " << lastX << " size = " << graph->data()->size();
+
+    m_pPlot->xAxis->setRange( lastX, 50, Qt::AlignRight );
+
+    m_pPlot->replot();
+}
+
+void CBasesicPlot::startTimer()
+{
+    m_timer.start( 0 );
+}
+
+void CBasesicPlot::routeMouseEvents(QMouseEvent *event)
+{
+
+}
+
+void CBasesicPlot::mousePressEvent(QMouseEvent *event)
+{
+
+}
+
+void CBasesicPlot::wheelEvent(QWheelEvent *event)
+{
+    QWheelEvent* newEvent = new QWheelEvent( event->pos(), event->delta(), event->buttons(), event->modifiers(), event->orientation() );
+    QCoreApplication::postEvent( m_pPlot, newEvent );
+}
+
+void CBasesicPlot::graphClicked(QCPAbstractPlottable *plottable)
+{
+    qDebug() << QString( "clilcked on graph %1" ).arg( plottable->name() );
+}
+
 void CBasesicPlot::updateCustomPlotSize()
 {
     if( nullptr == m_pPlot ){
@@ -31,8 +80,8 @@ void CBasesicPlot::updateCustomPlotSize()
 void CBasesicPlot::onCustomReplot()
 {
     update();
-//    qDebug() << "opengl enale = " << m_pPlot->openGl();
-    qDebug() << "rplot cost " << m_pPlot->replotTime( true );
+    //    qDebug() << "opengl enale = " << m_pPlot->openGl();
+    //    qDebug() << "rplot cost " << m_pPlot->replotTime( true );
 }
 
 void CBasesicPlot::onTimerTimeout()
@@ -49,16 +98,28 @@ void CBasesicPlot::onTimerTimeout()
 
     m_pPlot->xAxis->setRange( lastX, 50, Qt::AlignRight );
 
-
-
     m_pPlot->replot();
 }
 
 void CBasesicPlot::init()
 {
     m_pPlot = new QCustomPlot();
-    m_pPlot->setOpenGl( true );
+    //    m_pPlot->setOpenGl( true );
     connect( m_pPlot, &QCustomPlot::afterReplot, this, &CBasesicPlot::onCustomReplot );
+
+    connect( this, &QQuickPaintedItem::widthChanged, this, &CBasesicPlot::updateCustomPlotSize );
+    connect( this, &QQuickPaintedItem::heightChanged, this, &CBasesicPlot::updateCustomPlotSize );
+
+    m_pPlot->setInteractions( QCP::iRangeZoom | QCP::iRangeDrag );
+    m_pPlot->xAxis->setTickLabels( true );
+    m_pPlot->yAxis->setTickLabels( true );
+
+    m_pPlot->axisRect()->setAutoMargins( QCP::MarginSide::msNone );
+    m_pPlot->axisRect()->setMargins( QMargins( 10, 10, 10, 10 ) );
+
+    m_pPlot->axisRect()->setRangeZoom( Qt::Horizontal | Qt::Vertical );
+
+//    m_pPlotsetOptimizationFlag(QCP::oHighQualityLegend);
 
     initTest();
 
@@ -70,7 +131,7 @@ void CBasesicPlot::initTest()
     QVector<double> x;
     QVector<double> y;
 
-    int initSize = 50;
+    int initSize = 500;
 
     for( int index = 0; index < initSize; index++ ){
         x << index;
@@ -83,9 +144,10 @@ void CBasesicPlot::initTest()
     m_pPlot->xAxis->setRange( 0, 150 );
     m_pPlot->yAxis->setRange( 0, 105 );
 
-    connect( &m_timer, &QTimer::timeout, this, &CBasesicPlot::onTimerTimeout );
+    m_pPlot->setMouseTracking( true );
 
-    m_timer.start( 2000 );
+    connect( &m_timer, &QTimer::timeout, this, &CBasesicPlot::onTimerTimeout );
+    //    m_timer.start( 200 );
 
 }
 

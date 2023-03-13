@@ -1,4 +1,4 @@
-#ifndef CBASESICPLOT_H
+﻿#ifndef CBASESICPLOT_H
 #define CBASESICPLOT_H
 
 #ifndef QCUSTOMPLOT_USE_OPENGL
@@ -9,9 +9,9 @@
 #include <QDebug>
 #include <QTimer>
 #include <QQuickPaintedItem>
+#include <QMouseEvent>
+#include <QDebug>
 #include "../qcustomplot.h"
-
-
 
 
 class CBasesicPlot : public QQuickPaintedItem
@@ -22,9 +22,24 @@ public:
 
     virtual void paint( QPainter *painter ) override;
 
-    void updateCustomPlotSize();
+    Q_INVOKABLE void getName();
+
+    Q_INVOKABLE void appendData();
+
+    Q_INVOKABLE void startTimer();
+
+private:
+    void routeMouseEvents( QMouseEvent  *event );
+    virtual void mousePressEvent( QMouseEvent *event ) override;
+    virtual void wheelEvent( QWheelEvent *event ) override;
+
+protected slots:
+    void graphClicked( QCPAbstractPlottable *plottable );
+
 
 public slots:
+    void updateCustomPlotSize();
+
     void onCustomReplot();
 
     void onTimerTimeout();
