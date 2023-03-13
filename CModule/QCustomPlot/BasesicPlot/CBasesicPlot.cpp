@@ -31,15 +31,62 @@ void CBasesicPlot::updateCustomPlotSize()
 void CBasesicPlot::onCustomReplot()
 {
     update();
+//    qDebug() << "opengl enale = " << m_pPlot->openGl();
+    qDebug() << "rplot cost " << m_pPlot->replotTime( true );
+}
+
+void CBasesicPlot::onTimerTimeout()
+{
+
+    QCPGraph    *graph = m_pPlot->graph( 0 );
+    double lastX = graph->data()->at( graph->data()->size()  - 1 )->key;
+
+    double x = lastX + 1;
+    double y = QRandomGenerator::global()->bounded( 100 );
+
+    graph->addData( x, y );
+    //    qDebug() << "x = " << lastX << " size = " << graph->data()->size();
+
+    m_pPlot->xAxis->setRange( lastX, 50, Qt::AlignRight );
+
+
+
+    m_pPlot->replot();
 }
 
 void CBasesicPlot::init()
 {
     m_pPlot = new QCustomPlot();
+    m_pPlot->setOpenGl( true );
+    connect( m_pPlot, &QCustomPlot::afterReplot, this, &CBasesicPlot::onCustomReplot );
 
-    initPlot();
+    initTest();
 
     m_pPlot->replot();
+}
+
+void CBasesicPlot::initTest()
+{
+    QVector<double> x;
+    QVector<double> y;
+
+    int initSize = 50;
+
+    for( int index = 0; index < initSize; index++ ){
+        x << index;
+        y << QRandomGenerator::global()->bounded( 100 );
+    }
+
+    m_pPlot->addGraph();
+    m_pPlot->graph( 0 )->setData( x, y );
+
+    m_pPlot->xAxis->setRange( 0, 150 );
+    m_pPlot->yAxis->setRange( 0, 105 );
+
+    connect( &m_timer, &QTimer::timeout, this, &CBasesicPlot::onTimerTimeout );
+
+    m_timer.start( 2000 );
+
 }
 
 void CBasesicPlot::initPlot()
@@ -61,7 +108,7 @@ void CBasesicPlot::initPlot()
     //添加坐标轴
     m_pPlot->addGraph();
     m_pPlot->graph( 0 )->setPen( QPen( Qt::red ) );
-//    m_pPlot->graph( 0 )->setSelectedPen( QPen( Qt::blue, 2 ) );
+    //    m_pPlot->graph( 0 )->setSelectedPen( QPen( Qt::blue, 2 ) );
     m_pPlot->graph( 0 )->setData( x, y );
 
     m_pPlot->addGraph();

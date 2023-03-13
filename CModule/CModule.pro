@@ -18,7 +18,8 @@ SUBDIRS += \
 #    QQuickControls         #####    qml 自定义控件demo
 #    ffmpeg               #### ffmpeg 学习例子
 #    DesignModel         ##### 设计模式
-    NetWorkModel   ###网络 模块
+#    NetWorkModel   ###网络 模块
+    QCustomPlot        ##绘制图标Demo
 #    SqlDemo             #####   数据库sql操作( 批量插入GECG的假数据 )
 #    ProcessMonit        ### 进程控制( 程序升级Demo )
 #    CreateDmpFile       ## 创建Dump文件
@@ -58,7 +59,7 @@ SUBDIRS += \
 #    gmy
 #    DemoRadioBtn
 #    QThreadControl
-#    QCustomPlot
+
 
 #    QDebugLog  ### qDebug 重定向到日志文件中
 #    QmlFunctionCallback ###  C++回调qml函数( 感觉 用处不大 )

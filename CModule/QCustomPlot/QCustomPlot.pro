@@ -1,10 +1,13 @@
-QT += quick core
+QT += quick core gui
 CONFIG += c++11
+
+#DEFINES += QCUSTOMPLOT_USE_OPENGL
 
 greaterThan( QT_MAJOR_VERSION, 4 ): QT += widgets printsupport
 
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/bin/debug
+        LIBS       += -lopengl32 -lglu32
 }else
 {
         DESTDIR     = $$PWD/bin/release

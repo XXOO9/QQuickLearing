@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QApplication>
+#include <QOpenGLContext>
 #include "./BasesicPlot/CBasesicPlot.h"
 
 
@@ -11,7 +12,14 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
-    QQmlApplicationEngine engine;\
+    QQmlApplicationEngine engine;
+
+    QOpenGLContext *glContext = QOpenGLContext::currentContext();
+    if (glContext) {
+        qDebug() << "OpenGL rendering is enabled";
+    } else {
+        qDebug() << "OpenGL rendering is not enabled";
+    }
 
     qmlRegisterType<CBasesicPlot>( "CustPlot", 1, 0, "CustPlotItem" );
     const QUrl url(QStringLiteral("qrc:/main.qml"));
