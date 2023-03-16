@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QElapsedTimer>
 #include "./thirdParty/qcustomplot/qcustomplot.h"
+#include "CPlotLoadDataThread.h"
 
 namespace Ui {
 class CMainWidget;
@@ -26,11 +27,14 @@ private:
 protected slots:
     void onTimerTimeout();
 
+    void onReadyReplot();
+
 
 private:
     Ui::CMainWidget *ui;
     QCustomPlot *custPlot = nullptr;
     QTimer       m_timer;
+    CPlotLoadDataThread m_loadThread;
 };
 
 #endif // CMAINWIDGET_H

@@ -59,18 +59,19 @@ void CMainWidget::oneAsixMultiGraph()
 void CMainWidget::onePlotMultiAsixs()
 {
     custPlot = new QCustomPlot( this );
+//    custPlot->setOpenGl( true );
     custPlot->setGeometry( 0, 0, width(), height() );
     custPlot->plotLayout()->clear();
 
-    int rowCnt = 16;
-    int columnCnt = 16;
+    int rowCnt = 32;
+    int columnCnt = 32;
     int outsideMargin = 5;
     QElapsedTimer timer;
 
     QVector< double > x;
     QVector< double > y;
 
-    for( int index = 0; index < 200; index++ ){
+    for( int index = 0; index < 5; index++ ){
         x << index;
         y << QRandomGenerator::global()->bounded( 5 );
     }
@@ -90,12 +91,16 @@ void CMainWidget::onePlotMultiAsixs()
         }
     }
 
-    qDebug() << "cost " << timer.elapsed() << " ms";
+    qDebug() << "init cost " << timer.elapsed() << " ms";
     qDebug() << "grap cnt = " << custPlot->graphCount();
 
-    connect( &m_timer, &QTimer::timeout, this, &CMainWidget::onTimerTimeout, Qt::QueuedConnection );
+    connect( &m_loadThread, &CPlotLoadDataThread::sigLoadFinished, this, &CMainWidget::onReadyReplot, Qt::QueuedConnection );
+    m_loadThread.m_pPlot = custPlot;
+    m_loadThread.start();
 
-    m_timer.start( 0 );
+//    connect( &m_timer, &QTimer::timeout, this, &CMainWidget::onTimerTimeout, Qt::QueuedConnection );
+
+//    m_timer.start( 0 );
 }
 
 void CMainWidget::onTimerTimeout()
@@ -112,10 +117,19 @@ void CMainWidget::onTimerTimeout()
         double y = QRandomGenerator::global()->bounded( 5 );
 
         curGraph->addData( x, y );
+
+        custPlot->axisRect( index )->axis( QCPAxis::AxisType::atBottom )->setRange( x, 5, Qt::AlignRight);
     }
 
-    custPlot->xAxis->setRange( boundX, 5, Qt::AlignRight );
+    qDebug() << "load data cost " << timer.restart() << " ms";
+    custPlot->replot();
+    qDebug() << "replot cost " << timer.elapsed() << " ms";
+}
 
+void CMainWidget::onReadyReplot()
+{
+    QElapsedTimer timer;
+    timer.restart();
     custPlot->replot();
     qDebug() << "replot cost " << timer.elapsed() << " ms";
 }

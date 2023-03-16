@@ -10,6 +10,8 @@ greaterThan( QT_MAJOR_VERSION, 4 ): QT += widgets printsupport
 
 INCLUDEPATH += $$PWD/thirdParty/qcustomplot/
 
+DEFINES += QCUSTOMPLOT_USE_OPENGL
+
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/bin/debug
         LIBS       += -lopengl32 -lglu32
@@ -35,6 +37,7 @@ CONFIG += c++11
 
 SOURCES += \
         CBasePlot.cpp \
+        CPlotLoadDataThread.cpp \
         main.cpp \
         CMainWidget.cpp \
         thirdParty/qcustomplot/qcustomplot.cpp
@@ -42,6 +45,7 @@ SOURCES += \
 HEADERS += \
         CBasePlot.h \
         CMainWidget.h \
+        CPlotLoadDataThread.h \
         thirdParty/qcustomplot/qcustomplot.h
 
 FORMS += \
