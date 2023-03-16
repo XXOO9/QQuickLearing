@@ -9,10 +9,6 @@ class CBasePlot : public QWidget
     Q_OBJECT
 public:
     explicit CBasePlot(QWidget *parent = nullptr);
-
-
-
-
 };
 
 #endif // CBASEPLOT_H

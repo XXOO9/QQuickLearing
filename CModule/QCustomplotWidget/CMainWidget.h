@@ -3,7 +3,8 @@
 
 #include <QWidget>
 #include <QDebug>
-#include "../thirdParty/qcustomplot/qcustomplot.h"
+#include <QElapsedTimer>
+#include "./thirdParty/qcustomplot/qcustomplot.h"
 
 namespace Ui {
 class CMainWidget;
@@ -18,14 +19,18 @@ public:
     ~CMainWidget();
 
 private:
-    void init();
+    void oneAsixMultiGraph();
+
+    void onePlotMultiAsixs();
+
+protected slots:
+    void onTimerTimeout();
+
 
 private:
     Ui::CMainWidget *ui;
-
-
-
-    QCustomPlot *m_pPlot = nullptr;
+    QCustomPlot *custPlot = nullptr;
+    QTimer       m_timer;
 };
 
 #endif // CMAINWIDGET_H

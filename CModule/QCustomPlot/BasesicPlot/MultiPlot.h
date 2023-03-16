@@ -19,6 +19,9 @@ public slots:
     void onCustomReplot();
 
 private:
+    void init();
+
+private:
     QCustomPlot *m_pPlot = nullptr;
     QTimer       m_timer;
 };

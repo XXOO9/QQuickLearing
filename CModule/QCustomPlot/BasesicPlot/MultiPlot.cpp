@@ -2,7 +2,7 @@
 
 MultiPlot::MultiPlot()
 {
-    m_pPlot = new QCustomPlot();
+
 }
 
 void MultiPlot::paint(QPainter *painter)
@@ -25,4 +25,9 @@ void MultiPlot::updateCustomPlotSize()
 void MultiPlot::onCustomReplot()
 {
     update();
+}
+
+void MultiPlot::init()
+{
+    m_pPlot = new QCustomPlot();
 }
