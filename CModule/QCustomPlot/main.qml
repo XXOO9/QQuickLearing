@@ -3,6 +3,7 @@ import QtQuick.Window 2.12
 import CustPlot 1.0
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import CustPlotMulti 1.0
 
 Window {
     id: root
@@ -13,11 +14,8 @@ Window {
 
 //    flags: Qt.FramelessWindowHint | Qt.Window
 
-    SinglePlot{
-        anchors.centerIn: parent
+    CustPlotItemMulti{
+        anchors.fill: parent
     }
 
-//    ManyPlots{
-//        anchors.fill: parent
-//    }
 }

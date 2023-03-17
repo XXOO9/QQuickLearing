@@ -1,4 +1,4 @@
-#include "CPlotLoadDataThread.h"
+﻿#include "CPlotLoadDataThread.h"
 
 CPlotLoadDataThread::CPlotLoadDataThread()
 {
@@ -15,13 +15,13 @@ void CPlotLoadDataThread::run()
     while( 1 ){
         timer.restart();
         int boundX = 0;
-        for( int index = 0; index < 512; index++ ){
+
+        for( int index = 0; index < graphCnt; index++ ){
             QCPGraph    *curGraph = m_pPlot->graph( index );
             int lastX = curGraph->data()->at( curGraph->data()->size() - 1 )->key;
             boundX = lastX;
             double x = ++lastX;
             double y = QRandomGenerator::global()->bounded( 5 );
-
             curGraph->addData( x, y );
 
 //            timer1.restart();

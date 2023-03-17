@@ -8,15 +8,17 @@
 
 class MultiPlot : public QQuickPaintedItem
 {
+    Q_OBJECT
 public:
-    MultiPlot();
+    MultiPlot( QQuickPaintedItem *parent = nullptr );
 
     virtual void paint( QPainter *painter ) override;
 
 public slots:
-    void updateCustomPlotSize();
 
     void onCustomReplot();
+
+    void onUpdateCustomPlotSize();
 
 private:
     void init();

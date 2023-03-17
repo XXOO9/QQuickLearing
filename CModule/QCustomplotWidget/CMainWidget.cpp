@@ -98,32 +98,32 @@ void CMainWidget::onePlotMultiAsixs()
     m_loadThread.m_pPlot = custPlot;
     m_loadThread.start();
 
-//    connect( &m_timer, &QTimer::timeout, this, &CMainWidget::onTimerTimeout, Qt::QueuedConnection );
+    connect( &m_timer, &QTimer::timeout, this, &CMainWidget::onTimerTimeout, Qt::QueuedConnection );
 
-//    m_timer.start( 0 );
+    m_timer.start( 500 );
 }
 
 void CMainWidget::onTimerTimeout()
 {
-    int graphCnt = custPlot->graphCount();
-    QElapsedTimer timer;
-    timer.start();
-    int boundX = 0;
-    for( int index = 0; index < graphCnt; index++ ){
-        QCPGraph    *curGraph = custPlot->graph( index );
-        int lastX = curGraph->data()->at( curGraph->data()->size() - 1 )->key;
-        boundX = lastX;
-        double x = ++lastX;
-        double y = QRandomGenerator::global()->bounded( 5 );
+//    int graphCnt = custPlot->graphCount();
+//    QElapsedTimer timer;
+//    timer.start();
+//    int boundX = 0;
+//    for( int index = 0; index < graphCnt; index++ ){
+//        QCPGraph    *curGraph = custPlot->graph( index );
+//        int lastX = curGraph->data()->at( curGraph->data()->size() - 1 )->key;
+//        boundX = lastX;
+//        double x = ++lastX;
+//        double y = QRandomGenerator::global()->bounded( 5 );
 
-        curGraph->addData( x, y );
+//        curGraph->addData( x, y );
 
-        custPlot->axisRect( index )->axis( QCPAxis::AxisType::atBottom )->setRange( x, 5, Qt::AlignRight);
-    }
+//        custPlot->axisRect( index )->axis( QCPAxis::AxisType::atBottom )->setRange( x, 5, Qt::AlignRight);
+//    }
 
-    qDebug() << "load data cost " << timer.restart() << " ms";
+//    qDebug() << "load data cost " << timer.restart() << " ms";
     custPlot->replot();
-    qDebug() << "replot cost " << timer.elapsed() << " ms";
+//    qDebug() << "replot cost " << timer.elapsed() << " ms";
 }
 
 void CMainWidget::onReadyReplot()

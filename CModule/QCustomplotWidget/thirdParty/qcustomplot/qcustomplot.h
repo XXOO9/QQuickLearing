@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
 **                                                                        **
 **  QCustomPlot, an easy to use, modern plotting widget for Qt            **
 **  Copyright (C) 2011-2022 Emanuel Eichhammer                            **
@@ -2931,7 +2931,7 @@ void QCPDataContainer<DataType>::add(const QVector<DataType> &data, bool already
 }
 
 /*! \overload
-  
+
   Adds the provided single data point to the current data.
   
   \see remove
