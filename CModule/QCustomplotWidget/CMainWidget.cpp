@@ -1,6 +1,9 @@
 ﻿#include "CMainWidget.h"
 #include "ui_CMainWidget.h"
 
+#include <QThread>
+#include <omp.h>
+
 CMainWidget::CMainWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CMainWidget)
@@ -9,7 +12,7 @@ CMainWidget::CMainWidget(QWidget *parent) :
     ui->setupUi(this);
     this->resize( 1920, 1080 );
 
-//    oneAsixMultiGraph();
+    //    oneAsixMultiGraph();
     onePlotMultiAsixs();
 }
 
@@ -20,6 +23,7 @@ CMainWidget::~CMainWidget()
 
 void CMainWidget::oneAsixMultiGraph()
 {
+
     custPlot = new QCustomPlot( this );
 
     custPlot->setGeometry( 0, 0, width(), height() );
@@ -58,11 +62,14 @@ void CMainWidget::oneAsixMultiGraph()
 
 void CMainWidget::onePlotMultiAsixs()
 {
+    qDebug() << "main thread ID = " << QThread::currentThreadId();
     custPlot = new QCustomPlot( this );
-//    custPlot->setOpenGl( true );
+    //    custPlot->setOpenGl( true );
+    custPlot->setBackground( QBrush() );
     custPlot->setGeometry( 0, 0, width(), height() );
     custPlot->plotLayout()->clear();
 
+    qDebug() << "opengl state = " << custPlot->openGl();
     int rowCnt = 32;
     int columnCnt = 32;
     int outsideMargin = 5;
@@ -81,10 +88,24 @@ void CMainWidget::onePlotMultiAsixs()
     for( int column = 0; column < columnCnt; column++ ){
         for( int row = 0; row < rowCnt; row++ ){
             QCPAxisRect *tmp = new QCPAxisRect( custPlot );
+
+            QCPAxis *xAxisx = tmp->axis( QCPAxis::atBottom );
+            QCPAxis *yAxisx = tmp->axis( QCPAxis::atLeft );
+
+            xAxisx->setTickLabels( false );
+            yAxisx->setTickLabels( false );
+
+            xAxisx->grid()->setVisible( false );
+            yAxisx->grid()->setVisible( false );
+
+            xAxisx->setTicks( false );
+            yAxisx->setTicks( false );
+
+            tmp->axis( QCPAxis::atLeft, 0 )->setRange( -1.2, 1.2 );
             tmp->setAutoMargins( QCP::MarginSide::msNone );
             tmp->setMargins( QMargins( outsideMargin, outsideMargin, outsideMargin, outsideMargin ) );
 
-            QCPGraph *tmpGraph =  custPlot->addGraph( tmp->axis( QCPAxis::atBottom ), tmp->axis( QCPAxis::atLeft ) );
+            QCPGraph *tmpGraph =  custPlot->addGraph( xAxisx, yAxisx );
             tmpGraph->setData( x, y );
 
             custPlot->plotLayout()->addElement( row, column, tmp );
@@ -94,36 +115,40 @@ void CMainWidget::onePlotMultiAsixs()
     qDebug() << "init cost " << timer.elapsed() << " ms";
     qDebug() << "grap cnt = " << custPlot->graphCount();
 
-    connect( &m_loadThread, &CPlotLoadDataThread::sigLoadFinished, this, &CMainWidget::onReadyReplot, Qt::QueuedConnection );
-    m_loadThread.m_pPlot = custPlot;
-    m_loadThread.start();
+    connect( &m_timer, &QTimer::timeout, this, &CMainWidget::onTimerTimeout );
 
-    connect( &m_timer, &QTimer::timeout, this, &CMainWidget::onTimerTimeout, Qt::QueuedConnection );
-
-    m_timer.start( 500 );
+    m_timer.setSingleShot( true );
+    m_timer.start( 0 );
 }
 
 void CMainWidget::onTimerTimeout()
 {
-//    int graphCnt = custPlot->graphCount();
-//    QElapsedTimer timer;
-//    timer.start();
-//    int boundX = 0;
-//    for( int index = 0; index < graphCnt; index++ ){
-//        QCPGraph    *curGraph = custPlot->graph( index );
-//        int lastX = curGraph->data()->at( curGraph->data()->size() - 1 )->key;
-//        boundX = lastX;
-//        double x = ++lastX;
-//        double y = QRandomGenerator::global()->bounded( 5 );
+    int graphCnt = custPlot->graphCount();
+    QElapsedTimer timer;
+    timer.start();
+    double boundX = 0;
 
-//        curGraph->addData( x, y );
+    //#pragma omp parallel
+    //    {
+    for( int index = 0; index < graphCnt; index++ ){
+        QCPGraph    *curGraph = custPlot->graph( index );
+        double lastX = curGraph->data()->at( curGraph->data()->size() - 1 )->key;
+        boundX = lastX;
+        double x = ++lastX;
+        double y = qSin( x );
 
-//        custPlot->axisRect( index )->axis( QCPAxis::AxisType::atBottom )->setRange( x, 5, Qt::AlignRight);
-//    }
+        curGraph->addData( x, y );
 
-//    qDebug() << "load data cost " << timer.restart() << " ms";
-    custPlot->replot();
-//    qDebug() << "replot cost " << timer.elapsed() << " ms";
+        custPlot->axisRect( index )->axis( QCPAxis::AxisType::atBottom )->setRange( x, 5.0, Qt::AlignRight);
+
+    }
+    //    }
+
+
+    qDebug() << "load data cost " << timer.restart() << " ms";
+    custPlot->replot( QCustomPlot::RefreshPriority::rpQueuedReplot );
+    qDebug() << "replot cost " << timer.elapsed() << " ms";
+    m_timer.start( 0 );
 }
 
 void CMainWidget::onReadyReplot()

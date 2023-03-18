@@ -1,5 +1,7 @@
 #include "CMainWidget.h"
 #include <QApplication>
+#include <omp.h>
+#include <QElapsedTimer>
 
 int main(int argc, char *argv[])
 {

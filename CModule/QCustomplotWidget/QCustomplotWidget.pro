@@ -12,13 +12,18 @@ INCLUDEPATH += $$PWD/thirdParty/qcustomplot/
 
 DEFINES += QCUSTOMPLOT_USE_OPENGL
 
+QMAKE_CXXFLAGS += -openmp
+QMAKE_LFLAGS += -openmp
+
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/bin/debug
         LIBS       += -lopengl32 -lglu32
+        LIBS += -fopenmp
 }else
 {
         DESTDIR     = $$PWD/bin/release
         LIBS       += -lopengl32 -lglu32
+        LIBS += -fopenmp
 }
 
 MOC_DIR = temp/moc

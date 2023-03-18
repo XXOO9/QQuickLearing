@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>ManyPlots.qml</file>
         <file>SinglePlot.qml</file>
+        <file>FPSCalculaterView.qml</file>
     </qresource>
 </RCC>

@@ -20,6 +20,8 @@ public slots:
 
     void onUpdateCustomPlotSize();
 
+    void onTimerTimeout();
+
 private:
     void init();
 

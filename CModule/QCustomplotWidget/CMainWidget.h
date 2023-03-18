@@ -19,7 +19,9 @@ public:
     explicit CMainWidget(QWidget *parent = nullptr);
     ~CMainWidget();
 
+
 private:
+
     void oneAsixMultiGraph();
 
     void onePlotMultiAsixs();
