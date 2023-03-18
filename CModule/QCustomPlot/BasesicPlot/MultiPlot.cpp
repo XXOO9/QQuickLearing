@@ -52,23 +52,19 @@ void MultiPlot::onTimerTimeout()
     double  y = 0;
 
     QElapsedTimer timer;
-    timer.start();
-    const int perStep = 2;
-    static int curStep = 0;
+
     for( int index = 0; index < graphCnt; index++ ){
         graph = m_pPlot->graph( index );
         x = graph->data()->at( graph->data()->size() - 1 )->key + 1;
         y = qSin( x );
         graph->addData( x, y );
-        if( curStep % perStep == 0 ){
-            m_pPlot->axisRect( index )->axis( QCPAxis::AxisType::atBottom )->setRange( x+5, 15, Qt::AlignRight );
-            curStep = 0;
-        }
+
+#ifndef USE_THREAD_MOVE_RANGE_FLAG
+        m_pPlot->axisRect( index )->axis( QCPAxis::AxisType::atBottom, 0 )->setRange( x + 5.0, 15.0, Qt::AlignRight );
+#endif
+
     }
-    qDebug() << "load data cost " << timer.elapsed() << " ms";
-    curStep++;
     m_pPlot->replot( QCustomPlot::RefreshPriority::rpQueuedReplot );
-    m_timer.start( 0 );
 }
 
 void MultiPlot::init()
@@ -107,6 +103,7 @@ void MultiPlot::init()
             xAxis->setTicks( false );
             yAxis->setTicks( false );
 
+            yAxis->setLabelPadding( 0 );
             yAxis->setLabel( QString::number( index ) );
             yAxis->setRange( -1.1, 1.1 );
 
@@ -117,7 +114,19 @@ void MultiPlot::init()
 
     m_pPlot->replot();
     connect( &m_timer, &QTimer::timeout, this, &MultiPlot::onTimerTimeout, Qt::QueuedConnection );
-    m_timer.setSingleShot( true );
+
+#ifdef USE_THREAD_MOVE_RANGE_FLAG
+    m_moveRangeThread.m_pPlot = this->m_pPlot;
+    m_moveRangeThread.start( QThread::HighPriority );
+    m_timer.start( 10 );
+#else
     m_timer.start( 0 );
+#endif
+
+
+
+
+
+
 
 }

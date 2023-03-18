@@ -5,6 +5,9 @@
 #include <QDebug>
 #include <QQuickPaintedItem>
 #include "../qcustomplot.h"
+#include "CMoveGrapRangeThread.h"
+
+#define USE_THREAD_MOVE_RANGE_FLAG true
 
 class MultiPlot : public QQuickPaintedItem
 {
@@ -28,6 +31,7 @@ private:
 private:
     QCustomPlot *m_pPlot = nullptr;
     QTimer       m_timer;
+    CMoveGrapRangeThread    m_moveRangeThread;
 };
 
 #endif // MULTIPLOT_H
