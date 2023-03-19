@@ -70,10 +70,11 @@ void MultiPlot::onTimerTimeout()
 void MultiPlot::init()
 {
     m_pPlot = new QCustomPlot();
+    m_pPlot->plotLayout()->clear();
+
     connect( m_pPlot, &QCustomPlot::afterReplot, this, &MultiPlot::onCustomReplot );
     connect( this, &MultiPlot::widthChanged,  this, &MultiPlot::onUpdateCustomPlotSize );
     connect( this, &MultiPlot::heightChanged, this, &MultiPlot::onUpdateCustomPlotSize );
-    m_pPlot->plotLayout()->clear();
 
     //准备初始数据
     QVector< double > x;
@@ -94,6 +95,7 @@ void MultiPlot::init()
 
             axisRect->setAutoMargins( QCP::MarginSide::msNone );
             axisRect->setMargins( QMargins( 5, 5, 5, 5 ) );
+
             QCPGraph *graph = m_pPlot->addGraph( axisRect->axis( QCPAxis::AxisType::atBottom ), axisRect->axis( QCPAxis::AxisType::atLeft ) );
             graph->setData( x, y );
 
@@ -122,11 +124,4 @@ void MultiPlot::init()
 #else
     m_timer.start( 0 );
 #endif
-
-
-
-
-
-
-
 }

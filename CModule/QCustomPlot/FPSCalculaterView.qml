@@ -6,6 +6,9 @@ import QtQuick.Layouts 1.12
 import CustPlotMulti 1.0
 
 Item {
+    width: 400
+    height: 200
+    property alias fps: fpsCounter.text
     Text {
         id: fpsCounter
         text: "FPS: Calculating..."
@@ -15,6 +18,7 @@ Item {
         z: 5
     }
 
+
     property var lastTime: new Date().getTime()  // 上一帧的时间戳
 
 
@@ -22,38 +26,25 @@ Item {
         // 计算时间间隔
         var now = new Date().getTime();
         var elapsed = now - lastTime;
+
+        if( elapsed <= 1 ){
+            return
+        }
+
         lastTime = now;
 
         // 计算帧速率
         var fps = 1000 / elapsed;
         fpsCounter.text = "FPS: " + fps.toFixed(0);
+
     }
 
     Timer {
         interval: 1
-        running: true
+//        running: true
         repeat: true
         onTriggered: {
             updateFPS();
-        }
-    }
-
-    Grid{
-        anchors.fill: parent
-        padding: 0
-        rows: 2
-        columns: 2
-        Repeater{
-            model: 1
-            delegate:     CustPlotItemMulti{
-                width: root.width / 2
-                height: root.height / 2
-                Text {
-                    text: index
-                    font.pixelSize: 50
-                    color: 'red'
-                }
-            }
         }
     }
 }

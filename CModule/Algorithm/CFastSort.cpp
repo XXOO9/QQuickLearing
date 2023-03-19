@@ -3,14 +3,7 @@
 
 CFastSort::CFastSort()
 {
-    QVector<int> vecNumbers;
-
-    int cnt = 13;
-    while( cnt-- ){
-       int tmp = QRandomGenerator::global()->bounded( 0, 100 );
-       vecNumbers << tmp;
-    }
-    fastSort( vecNumbers );
+    guluguluSort();
 }
 
 void CFastSort::fastSort( QVector<int> &src )
@@ -54,6 +47,33 @@ void CFastSort::fastSort( QVector<int> &src )
     qDebug() << src;
 }
 
+void CFastSort::guluguluSort()
+{
+    QVector< int > src = generate( 10 );
+
+    qDebug() << src;
+    for( int index = 0; index < src.size(); index++ ){
+        for( int tmpIndex = index; tmpIndex < src.size(); tmpIndex++ ){
+            if( src[ index ] < src[ tmpIndex ] ){
+                int tmp = src[ index ];
+                src[ index ] = src[ tmpIndex ];
+                src[ tmpIndex ] = tmp;
+            }
+        }
+    }
+
+    qDebug() << src;
+}
+
+QVector<int> CFastSort::generate( const int size )
+{
+    QVector< int > rets;
+    for( int index = 0; index < size; index++ ){
+        rets << QRandomGenerator::global()->bounded( 100 );
+    }
+
+    return rets;
+}
 
 
 

@@ -55,6 +55,7 @@ void CCameraControler::openCamera()
         cvMat2QImage( m_frame, m_img );
         emit sigNewFrameAvailable( m_img );
         qDebug() << "cost " << cntTimer.elapsed();
+        qDebug() << "fps = "    << m_camera.get( CAP_PROP_FPS );
 //        QThread::msleep( 5 );
     }
 }

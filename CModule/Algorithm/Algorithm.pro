@@ -1,6 +1,6 @@
 QT -= gui
 
-CONFIG += c++11 console
+CONFIG += c++11
 CONFIG -= app_bundle
 
 CONFIG( debug, debug | release ){
@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         CFastSort.cpp \
+        StringAlgorithm.cpp \
         main.cpp
 
 # Default rules for deployment.
@@ -27,4 +28,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    CFastSort.h
+    CFastSort.h \
+    StringAlgorithm.h
