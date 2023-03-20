@@ -21,7 +21,7 @@ void MultiPlot::paint(QPainter *painter)
     //    qDebug() << "draw cost 2" << timer.restart() << " ms";
 
     m_pPlot->toPainter( &qcppainter );
-//    qDebug() << "draw cost 3" << timer.restart() << " ms";
+    //    qDebug() << "draw cost 3" << timer.restart() << " ms";
 
     painter->drawPixmap( QPoint(), picture );
     //    qDebug() << "draw cost 4" << timer.elapsed() << " ms";
@@ -44,35 +44,42 @@ void MultiPlot::onUpdateCustomPlotSize()
 
 void MultiPlot::onTimerTimeout()
 {
+    QElapsedTimer timer;
+    timer.start();
     int graphCnt = m_pPlot->graphCount();
-
     QCPGraph *graph = nullptr;
-
     double x = -1;
     double  y = 0;
-
-    QElapsedTimer timer;
-
     for( int index = 0; index < graphCnt; index++ ){
         graph = m_pPlot->graph( index );
+        graph->data()->remove( graph->data()->at( 0 )->key );
+
         x = graph->data()->at( graph->data()->size() - 1 )->key + 1;
         y = qSin( x );
         graph->addData( x, y );
-
-#ifndef USE_THREAD_MOVE_RANGE_FLAG
-        m_pPlot->axisRect( index )->axis( QCPAxis::AxisType::atBottom, 0 )->setRange( x + 5.0, 15.0, Qt::AlignRight );
-#endif
-
+        graph->rescaleAxes();
     }
+
+    qDebug() << "load data " << timer.restart() << " ms";
     m_pPlot->replot( QCustomPlot::RefreshPriority::rpQueuedReplot );
+    qDebug() << "plot " << timer.elapsed() << " ms";
+}
+
+void MultiPlot::onMouseWheel(QWheelEvent *event)
+{
+    qDebug() << "2";
 }
 
 void MultiPlot::init()
 {
+    setAcceptedMouseButtons( Qt::AllButtons );
+
     m_pPlot = new QCustomPlot();
     m_pPlot->plotLayout()->clear();
+    m_pPlot->setInteractions( QCP::Interaction::iRangeZoom | QCP::Interaction::iRangeDrag );
 
     connect( m_pPlot, &QCustomPlot::afterReplot, this, &MultiPlot::onCustomReplot );
+    connect( m_pPlot, &QCustomPlot::mouseWheel, this, &MultiPlot::onMouseWheel );
     connect( this, &MultiPlot::widthChanged,  this, &MultiPlot::onUpdateCustomPlotSize );
     connect( this, &MultiPlot::heightChanged, this, &MultiPlot::onUpdateCustomPlotSize );
 
@@ -80,13 +87,13 @@ void MultiPlot::init()
     QVector< double > x;
     QVector< double > y;
 
-    for( int index = 0; index < 5; index++ ){
+    for( int index = 0; index < 10; index++ ){
         x << index;
         y << qSin( index );
     }
 
-    int rowCnt = 32;
-    int columnCnt = 32;
+    int rowCnt = 2;
+    int columnCnt = 2;
     int index = 0;
 
     for( int row = 0; row < rowCnt; row++ ){
@@ -109,6 +116,8 @@ void MultiPlot::init()
             yAxis->setLabel( QString::number( index ) );
             yAxis->setRange( -1.1, 1.1 );
 
+            //            xAxis->setRange( 0.0, 13.0 );
+
             m_pPlot->plotLayout()->addElement( row, column, axisRect );
             index++;
         }
@@ -117,11 +126,10 @@ void MultiPlot::init()
     m_pPlot->replot();
     connect( &m_timer, &QTimer::timeout, this, &MultiPlot::onTimerTimeout, Qt::QueuedConnection );
 
-#ifdef USE_THREAD_MOVE_RANGE_FLAG
-    m_moveRangeThread.m_pPlot = this->m_pPlot;
-    m_moveRangeThread.start( QThread::HighPriority );
-    m_timer.start( 10 );
-#else
-    m_timer.start( 0 );
-#endif
+}
+
+void MultiPlot::wheelEvent(QWheelEvent *event)
+{
+//    qDebug() << "1";
+//    qDebug() << "label = " << m_pPlot->axisRectAt( event->pos() )->axis( QCPAxis::AxisType::atLeft )->label();
 }

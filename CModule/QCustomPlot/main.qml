@@ -18,24 +18,24 @@ Window {
 
     property real framCnt: 0
     property real fps: 0
-    onFrameSwapped: {
-        framCnt++
-        let now = new Date().getTime()
+//    onFrameSwapped: {
+//        framCnt++
+//        let now = new Date().getTime()
 
-        if( now - lastTime >= 1000 ){
-            fps = framCnt
-            framCnt = 0
-            lastTime = now
-            fpsText.fps = fps
-        }
-    }
+//        if( now - lastTime >= 1000 ){
+//            fps = framCnt
+//            framCnt = 0
+//            lastTime = now
+//            fpsText.fps = fps
+//        }
+//    }
 
 
-    FPSCalculaterView{
-        id: fpsText
-        z: 5
-        anchors{ top: parent.top; left: parent.left }
-    }
+//    FPSCalculaterView{
+//        id: fpsText
+//        z: 5
+//        anchors{ top: parent.top; left: parent.left }
+//    }
 
     CustPlotItemMulti{
         anchors.fill: parent

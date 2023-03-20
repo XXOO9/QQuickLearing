@@ -3,6 +3,7 @@ CONFIG += c++11
 
 #DEFINES += QCUSTOMPLOT_USE_OPENGL
 
+TARGET = ChartViewThread
 greaterThan( QT_MAJOR_VERSION, 4 ): QT += widgets printsupport
 
 CONFIG( debug, debug | release ){

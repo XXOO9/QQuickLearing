@@ -7,7 +7,7 @@
 #include "../qcustomplot.h"
 #include "CMoveGrapRangeThread.h"
 
-#define USE_THREAD_MOVE_RANGE_FLAG true
+//#define USE_THREAD_MOVE_RANGE_FLAG true
 
 class MultiPlot : public QQuickPaintedItem
 {
@@ -25,8 +25,12 @@ public slots:
 
     void onTimerTimeout();
 
+    void onMouseWheel( QWheelEvent *event );
+
 private:
     void init();
+
+    virtual void wheelEvent( QWheelEvent *event ) override;
 
 private:
     QCustomPlot *m_pPlot = nullptr;
