@@ -30,12 +30,19 @@ public slots:
 private:
     void init();
 
+    void routeMouseEvents( QMouseEvent  *event );
+    virtual void mousePressEvent( QMouseEvent *event ) override;
+    virtual void mouseReleaseEvent( QMouseEvent *event ) override;
+    virtual void mouseMoveEvent( QMouseEvent *event ) override;
     virtual void wheelEvent( QWheelEvent *event ) override;
 
 private:
     QCustomPlot *m_pPlot = nullptr;
     QTimer       m_timer;
     CMoveGrapRangeThread    m_moveRangeThread;
+
+    QPointF       m_lastPressPos;
+    QCPAxisRect  *m_curAxisRect = nullptr;
 };
 
 #endif // MULTIPLOT_H

@@ -92,8 +92,8 @@ void MultiPlot::init()
         y << qSin( index );
     }
 
-    int rowCnt = 2;
-    int columnCnt = 2;
+    int rowCnt = 32;
+    int columnCnt = 32;
     int index = 0;
 
     for( int row = 0; row < rowCnt; row++ ){
@@ -115,8 +115,9 @@ void MultiPlot::init()
             yAxis->setLabelPadding( 0 );
             yAxis->setLabel( QString::number( index ) );
             yAxis->setRange( -1.1, 1.1 );
+//            yAxis->setRange( -10, 10 );
 
-            //            xAxis->setRange( 0.0, 13.0 );
+//                        xAxis->setRange( 0.0, 13.0 );
 
             m_pPlot->plotLayout()->addElement( row, column, axisRect );
             index++;
@@ -128,8 +129,61 @@ void MultiPlot::init()
 
 }
 
+void MultiPlot::routeMouseEvents(QMouseEvent *event)
+{
+    if( nullptr == m_pPlot ){
+        return;
+    }
+
+    QMouseEvent *newEvent = new QMouseEvent( event->type(), event->localPos(), event->button(), event->buttons(), event->modifiers() );
+
+    QCoreApplication::postEvent( m_pPlot, newEvent );
+}
+
+void MultiPlot::mousePressEvent(QMouseEvent *event)
+{
+    //    routeMouseEvents( event );
+    if( Qt::LeftButton == event->button() ){
+        m_lastPressPos = event->pos();
+    }
+
+    m_curAxisRect = m_pPlot->axisRectAt( event->pos() );
+
+}
+
+void MultiPlot::mouseReleaseEvent(QMouseEvent *event)
+{
+
+}
+
+void MultiPlot::mouseMoveEvent(QMouseEvent *event)
+{
+    if( Qt::LeftButton != event->buttons() ){
+        return;
+    }
+
+    QPointF deltaPos = event->pos() - m_lastPressPos;
+    m_lastPressPos = event->pos();
+
+    qDebug() << "diff x = " << deltaPos.x();
+    qDebug() << "diff y = " << deltaPos.y();
+
+    if( nullptr == m_curAxisRect ){
+        return;
+    }
+    m_curAxisRect->axis( QCPAxis::AxisType::atLeft, 0 )->moveRange( deltaPos.y() * 0.3 );
+    m_curAxisRect->axis( QCPAxis::AxisType::atBottom, 0 )->moveRange( -deltaPos.x() * 0.3 );
+    m_pPlot->replot( QCustomPlot::RefreshPriority::rpQueuedReplot );
+}
+
 void MultiPlot::wheelEvent(QWheelEvent *event)
 {
-//    qDebug() << "1";
-//    qDebug() << "label = " << m_pPlot->axisRectAt( event->pos() )->axis( QCPAxis::AxisType::atLeft )->label();
+    qDebug() << "1";
+    double ret = event->delta() > 0 ? 0.9 : 1.1;
+    if( nullptr == m_curAxisRect ){
+        return;
+    }
+    m_curAxisRect->axis( QCPAxis::AxisType::atLeft, 0 )->scaleRange( ret );
+    m_curAxisRect->axis( QCPAxis::AxisType::atBottom, 0 )->scaleRange( ret );
+    m_pPlot->replot( QCustomPlot::RefreshPriority::rpQueuedReplot );
 }
