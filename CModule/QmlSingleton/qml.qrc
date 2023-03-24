@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>TestGlobal.qml</file>
+        <file>qmldir</file>
+        <file>OperatorA.qml</file>
+        <file>OperatorB.qml</file>
+    </qresource>
+</RCC>

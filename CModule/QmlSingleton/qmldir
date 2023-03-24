@@ -1,0 +1,2 @@
+﻿module Custom
+singleton TestGlobal 1.0 TestGlobal.qml

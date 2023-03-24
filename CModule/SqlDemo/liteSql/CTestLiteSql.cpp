@@ -52,7 +52,7 @@ void CTestLiteSql::queryTargetRecords()
 
 
     qDebug() << QString::fromStdString( sql.asString() );
-    vector<userInfo> target = select<userInfo>( *m_pDataBase, sql ).all();
+    vector<userInfo> target = select< userInfo >( *m_pDataBase, sql ).orderBy( userInfo::UserName, false ).all();
 
     //    Records records = m_pDataBase->query( SelectQuery().result( "id_" ).source( "userName_" ).where( userInfo::UserName == "userName_1" ) );
 }

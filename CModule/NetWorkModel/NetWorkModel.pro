@@ -3,5 +3,6 @@ TEMPLATE = subdirs
 SUBDIRS += \
 #    CTCPClient \
 #    CTCPServer \
- \#    HTTPQueue
-    LibCurl
+#    HTTPQueue
+#    LibCurl
+    UPDDemo

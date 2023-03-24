@@ -65,7 +65,8 @@ Item {
                         display: true,      // 改轴是否展示出来
                         fontColor: 'red',    // 改轴上文字的颜色
                         beginAtZero: true,       // 坐标轴从0开始绘制
-                        stepSize: 1
+                        stepSize: 1,
+                        max: 100
                     }
 
                 }],

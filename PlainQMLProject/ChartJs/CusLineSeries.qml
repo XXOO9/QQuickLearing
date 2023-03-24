@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 
 Item {
     id: root
@@ -154,7 +154,8 @@ Item {
                     },
 
                     ticks: {
-                        beginAtZero: true       // 坐标轴从0开始绘制
+                        beginAtZero: true,       // 坐标轴从0开始绘制
+                        max: 200        //固定Y轴的最大值
                     }
 
                 }],
@@ -187,7 +188,7 @@ Item {
         return options
     }
 
-    function generateRandomVal( min = 0, max = 100 ){
+    function generateRandomVal( min = 0, max = 45 ){
         const tmp = Math.floor(Math.random() * (max - min + 1)) + min
         console.log( "ret = " + tmp )
         return tmp

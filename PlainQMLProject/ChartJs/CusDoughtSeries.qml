@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * Elypson's Chart.qml adaptor to Chart.js
  * (c) 2020 ChartJs2QML contributors (starting with Elypson, Michael A. Voelkel, https://github.com/Elypson)
  * Released under the MIT License
@@ -30,11 +30,13 @@ Item{
     //所有的数据都是从这里取走的
     ListModel{
         id: m_list
-        ListElement{ val: 0.1; color: "#2DAF6A";        tips: "tips1" }
-        ListElement{ val: 0.2; color: "#5A5DD4";        tips: "tips2" }
-        ListElement{ val: 0.2; color: "#D7B75E";      tips: "tips3" }
-        ListElement{ val: 0.2; color: "#FE5578";     tips: "tips4" }
-        ListElement{ val: 0.3; color: "#2B85D9";       tips: "tips5" }
+//                ListElement{ val: 0.1; color: "#2DAF6A";        tips: "tips1" }
+//                ListElement{ val: 0.2; color: "#5A5DD4";        tips: "tips2" }
+//                ListElement{ val: 0.2; color: "#D7B75E";      tips: "tips3" }
+//                ListElement{ val: 0.2; color: "#FE5578";     tips: "tips4" }
+//                ListElement{ val: 0.3; color: "#2B85D9";       tips: "tips5" }
+
+        ListElement{ val: 1; color: "#2B85D9";       tips: "tips5" }
     }
 
     Rectangle{
@@ -66,6 +68,10 @@ Item{
         optionsConfig = {
             maintainAspectRatio: false,
             responsive: false,
+
+            cutoutPercentage: 70,
+            borderWidth: 1,
+            borderColor: 'red',
 
             legend: {
                 display: true,
@@ -114,8 +120,14 @@ Item{
 
         dataObj = {
             data: dataArray,
-            backgroundColor: colorArray,
-            borderColor: colorArray,          //可以同过这个控制表框
+//            backgroundColor: colorArray,
+//            borderColor: colorArray,          //可以同过这个控制表框
+
+            backgroundColor: ['rgba(0,0,0,0)'],
+            borderWidth: 20,
+            borderColor: ['red'],
+            hoverBackgroundColor: ['green'],
+            hoverBorderColor: ['black']
         }
 
         lenendConfig = {
