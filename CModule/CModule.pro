@@ -20,7 +20,7 @@ TEMPLATE = subdirs
 
 
 SUBDIRS += \
-    opencvView         \ ####重新整理的opencv
+#    opencvView          ####重新整理的opencv
 #    QQuickControls      #####    qml 自定义控件demo
 #    ffmpeg              #### ffmpeg 学习例子
 #    DesignModel         ##### 设计模式
@@ -93,6 +93,7 @@ SUBDIRS += \
 #    CusTools
 #    QQuickRender        #### qml 渲染
 #    Algorithm       ###算法小例子
-#    QmlSingleton
+ \#    QmlSingleton
+    FaceRecog
 
 
