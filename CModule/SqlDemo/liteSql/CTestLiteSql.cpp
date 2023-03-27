@@ -49,12 +49,19 @@ void CTestLiteSql::removeRecords()
 void CTestLiteSql::queryTargetRecords()
 {
     And sql( userInfo::UserName == "userName_1", userInfo::Age == 11 );
-
-
     qDebug() << QString::fromStdString( sql.asString() );
     vector<userInfo> target = select< userInfo >( *m_pDataBase, sql ).orderBy( userInfo::UserName, false ).all();
 
     //    Records records = m_pDataBase->query( SelectQuery().result( "id_" ).source( "userName_" ).where( userInfo::UserName == "userName_1" ) );
+}
+
+void CTestLiteSql::transaction()
+{
+    try {
+        m_pDataBase->begin();
+    } catch ( Except e ) {
+        
+    }
 }
 
 void CTestLiteSql::test()

@@ -12,7 +12,7 @@ Window {
     height: Screen.height
     title: qsTr("Hello World")
 
-    flags: Qt.FramelessWindowHint | Qt.Window
+//    flags: Qt.FramelessWindowHint | Qt.Window
 
     property var lastTime: new Date().getTime()
 

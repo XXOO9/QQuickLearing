@@ -20,13 +20,14 @@ TEMPLATE = subdirs
 
 
 SUBDIRS += \
+    opencvView         \ ####重新整理的opencv
 #    QQuickControls      #####    qml 自定义控件demo
 #    ffmpeg              #### ffmpeg 学习例子
 #    DesignModel         ##### 设计模式
 #    NetWorkModel        ###网络 模块
 #    QCustomPlot         ##绘制图表Demo qml版本
-# QCustomplotWidget
-#    SqlDemo             #####   数据库sql操作( 批量插入GECG的假数据 )
+#    QCustomplotWidget
+#    SqlDemo             #####   数据库sql操作
 #    ProcessMonit        ### 进程控制( 程序升级Demo )
 #    CreateDmpFile       ## 创建Dump文件
 #    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
@@ -91,6 +92,7 @@ SUBDIRS += \
 #    QPainterDemo        ##  可以参考 opencv例子
 #    CusTools
 #    QQuickRender        #### qml 渲染
- \#    Algorithm       ###算法小例子
-    QmlSingleton
+#    Algorithm       ###算法小例子
+#    QmlSingleton
+
 

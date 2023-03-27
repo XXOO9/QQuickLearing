@@ -22,6 +22,8 @@ public:
     void removeRecords();
 
     void queryTargetRecords();
+
+    void transaction();
     void test();
     WDNMD *m_pDataBase = nullptr;
 };

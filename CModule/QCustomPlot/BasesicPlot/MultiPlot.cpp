@@ -126,6 +126,7 @@ void MultiPlot::init()
 
     m_pPlot->replot();
     connect( &m_timer, &QTimer::timeout, this, &MultiPlot::onTimerTimeout, Qt::QueuedConnection );
+    m_timer.start( 0 );
 
 }
 
