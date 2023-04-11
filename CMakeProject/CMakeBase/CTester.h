@@ -13,6 +13,9 @@ public:
     CTester();
     CTestStaticLib a;
     CTestSharedLib b;
+
+private:
+    void compileSystemInfo();
 };
 
 #endif // CTESTER_H

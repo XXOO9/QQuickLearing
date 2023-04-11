@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 3.26.0 )
+cmake_minimum_required( VERSION 3.22.0 )
 project( LibDemoShared )
 
 message( "current cmake path = " ${CMAKE_CURRENT_BINARY_DIR})
