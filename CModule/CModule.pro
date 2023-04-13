@@ -25,7 +25,7 @@ SUBDIRS += \
 #    ffmpeg              #### ffmpeg 学习例子
 #    DesignModel         ##### 设计模式
 #    NetWorkModel        ###网络 模块
-#    QCustomPlot         ##绘制图表Demo qml版本
+    QCustomPlot         ##绘制图表Demo qml版本
 #    QCustomplotWidget
 #    SqlDemo             #####   数据库sql操作
 #    ProcessMonit        ### 进程控制( 程序升级Demo )
@@ -93,7 +93,7 @@ SUBDIRS += \
 #    CusTools
 #    QQuickRender        #### qml 渲染
 #    Algorithm       ###算法小例子
- \#    QmlSingleton
-    FaceRecog
+#    QmlSingleton
+#    FaceRecog
 
 

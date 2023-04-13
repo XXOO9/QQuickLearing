@@ -3,6 +3,9 @@ project( LibDemoShared )
 
 message( "current cmake path = " ${CMAKE_CURRENT_BINARY_DIR})
 
+#预编译宏 -DXXXX
+ADD_DEFINITIONS( -DLIBRYARYEXPORT )
+
 set( TARGET_BIN_PATH  ${CMAKE_CURRENT_BINARY_DIR}/../bin/ )
 message( "target build path = " ${TARGET_BIN_PATH} )
 

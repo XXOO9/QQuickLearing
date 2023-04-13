@@ -3,14 +3,15 @@
 
 using namespace std;
 
-#if defined(WIN32)
+#if defined( LIBRYARYEXPORT )
 #define DLLEXPORT __declspec(dllexport)
 #else
-#define DLLEXPORT 
+#define DLLEXPORT __declspec(dllimport)
 #endif
 
 class DLLEXPORT CTestSharedLib
 {
 public:
     CTestSharedLib();
+    static int m_val;
 };

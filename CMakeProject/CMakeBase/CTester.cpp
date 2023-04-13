@@ -4,6 +4,9 @@ CTester::CTester()
 {
     cout << "CTester Constructor..." << endl;
     compileSystemInfo();
+
+    CTestSharedLib::m_val = 20;
+    cout << "change val to " << CTestSharedLib::m_val << endl;
 }
 
 void CTester::compileSystemInfo()
