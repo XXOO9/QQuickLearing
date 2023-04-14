@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 3.20.0 )
+﻿cmake_minimum_required( VERSION 3.20.0 )
 
 #编译平台判断
 if( WIN32 )
@@ -13,6 +13,9 @@ project( CMakeBase )
 set( SRC_LIST
     main.cpp
     CTester.h CTester.cpp
+    Boy.h Boy.cpp
+    Girl.h Girl.cpp
+    CTestCycleRefrence.h CTestCycleRefrence.cpp
 )
 
 #添加子目录

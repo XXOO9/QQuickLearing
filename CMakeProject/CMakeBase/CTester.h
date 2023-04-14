@@ -11,6 +11,7 @@ class CTester
 {
 public:
     CTester();
+    ~CTester();
     CTestStaticLib a;
     CTestSharedLib b;
 

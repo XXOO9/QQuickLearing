@@ -7,4 +7,5 @@ class CTestStaticLib
 {
 public:
     CTestStaticLib();
+    ~CTestStaticLib();
 };

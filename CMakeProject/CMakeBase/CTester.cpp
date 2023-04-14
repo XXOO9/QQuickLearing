@@ -4,8 +4,11 @@ CTester::CTester()
 {
     cout << "CTester Constructor..." << endl;
     compileSystemInfo();
+}
 
-    test();
+CTester::~CTester()
+{
+
 }
 
 void CTester::compileSystemInfo()
