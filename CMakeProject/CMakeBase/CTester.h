@@ -1,4 +1,4 @@
-#ifndef CTESTER_H
+﻿#ifndef CTESTER_H
 #define CTESTER_H
 
 #include <iostream>
@@ -16,6 +16,10 @@ public:
 
 private:
     void compileSystemInfo();
+
+
+    void test();
+    shared_ptr<CTestSharedLib> getShared();
 };
 
 #endif // CTESTER_H

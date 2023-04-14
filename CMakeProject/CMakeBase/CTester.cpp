@@ -5,8 +5,7 @@ CTester::CTester()
     cout << "CTester Constructor..." << endl;
     compileSystemInfo();
 
-    CTestSharedLib::m_val = 20;
-    cout << "change val to " << CTestSharedLib::m_val << endl;
+    test();
 }
 
 void CTester::compileSystemInfo()
@@ -19,4 +18,26 @@ void CTester::compileSystemInfo()
 #else
     cout << "this is unKnown platform..." << endl;
 #endif
+}
+
+void CTester::test()
+{
+    shared_ptr<CTestSharedLib>  p( new CTestSharedLib );
+    weak_ptr<CTestSharedLib> first = p;
+    cout << first.expired() << endl;
+
+    if( !first.expired() ){
+        auto tmpPtr = first.lock();
+        cout << "use cnt = " << tmpPtr.use_count() << endl;
+    }
+}
+
+shared_ptr<CTestSharedLib> CTester::getShared()
+{
+    shared_ptr<CTestSharedLib> p;
+    cout << "use cnt = " << p.use_count() << endl;
+//    CTestSharedLib *p = new CTestSharedLib();
+    shared_ptr<CTestSharedLib> ret( p );
+    cout << "create addr = " << ret << endl;
+    return ret;
 }

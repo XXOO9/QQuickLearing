@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 
 using namespace std;
@@ -12,6 +12,7 @@ using namespace std;
 class DLLEXPORT CTestSharedLib
 {
 public:
-    CTestSharedLib();
+    explicit CTestSharedLib();
+    ~CTestSharedLib();
     static int m_val;
 };
