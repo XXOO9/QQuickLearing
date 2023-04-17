@@ -1,15 +1,21 @@
 ﻿#include<iostream>
+#include <thread>
 #include "CTester.h"
-#include "CTestCycleRefrence.h"
+#include "CLambdaTest.h"
+#include "Common.h"
 
 void test()
 {
-    CTestCycleRefrence a;
+    Boy a;
+}
+
+void threadA()
+{
+    thread a;
 }
 
 int main()
 {
     test();
-    std::cout << "WDNMD" << std::endl;
     return 0;
 }

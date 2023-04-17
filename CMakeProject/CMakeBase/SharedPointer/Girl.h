@@ -3,19 +3,20 @@
 
 #include <iostream>
 #include "./Boy.h"
+#include "SharedPointerGlobal.h"
 
 using namespace std;
 class Boy;
 
-class Girl
+class DLLEXPORT Girl
 {
 public:
     Girl();
     ~Girl();
 
-    void setBoy( shared_ptr<Boy> boy );
+    void setBoy( weak_ptr<Boy> boy );
 
-    shared_ptr<Boy> m_boy;
+    weak_ptr<Boy> m_boy;
 };
 
 #endif // GIRL_H

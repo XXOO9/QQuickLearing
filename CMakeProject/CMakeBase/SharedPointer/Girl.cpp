@@ -10,7 +10,7 @@ Girl::~Girl()
     cout << "kill a girl..." << endl;
 }
 
-void Girl::setBoy(shared_ptr<Boy> boy)
+void Girl::setBoy(weak_ptr<Boy> boy)
 {
-
+    m_boy = boy;
 }

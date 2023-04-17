@@ -8,8 +8,9 @@
 
 #include "Boy.h"
 #include "Girl.h"
+#include "SharedPointerGlobal.h"
 
-class CTestCycleRefrence
+class DLLEXPORT CTestCycleRefrence
 {
 public:
     CTestCycleRefrence();
