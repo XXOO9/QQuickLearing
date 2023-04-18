@@ -5,6 +5,7 @@
 #include <vector>
 #include "CTestRValReference.h"
 #include "./SharedPointer/CTestCycleRefrence.h"
+#include "./MultiThread/CThread.h"
 
 using namespace std;
 
