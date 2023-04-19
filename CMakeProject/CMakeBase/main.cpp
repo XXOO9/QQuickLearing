@@ -12,15 +12,15 @@ void test()
 
 thread threadTest()
 {
-
-    thread a( [](){
+    CThread b;
+    thread a( [ & ](){
         cout << "threadTest thread ID = " << std::this_thread::get_id() << endl;
         cout << "WDNMD" << endl;
-        CThread b;
+
     } );
 
 //    a.join();
-    cout << "2222" << endl;
+    cout << "val = " << b.m_val << endl;
 //    a.detach();
 
     return a;
@@ -29,14 +29,13 @@ thread threadTest()
 int main()
 {
     cout << "main thread ID = " << std::this_thread::get_id() << endl;
-    thread a = threadTest();
+    thread th = threadTest();
 
-    std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
-
-    if( a.joinable() ){
-        a.join();
+    if( th.joinable() ){
+        cout << "join able..." << endl;
     }
 
+    std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
     cout << "111" << endl;
     return 0;
 }
