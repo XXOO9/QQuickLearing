@@ -1,9 +1,10 @@
 ﻿#include "CThread.h"
 
+
 CThread::CThread()
 {
     cout << "constructos CThread..." << endl;
-    initThread();
+    //    initThread();
 }
 
 CThread::~CThread()
@@ -11,47 +12,88 @@ CThread::~CThread()
     cout << "distory CThread..." << endl;
 }
 
-void CThread::testThreadA()
+void CThread::testMutex()
 {
-    m_val = 1;
-    cout << "call test thread A" << endl;
-}
+    std::mutex mutex;
+    int val = 0;
 
-void CThread::testThreadB()
-{
-    m_val = 2;
-    cout << "call test thread B" << endl;
-}
-
-void CThread::testThreadC()
-{
-    m_val = 3;
-    cout << "call test thread C" << endl;
-}
-
-void CThread::testCount()
-{
-    std::function<void (void)> func = [this](){
-        int i = 10000;
-        while( i-- ){
-            m_val++;
+    auto funA = [ & ](){
+        while( true ){
+            mutex.lock();
+            cout << "change val by funA = " << ++val << " addr = " << &val << endl;
+            mutex.unlock();
+            std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
         }
     };
+
+    auto funB = [ & ](){
+        while( true ){
+            mutex.lock();
+            val *= 2;
+            cout << "change val by funB = " << val << " addr = " << &val << endl;
+            mutex.unlock();
+            std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+        }
+    };
+
+    shared_ptr< thread > tha = make_shared< thread >( funA );
+    shared_ptr< thread > thb = make_shared< thread >( funB );
+
+    tha->join();
+    thb->join();
+
 }
 
-void CThread::initThread()
+void CThread::testGuradMutex()
 {
-    auto funcA = [this](){ testThreadA(); };
-    shared_ptr<thread> a = make_shared< thread >( funcA );
+    std::mutex mutex;
+    std::lock_guard< std::mutex > guardLock( mutex );
+}
 
-    auto funcB = [this](){ testThreadB(); };
-    shared_ptr<thread> b = make_shared< thread >( funcB );
+void CThread::testCondition()
+{
 
-    auto funcC = [this](){ testThreadC(); };
-    shared_ptr<thread> c = make_shared< thread >( funcC );
+}
+
+void CThread::testConditionVariable()
+{
+    std::mutex mutex;
+    std::condition_variable cv;
+    bool ready = false;
+
+    auto print = [ & ]( const int id ){
+        std::unique_lock< std::mutex > lock( mutex );
+//        while( !ready ){
+//            cout << "coming thread = " << id << endl;
+//            cv.wait( lock );
+//            cout << "after wait= " << id << endl;
+//        }
 
 
-    a->join();
-    b->join();
-    c->join();
+        cout << "coming thread = " << id << endl;
+        cv.wait( lock );
+        cout << "thread display id = " << id << endl;
+    };
+
+    auto go = [ & ](){
+        std::unique_lock< std::mutex > lock( mutex );
+//        cv.notify_all();
+        cv.notify_one();
+    };
+
+    thread thArray[ 10 ];
+
+    for( int index = 0; index < 10; index++ ){
+        thArray[ index ] = thread( print, index );
+    }
+
+    cout << "threads ready race..." << endl;
+
+    std::this_thread::sleep_for( std::chrono::milliseconds( 100 ) );
+
+    go();
+
+    for( auto &ele : thArray ){
+        ele.join();
+    }
 }

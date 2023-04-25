@@ -1,6 +1,7 @@
 ﻿cmake_minimum_required( VERSION 3.20.0 )
 
 set( CMAKE_CXX_STANDARD 11 )
+set( CMAKE_CXX_STANDARD_REQUIRED ON )
 
 project( LibMultiThread )
 
@@ -21,6 +22,7 @@ message( "thread build path = " ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} )
 set( SRC_LIST
     MultiThread_Global.h
     CThread.h CThread.cpp
+    CTaskQueueThread.h CTaskQueueThread.cpp
 )
 
 add_library( ${PROJECT_NAME} SHARED ${SRC_LIST} )

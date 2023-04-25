@@ -5,9 +5,12 @@
 
 #include <iostream>
 #include <memory>
+#include <iomanip>
 #include <functional>
 #include <thread>
 #include <mutex>
+#include <chrono>
+
 
 using namespace std;
 
@@ -17,24 +20,13 @@ public:
     CThread();
     ~CThread();
 
-    void testThreadA();
+    void testMutex();
 
-    void testThreadB();
+    void testGuradMutex();
 
-    void testThreadC();
+    void testCondition();
 
-    void testCount();
-
-    int  m_val = 10;
-
-private:
-    void initThread();
-
-private:
-    shared_ptr<thread>  m_tha;
-    shared_ptr<thread>  m_thb;
-    shared_ptr<thread>  m_thc;
-
+    void testConditionVariable();
 };
 
 #endif // CTHREAD_H

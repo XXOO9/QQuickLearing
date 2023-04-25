@@ -46,3 +46,4 @@ CModule/.qtc_clangd/.cache/clangd/index/qstringview.h.535A6699F03D2146.idx.tmp.b
 *.ppm
 *.ppm
 CMakeProject/build*
+*/build-*
