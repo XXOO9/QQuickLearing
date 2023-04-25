@@ -1,6 +1,1 @@
-#include "CServer.h"
-
-CServer::CServer()
-{
-
-}
+﻿#include "CServer.h"

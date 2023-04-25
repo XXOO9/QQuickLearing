@@ -9,7 +9,7 @@ CONFIG( debug, debug | release ){
         RCC_DIR     = $$PWD/bin/debug/temp/rcc
         UI_DIR      = $$PWD/bin/debug/temp/ui
         OBJECTS_DIR = $$PWD/bin/debug/temp/obj
-        LIBS += -L$$PWD/ -loatpp
+#        LIBS +=       -L$$PWD/ -loatpp
 }else
 {
         DESTDIR     = $$PWD/bin/release
