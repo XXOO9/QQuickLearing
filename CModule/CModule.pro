@@ -20,7 +20,7 @@ TEMPLATE = subdirs
 
 
 SUBDIRS += \
-    OatDemo \
+    OatDemo
 #QPainterDrawBoard   \
 #    opencvView          ####重新整理的opencv
 #    QQuickControls      #####    qml 自定义控件demo

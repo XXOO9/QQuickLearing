@@ -1,22 +1,17 @@
 QT += quick
 CONFIG += c++11
 
-INCLUDEPATH += $$PWD/oatpp/
+INCLUDEPATH += $$PWD/oatpp
 
 CONFIG( debug, debug | release ){
         DESTDIR     = $$PWD/bin/debug
-        MOC_DIR     = $$PWD/bin/debug/temp/moc
-        RCC_DIR     = $$PWD/bin/debug/temp/rcc
-        UI_DIR      = $$PWD/bin/debug/temp/ui
-        OBJECTS_DIR = $$PWD/bin/debug/temp/obj
-#        LIBS +=       -L$$PWD/ -loatpp
+        LIBS       += -L$$PWD/ -loatpp  \
+                               -lwsock32    \
+                               -lws2_32
 }else
 {
         DESTDIR     = $$PWD/bin/release
-        MOC_DIR     = $$PWD/bin/release/temp/moc
-        RCC_DIR     = $$PWD/bin/release/temp/rcc
-        UI_DIR      = $$PWD/bin/release/temp/ui
-        OBJECTS_DIR = $$PWD/bin/release/temp/obj
+        LIBS       += -L$$PWD/ -loatpp
 }
 
 
@@ -28,6 +23,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        CHttpGetHandler.cpp \
+        CHttpPostHandle.cpp \
         CServer.cpp \
         main.cpp
 
@@ -45,4 +42,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    CHttpGetHandler.h \
+    CHttpPostHandle.h \
     CServer.h
