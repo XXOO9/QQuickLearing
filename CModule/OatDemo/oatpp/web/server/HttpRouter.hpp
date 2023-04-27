@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *
  * Project         _____    __   ____   _      _
  *                (  _  )  /__\ (_  _)_| |_  _| |_
@@ -89,7 +89,7 @@ public:
    * @param endpoint - router endpoint.
    */
   void route(const oatpp::String& method, const oatpp::String& pathPattern, const RouterEndpoint& endpoint) {
-    getBranch(method)->route(pathPattern, endpoint);
+     getBranch(method)->route(pathPattern, endpoint);
   }
 
   /**

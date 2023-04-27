@@ -8,6 +8,14 @@
 #include "oatpp/web/server/HttpConnectionHandler.hpp"
 #include "oatpp/web/protocol/http/incoming/Request.hpp"
 #include "oatpp/network/tcp/server/ConnectionProvider.hpp"
+#include "oatpp/web/server/api/ApiController.hpp"
+
+#include "oatpp/core/macro/component.hpp"
+#include "oatpp/web/server/api/ApiController.hpp"
+#include "oatpp/web/server/api/Endpoint.hpp"
+#include "oatpp/core/macro/codegen.hpp"
+#include "oatpp/codegen/api_controller/base_define.hpp"
+#include "CUserInfo.h"
 
 class CHttpPostHandle : public oatpp::web::server::HttpRequestHandler
 {

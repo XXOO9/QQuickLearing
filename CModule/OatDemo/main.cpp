@@ -1,32 +1,20 @@
 ﻿#include <QDebug>
 #include "CHttpGetHandler.h"
 #include "CHttpPostHandle.h"
-
-/**
- * Custom Request Handler
- */
-class Handler : public oatpp::web::server::HttpRequestHandler {
-public:
-
-    /**
-   * Handle incoming request and return outgoing response.
-   */
-    virtual std::shared_ptr<OutgoingResponse> handle(const std::shared_ptr<IncomingRequest>& request) override
-    {
-        return ResponseFactory::createResponse(Status::CODE_200, "Hello World!");
-    }
-
-};
+#include "CCodeGen.h"
+#include "CUserInfo.h"
 
 void run() {
-
     /* Create Router for HTTP requests routing */
     auto router = oatpp::web::server::HttpRouter::createShared();
 
     /* Route GET - "/hello" requests to Handler */
-    router->route("GET", "/WDNMD", std::make_shared<CHttpGetHandler>());
+//    router->route("GET", "/WDNMD", std::make_shared<CHttpGetHandler>() );
 
-    router->route("POST", "/NMSL", std::make_shared<CHttpPostHandle>());
+    router->route("POST", "/NMSL", std::make_shared<CHttpPostHandle>() );
+
+//    auto tmpController = MyController::createShared();
+//    router->addController( tmpController );
 
     /* Create HTTP connection handler with router */
     auto connectionHandler = oatpp::web::server::HttpConnectionHandler::createShared(router);
@@ -44,13 +32,20 @@ void run() {
     server.run();
 }
 
+
 int main() {
 
     /* Init oatpp Environment */
     oatpp::base::Environment::init();
 
     /* Run App */
+    CUserInfo a;
+    a.toString();
+
     run();
+
+    std::cout << "1111" << std::endl;
+
 
     /* Destroy oatpp Environment */
     oatpp::base::Environment::destroy();

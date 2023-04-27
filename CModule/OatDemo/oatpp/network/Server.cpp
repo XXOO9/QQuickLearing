@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *
  * Project         _____    __   ____   _      _
  *                (  _  )  /__\ (_  _)_| |_  _| |_
@@ -95,7 +95,8 @@ void Server::mainLoop(Server *instance) {
 
 }
 
-void Server::run(std::function<bool()> conditional) {
+void Server::run(std::function<bool()> conditional)
+{
   std::unique_lock<std::mutex> ul(m_mutex);
   switch (getStatus()) {
     case STATUS_STARTING:
