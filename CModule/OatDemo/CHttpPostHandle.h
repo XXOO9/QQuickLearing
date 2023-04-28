@@ -15,7 +15,13 @@
 #include "oatpp/web/server/api/Endpoint.hpp"
 #include "oatpp/core/macro/codegen.hpp"
 #include "oatpp/codegen/api_controller/base_define.hpp"
+
+#include "oatpp/core/data/mapping/ObjectMapper.hpp"
+#include "oatpp/core/base/ObjectHandle.hpp"
+
 #include "CUserInfo.h"
+
+using namespace oatpp;
 
 class CHttpPostHandle : public oatpp::web::server::HttpRequestHandler
 {
