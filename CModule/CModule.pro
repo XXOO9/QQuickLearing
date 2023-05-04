@@ -20,7 +20,7 @@ TEMPLATE = subdirs
 
 
 SUBDIRS += \
-    OatDemo
+#    OatDemo
 #QPainterDrawBoard   \
 #    opencvView          ####重新整理的opencv
 #    QQuickControls      #####    qml 自定义控件demo
@@ -29,7 +29,7 @@ SUBDIRS += \
 #    NetWorkModel        ###网络 模块
 #    QCustomPlot         ##绘制图表Demo qml版本
 #    QCustomplotWidget
-#    SqlDemo             #####   数据库sql操作
+    SqlDemo             #####   数据库sql操作
 #    ProcessMonit        ### 进程控制( 程序升级Demo )
 #    CreateDmpFile       ## 创建Dump文件
 #    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个

@@ -16,6 +16,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 include( $$PWD/liteSql/liteSql.pri )
+include( $$PWD/MySql/MySql.pri )
+
+
 ## 网上下载的只有debug下的库， 没有release的库，有时间研究编译源码编出来
 
 CONFIG( debug, debug | release ){

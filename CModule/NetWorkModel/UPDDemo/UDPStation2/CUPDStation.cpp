@@ -3,6 +3,7 @@
 CUPDStation::CUPDStation(QObject *parent) : QObject(parent)
 {
     init();
+    test();
 }
 
 void CUPDStation::send()
@@ -32,4 +33,19 @@ void CUPDStation::init()
     bool ok = m_pUdpSocket->bind( QHostAddress::LocalHost, 10085 );
     qDebug() << "station 2 bind ret = " << QVariant( ok );
     connect( m_pUdpSocket, &QUdpSocket::readyRead, this, &CUPDStation::onNewMessage );
+}
+
+void CUPDStation::test()
+{
+    QJsonObject jsobj;
+
+    QJsonObject js1{ { "property1", 1} };
+    QJsonObject js2{ { "property2", 2} };
+
+    QJsonArray jsArray;
+    jsArray << js1 << js2;
+
+    jsobj.insert( "WDNMD", jsArray );
+
+    qDebug() << "json = " << jsobj;
 }

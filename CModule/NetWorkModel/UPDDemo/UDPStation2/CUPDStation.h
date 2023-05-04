@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QUdpSocket>
 #include <QDebug>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
 
 class CUPDStation : public QObject
 {
@@ -17,6 +20,8 @@ public slots:
     void onNewMessage();
 private:
     void init();
+
+    void test();
 private:
     QUdpSocket  *m_pUdpSocket = nullptr;
 };
