@@ -31,13 +31,13 @@ SUBDIRS += \
 #    QCustomplotWidget
 #    SqlDemo             #####   数据库sql操作
 #    ProcessMonit        ### 进程控制( 程序升级Demo )
-    CreateDmpFile       ## 创建Dump文件
+#    CreateDmpFile       ## 创建Dump文件
 #    QSqlTableModelDemo  ##据说一次最多只能查询256条数据，故暂时不研究这个
 #    unitTest     \              ## 单元测试
 #    EnumWithQuick \
 #    RightMouseClicked
 #    MyTableView                   \
-#    CustQQuickVirtualKeyBoard      \
+    CustQQuickVirtualKeyBoard
 #    CustDialog                      \
 #    CustListView
 #    DynamicCreateComponent
