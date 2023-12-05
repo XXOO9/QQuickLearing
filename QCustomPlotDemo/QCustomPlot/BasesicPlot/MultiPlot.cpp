@@ -14,15 +14,23 @@ void MultiPlot::paint(QPainter *painter)
     QElapsedTimer timer;
     timer.restart();
 
+    //2023.12.05 目前初步理解为:
+    //在qml中使用QCustomPlot， 每一次刷新绘制，其实都是在绘制一张QPixMap
+    //2.经过实测，该步骤并非为耗时操作(耗时占比较少)
+
+
+    //1. 获取画布尺寸
     QPixmap picture( boundingRect().size().toSize() );
     //    qDebug() << "draw cost 1" << timer.restart() << " ms";
 
+    //2.构造QCustomPlot画笔对象
     QCPPainter qcppainter( &picture );
-    //    qDebug() << "draw cost 2" << timer.restart() << " ms";
 
+    //3.送入QCustomPlot对象
     m_pPlot->toPainter( &qcppainter );
     //    qDebug() << "draw cost 3" << timer.restart() << " ms";
 
+    //4.使用 Qt的 Painter 开始绘制
     painter->drawPixmap( QPoint(), picture );
     //    qDebug() << "draw cost 4" << timer.elapsed() << " ms";
 
