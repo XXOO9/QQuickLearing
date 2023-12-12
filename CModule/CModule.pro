@@ -37,7 +37,7 @@ SUBDIRS += \
 #    EnumWithQuick \
 #    RightMouseClicked
 #    MyTableView                   \
-    CustQQuickVirtualKeyBoard
+#    CustQQuickVirtualKeyBoard
 #    CustDialog                      \
 #    CustListView
 #    DynamicCreateComponent
@@ -77,7 +77,7 @@ SUBDIRS += \
 #    DemoGrid
 #    DemoTabView
 #    DemoCircle
-#    DemoQCustomplot
+    DemoQCustomplot
 #    DemoVideoPlayer
 #    DemoTextDisplayDifferentStyleText
 #    DemoChartjs
