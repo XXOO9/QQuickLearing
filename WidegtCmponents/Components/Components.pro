@@ -5,6 +5,8 @@ DEFINES += COMPONENTS_LIBRARY
 
 CONFIG += c++17
 
+include( $$PWD/Tables/Tables.pri )
+
 CONFIG( debug, debug | release ){
 DESTDIR = $$PWD/../ComponentsTest/bin/debug
 }
